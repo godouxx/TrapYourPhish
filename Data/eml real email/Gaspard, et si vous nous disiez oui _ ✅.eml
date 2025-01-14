@@ -1,0 +1,174 @@
+Delivered-To: gaspardaudoux@gmail.com
+Received: by 2002:a05:6358:24a3:b0:178:a4bb:1350 with SMTP id m35csp2458741rwc;
+        Wed, 21 Feb 2024 09:25:43 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEe3452ZeqramYXY8FgJorQw4KSaOJxjqLdPpifIwXk382UoV8CSkiH5Zzai2sLR85Rhdus
+X-Received: by 2002:a05:620a:1241:b0:785:d4d9:a084 with SMTP id a1-20020a05620a124100b00785d4d9a084mr21881780qkl.66.1708536343521;
+        Wed, 21 Feb 2024 09:25:43 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1708536343; cv=none;
+        d=google.com; s=arc-20160816;
+        b=eTM4wpWYOSbSGRMRz/llWRGxwjELAQccMYAMTpVE3UcGMO+dZoL/B2OmActdPjHn1W
+         MFLyNpJqtQgdXR5uobWClX8AfkUl/E+LInpifn2Kuz+d00ZmRUjMleAgOEihBSEDkmmO
+         LDI5wZ/shhSKtf3uFm35C99nARuMxNdZhqncoXuzX4a0g0muyrDYfkRTkqXuHmSvAMOZ
+         izlH7yZQCzVjlo9tHkHJzPeUBe6Vk0rMchuFO8mvIaP0u6THRGmPEDkX6Hc6rymxPLn1
+         LLpAEhtfLLqRAbylBRQ5IggARpqmB328cOmW6f6tvuPhn6SQR5lLBDcjPFUcP5MeDyez
+         AJ6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=content-transfer-encoding:feedback-id:message-id:list-id:reply-to
+         :mime-version:list-unsubscribe-post:list-unsubscribe:date:subject:to
+         :from:dkim-signature;
+        bh=EUEdn6669q/AOMKRhUHz0iRd3GjGNKBrtCgo/dnqFxw=;
+        fh=4HpQgZ73+tXmcqdRJO2vz+28IBb89pNJys8TsRmaqWA=;
+        b=GH/Nj1X9zd5az4S0tfez4w6zcv8WxBtkT6fh+ZEnsp/PPHW5mzhl3YJNdumGLtL1jT
+         90rzOn8lEfyfeXi386qftQ2oCRr8oFCjbFnzrrmGDev0Ovu6Px/FQvFFJ4iqbd9ylvdn
+         WsJs9cN5kPt5M3EIcST/XqPnIDZNdKwNMXDk63gB6PXz1NjRAAFt0/AR5YpngG9Ky826
+         D/xCrGytmzPZiRm+vHqvQRh0iJAJaxgNY9EuMggYgVhm/QRSAfMIxldnRFDBCcD0JADR
+         RtGTSrTs8L10KDfSoWiD+Xjtgg4m8o1te4YXI/hcl6gwbcFmZl0Q/bpbDpmyKvZOIcFu
+         PWYw==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@email.decathlon.fr header.s=200608 header.b=wwbx2i3K;
+       spf=pass (google.com: domain of bounce-45_html-731744814-2409296-7292458-5625@bounce.email.decathlon.fr designates 13.111.188.64 as permitted sender) smtp.mailfrom=bounce-45_HTML-731744814-2409296-7292458-5625@bounce.email.decathlon.fr;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=email.decathlon.fr
+Return-Path: <bounce-45_HTML-731744814-2409296-7292458-5625@bounce.email.decathlon.fr>
+Received: from mta2.email.decathlon.fr (mta2.email.decathlon.fr. [13.111.188.64])
+        by mx.google.com with ESMTPS id br30-20020a05620a461e00b007879038b456si968238qkb.196.2024.02.21.09.25.43
+        for <gaspardaudoux@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 21 Feb 2024 09:25:43 -0800 (PST)
+Received-SPF: pass (google.com: domain of bounce-45_html-731744814-2409296-7292458-5625@bounce.email.decathlon.fr designates 13.111.188.64 as permitted sender) client-ip=13.111.188.64;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@email.decathlon.fr header.s=200608 header.b=wwbx2i3K;
+       spf=pass (google.com: domain of bounce-45_html-731744814-2409296-7292458-5625@bounce.email.decathlon.fr designates 13.111.188.64 as permitted sender) smtp.mailfrom=bounce-45_HTML-731744814-2409296-7292458-5625@bounce.email.decathlon.fr;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=email.decathlon.fr
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=200608; d=email.decathlon.fr;
+ h=From:To:Subject:Date:List-Unsubscribe:List-Unsubscribe-Post:MIME-Version:
+ Reply-To:List-ID:X-CSA-Complaints:Message-ID:Content-Type:
+ Content-Transfer-Encoding; i=service.carte@email.decathlon.fr;
+ bh=EUEdn6669q/AOMKRhUHz0iRd3GjGNKBrtCgo/dnqFxw=;
+ b=wwbx2i3K1YBzHxi2RiDNuxRXbi6fM8Tm6nSl57cXyF7ULl7RzA0ayNG2UtlM8hrxpXRsUcRWSVYN
+   x43oNK0QrrvyWBNnIpuMGfcHeBZEZWcdl6ISrNlmBCfzhQH6AJ5tNaS+hRdSKu8NHqJrj1yHh6Jg
+   CRxa8sfO9QkzNAazVDM=
+Received: by mta2.email.decathlon.fr id hqop1e2fmd4n for <gaspardaudoux@gmail.com>; Wed, 21 Feb 2024 17:25:15 +0000 (envelope-from <bounce-45_HTML-731744814-2409296-7292458-5625@bounce.email.decathlon.fr>)
+From: "Decathlon" <service.carte@email.decathlon.fr>
+To: <gaspardaudoux@gmail.com>
+Subject: =?UTF-8?B?R2FzcGFyZCwgZXQgc2kgdm91cyBub3VzIGRpc2lleiBvdWkgPyA=?=
+ =?UTF-8?B?4pyF?=
+Date: Wed, 21 Feb 2024 11:25:15 -0600
+List-Unsubscribe: <https://click.email.decathlon.fr/subscription_center.aspx?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOiI3MjkyNDU4IiwicyI6IjczMTc0NDgxNCIsImxpZCI6IjQ1IiwiaiI6IjI0MDkyOTYiLCJqYiI6IjU2MjUiLCJkIjoiNzAyMjUifQ.BYyLvlMo-OBtjKxEqcuc1ve32CO75PkgHaFF4hzHSA4>, <mailto:leave-fd8210751a3c402029-fe281373746300797d1574-fe8f1674756d067473-fe8a13727c6600787d-ff2d11767761@leave.email.decathlon.fr>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+x-CSA-Compliance-Source: SFMC
+MIME-Version: 1.0
+Reply-To: "Decathlon France" <reply-fe8f1674756d067473-45_HTML-731744814-7292458-5625@email.decathlon.fr>
+List-ID: <7237433.xt.local>
+X-CSA-Complaints: csa-complaints@eco.de
+X-SFMC-Stack: 7
+x-job: 7292458_2409296
+Message-ID: <59cc414c-bfbf-4555-aa91-36eb957b71c5@atl1s07mta3060.xt.local>
+Feedback-ID: 7292458:2409296:13.111.188.64:sfmktgcld
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html><html lang="{language_code:lowercase}" xmlns:v="urn:schemas-microsoft-com:vml" style="color-scheme:light dark;"><head><!-- EXTRACT ONE_TEMPLATE_XP_CSS --><meta charset="utf-8"><meta name="x-apple-disable-message-reformatting"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no"><meta name="color-scheme" content="light dark"><meta name="supported-color-schemes" content="light  dark"><!--[if mso]> <noscript><xml><o:OfficeDocumentSettings xmlns:o="urn:schemas-microsoft-com:office:office"><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+<style>     td,     th,     div,     p,     a,     h1,     h2,     h3,     h4,     h5,     h6 {         font-family: Arial, Helvetica, sans-serif;         mso-line-height-rule: exactly;     } </style><![endif]--><title>Decathlon</title><style>
+    [class^="border-b"] {
+        border-bottom-style: solid;
+    }
+
+    :root {
+        color-scheme: light dark;
+    }
+
+    @media (prefers-color-scheme:dark) {
+        .dark-bg-black {
+            background-color: #000 !important;
+        }
+
+        .dark-bg-gray-800 {
+            background-color: #1f2937 !important;
+        }
+
+        .dark-text-white {
+            color: #fff !important;
+        }
+    }
+
+    @media (max-width:600px) {
+        .sm-m-auto {
+            margin: auto !important;
+        }
+
+        .sm-mx-0 {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+
+        .sm-inline-block {
+            display: inline-block !important;
+        }
+
+        .sm-w-12 {
+            width: 48px !important;
+        }
+
+        .sm-w-full {
+            width: 100% !important;
+        }
+
+        .sm-text-center {
+            text-align: center !important;
+        }
+
+        .sm-text-sm {
+            font-size: 14px !important;
+        }
+
+        .sm-text-xs {
+            font-size: 12px !important;
+        }
+    }
+</style><!-- END EXTRACT  ONE_TEMPLATE_XP_CSS --><!--  --><!--  --><!--  --><!--  --></head><body class="dark-bg-black dark-text-white body" style="margin:0;width:100%;background-color:#e7f3f9;padding:0;font-family:Arial,Helvetica,sans-serif;font-size:16px;color:#101010;-webkit-font-smoothing:antialiased;word-break:break-word;word-spacing:normal"><style type="text/css">
+div.preheader 
+{ display: none !important; } 
+</style>
+<div class="preheader" style="font-size: 1px; display: none !important;">La communication chez Decathlon</div><div role="article" aria-roledescription="email" aria-label="Decathlon" lang="fr"><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0"  role="presentation"><tr><td align="center" class="dark-bg-black" style="background-color:#e7f3f9" bgcolor="#e7f3f9"><table class="sm-w-full" style="width:636px" width="636px" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td><!--[if !mso]><!--><div style="display:none;text-align:center;height:0;overflow:hidden">La communication chez Decathlon </div>
+<div style="display:none;text-align:center;height:0;overflow:hidden">
+ &#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;
+&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;
+&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;&#847;&zwnj;&#8199;&#65279;&nbsp;
+</div><!--<![endif]--><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td style="padding-top:20px;text-align:center;font-size:12px" align="center">Si vous ne visualisez pas correctement cet email&nbsp;<a href="https://view.email.decathlon.fr/?qs=535c9dae8108ed99701be65fa38cb1bae6b443ce48567521bec6f455aa1798e53e2989b2834597876bdbae73015406fd5455841f06050c92b6af1e779738d36c997cfb23754fd1e6f86839084fc6e27d" style="color:#000000; text-decoration:underline; font-size:12px;">cliquez ici</a></td></tr></table><img src="https://click.email.decathlon.fr/open.aspx?ffcb10-fe8f1674756d067473-fe1d137573650d7b701077-fe8a13727c6600787d-ff961075-fe281373746300797d1574-ff2d11767761&d=70225&bmt=0" width="1" height="1" alt=""></custom></td></tr><tr><td class="dark-bg-gray-800" style="background-color:#fff" bgcolor="#ffffff">
+<table data-testid="hero-picture-block" style="width:100%;"  width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td align="center"> 
+<a href="https://click.email.decathlon.fr/?qs=858f96f11ce9987fd7a976b313b980aac3d51e69c0b726e25f0be16fa818ef17ffd2a1ab733954b7082ab54badc1e15ec9cbd53eb9f501cd7a37b3441ee81612" target="_blank" style="text-decoration:none" rel="noopener"><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td height="330" background="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/da6079af-5f95-49ab-b995-0174f54e5b09.jpg" style="background:url(https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/da6079af-5f95-49ab-b995-0174f54e5b09.jpg)  #b5cfe3;background-size:cover;background-position:top center;height:330px;vertical-align:top" valign="top"><!--[if gte mso 9]>
+<v:image xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="border:0;display:inline-block;width:636px;height:330px;" src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/da6079af-5f95-49ab-b995-0174f54e5b09.jpg"/><v:rect href="headerRedirectUrl || https://www.decathlon.fr/" xmlns:v="urn:schemas-microsoft-com:vml" fill="true"  stroke="false" style="border:0;display:inline-block;position:absolute;bottom:0px;right:0px;width:636px;height:330px;"><v:fill opacity="0%" color="#cccccc"/><v:textbox inset="0,0,0,0"><![endif]--><div><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td valign="middle" style="vertical-align:middle;padding:20px 0 0 20px">
+<a  title="hero block" href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f7601c2260a673002176a5cc0fbba8a10b345287c417a878691b7a764f77b4f692b2e433cb3e4aa1e4dc402e8cf850121084a5775ffa0f641" target="_blank" style="text-decoration:none" rel="noopener"><img src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/1b1600d9-58c8-4026-b922-91cf3eec2bb7.png" alt="Decathlon" border="0" width="128"></a></td></tr></table></div><!--[if gte mso 9]></v:textbox></v:fill></v:rect></v:image><![endif]--></td></tr></table></a></td></tr><tr><td style="height:24px"  height="24px">&nbsp;&nbsp;</td></tr></table><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td style="padding:16px 20px"><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr>
+<td class="dark-text-white" style="padding-top:20px;padding-bottom:20px;color:#001018"> Bonjour Gaspard,<br><br>
+Cela fait maintenant un petit moment que vous faites partie de l'équipe... et il semblerait que vous ne recevez pas les dernières infos de notre part.<br><br>
+Pour que vous puissiez faire votre choix en toute connaissance de cause, on vous explique ce à quoi vous pourriez dire oui&nbsp;!<br>
+<br>
+C'est par ici, que le match commence&nbsp;&#128071;&nbsp;!<br><br>
+<strong>Souhaitez-vous recevoir vos bons cadeaux*, offres, promotions, actus et conseils qui vous ressemblent&nbsp;?</strong> </td></tr></table><table class="sm-w-full" style="border-collapse:  collapse" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td style="cursor:auto;border-radius:4px;background-color:#0284c7;padding:0;font-size:16px;font-weight:700;mso-padding-alt:14px" bgcolor="#0284c7"> <a href="https://click.email.decathlon.fr/?qs=858f96f11ce9987fd7a976b313b980aac3d51e69c0b726e25f0be16fa818ef17ffd2a1ab733954b7082ab54badc1e15ec9cbd53eb9f501cd7a37b3441ee81612" class="sm-w-full dark-text-white" style="text-decoration:none;display:inline-block;border-radius:4px;padding:14px 24px;text-align:center;color:#fff;text-decoration-line:none;mso-padding-alt:  0" target="_blank" rel="noopener">Je modifie mes préférences de communication &nbsp;&nbsp;
+<img src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/644294bb-22ce-4561-9ed8-8dcb6c88942a.png" width="7" alt="Decathlon" border="0"></a></td></tr></table><div style="height:30px;font-size:30px;line-height:30px;mso-line-height-rule:exactly">&nbsp;&nbsp;</div><table class="sm-w-full sm-mx-0" style="margin:10px 24px;width:80%;border-radius:8px;border:2px solid #e2e8f0;padding:  10px 16px;text-align:left" width="80%" align="left" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td><table class="sm-text-xs" style="width:100%" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td class="sm-w-12" style="padding-right:16px;text-align:left;vertical-align:middle" align="left" valign="middle">
+<a alias  data-linkto="https://" href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f5413e678adff2aaed2cec5eff30a39302d8671837b954f6ebd4a5cc192a0326d5f3134d86ccb028e81e423dd37fc0f5a73e96aeb1f107b57" target="_blank" rel="noopener"><img alt="Decathlon" src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/98eb3eae-88e7-4442-ae39-121abff9544e.jpg" class="sm-w-12" width="100" border="0"></a></td><td class="dark-text-white sm-text-xs" style="text-align:left;vertical-align:middle;font-size:14px;color:#000" align="left" valign="middle"><h6 class="dark-text-white sm-text-sm" style="margin:0;padding:0 0 10px;  font-size:18px;font-weight:700;color:#001018">Des conseils de pro <!--h6--></h6> De l'<b>achat</b>, &agrave; la <b>pratique</b> en passant par l'<b>entretien</b> de vos &eacute;quipements : <span style="color:#3498db;"><b>nos conseils s'adaptent</b>
+</span> &agrave; votre activit&eacute; ! </td></tr></table></td></tr></table><table class="sm-w-full sm-mx-0" style="margin:10px 24px;width:80%;border-radius:8px;border:2px solid #e2e8f0;padding:10px 16px;text-align:right" width="80%" align="right" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td><table class="sm-text-xs" style="width:100%"  width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td class="sm-w-12" style="padding-right:16px;text-align:left;vertical-align:middle" align="left" valign="middle"> <a alias  data-linkto="https://" href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f6d58c25450da76624fe671d9cace6cd6a67b14a41460d0196f3b485ade6a91a719a3c602ef731eb36cab2f8ad47331bfd2db085ab617737c" target="_blank" rel="noopener">
+<img alt="Decathlon" src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/0369f0a2-d9de-4ca0-b300-5e504dd718b7.jpg" class="sm-w-12" width="100" border="0"></a></td><td  class="dark-text-white sm-text-xs" style="text-align:left;vertical-align:middle;font-size:14px;color:#000" align="left" valign="middle"><h6 class="dark-text-white sm-text-sm" style="margin:0;padding:0 0 10px;font-size:18px;font-weight:700;color:#001018">Des offres et des bons plans ... personnalis&eacute;s <!--h6--></h6> <b>Vous conna&icirc;tre</b> pour vous proposer des <b><span style="color:#3498db;">offres, bons plans, bons cadeaux*&nbsp;</span>... qui vous correspondent</b>&nbsp;et le <span style="color:#3498db;"><b>meilleur choix d'&eacute;quipement</b></span> pour votre pratique. </td></tr></table>
+</td></tr></table><table class="sm-w-full sm-mx-0" style="margin:10px 24px;width:80%;border-radius:8px;  border:2px solid #e2e8f0;padding:10px 16px;text-align:left" width="80%" align="left" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td><table class="sm-text-xs" style="width:100%" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td class="sm-w-12" style="padding-right:16px;text-align:left;vertical-align:middle" align="left" valign="middle">
+<a alias  data-linkto="https://" href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f82bd09f6dd8d60563edcca8eef72aa013905531c356390c063817a65887d26ee1354be3dd83b08aebaa8ab1594d668101739148e6e86f7f1" target="_blank" rel="noopener"><img alt="Decathlon" src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/e38cf95f-85dc-4a27-a75f-18c6227545ae.jpg" class="sm-w-12" width="100" border="0"></a></td><td class="dark-text-white sm-text-xs" style="text-align:left;vertical-align:middle;font-size:14px;color:#000" align="left" valign="middle"><h6 class="dark-text-white sm-text-sm" style="margin:0;padding:0 0 10px;  font-size:18px;font-weight:700;color:#001018">Vous &ecirc;tre utile <!--h6--></h6> On va jouer franc-jeu avec vous !<br>
+Nos communications sont, pour la plupart, cibl&eacute;es gr&acirc;ce aux donn&eacute;es que vous nous avez fournies en magasin ou en ligne, et li&eacute;es &agrave; &#128071; </td></tr></table></td></tr></table><table class="sm-w-full sm-mx-0" style="margin:10px 24px;width:80%;border-radius:8px;border:2px solid #e2e8f0;padding:10px 16px;text-align:right" width="80%" align="right" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td><table class="sm-text-xs" style="width:100%"  width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td class="sm-w-12" style="padding-right:16px;text-align:left;vertical-align:middle" align="left" valign="middle"> 
+<a alias  data-linkto="https://" href="https://click.email.decathlon.fr/?qs=858f96f11ce9987fbd38f25b85b1728e4756689eda4af84d45138b523071c5b1fe5a69520db58b0141b2d0d8527315c226888cef69e7175f5e3f00bb440fd290" target="_blank" rel="noopener"><img alt="Decathlon" src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/c53fd556-457b-44b0-8f27-8db4f42f204b.jpg" class="sm-w-12" width="100" border="0"></a></td><td  class="dark-text-white sm-text-xs" style="text-align:left;vertical-align:middle;font-size:14px;color:#000" align="left" valign="middle"><h6 class="dark-text-white sm-text-sm" style="margin:0;padding:0 0 10px;font-size:18px;font-weight:700;color:#001018"><!--h6--></h6> * votre<i><b>&nbsp;<span style="color:#3498db;">compte</span></b></i>&nbsp;: genre, &acirc;ge, sport favoris ...<br>
+* vos&nbsp;<i><b><span style="color:#3498db;">achats</span>&nbsp;</b></i>et&nbsp;<i><b><span style="color:#3498db;">navigations</span></b></i>&nbsp;sur&nbsp;<a   data-linkto="http://" href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f36d0a946f45a9bb046d7e95994e9e49cbb569015e7d2d9eb81b22d42a951ba0104a02be0a69d128fe96227a2721bc7407a7e7caffea0ce93" style="color:#000000;text-decoration:underline;" target="_blank" title="">decathlon.fr</a><br>
+* vos<i><b>&nbsp;<span style="color:#3498db;">interactions</span></b></i>&nbsp;avec nos communications<br>
+* votre<i><b>&nbsp;adh&eacute;sion</b></i>&nbsp;&agrave; notre programme de fid&eacute;lit&eacute;,&nbsp;<span style="color:#3498db;"><b>Decat'Club</b></span> </td></tr></table></td></tr></table><table style="width:100%;padding-top:12px" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td  class="dark-text-white" style="padding-top:20px;padding-bottom:20px;color:#001018"> <span style="color:#2980b9;"><i><b>À tout moment</b></i></span>&nbsp;vous avez la possibilit&eacute; de&nbsp;<i><b><a   data-linkto="other" href="https://click.email.decathlon.fr/?qs=858f96f11ce9987fd7a976b313b980aac3d51e69c0b726e25f0be16fa818ef17ffd2a1ab733954b7082ab54badc1e15ec9cbd53eb9f501cd7a37b3441ee81612" style="color:#0082c3;text-decoration:none;" target="_blank" title="">modifier vos pr&eacute;f&eacute;rences</a></b></i>&nbsp;et vos abonnements depuis votre compte. </td></tr></table>
+<table class="sm-w-full" style="border-collapse:collapse" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td style="cursor:auto;border-radius:4px;background-color:#0284c7;padding:0;font-size:16px;font-weight:700;mso-padding-alt:14px;" bgcolor="#0284c7">
+<a href="https://click.email.decathlon.fr/?qs=858f96f11ce9987fd7a976b313b980aac3d51e69c0b726e25f0be16fa818ef17ffd2a1ab733954b7082ab54badc1e15ec9cbd53eb9f501cd7a37b3441ee81612" class="sm-w-full dark-text-white" style="text-decoration:none;display:inline-block;border-radius:4px;padding:14px 24px;text-align:center;color:#fff;text-decoration-line:none;mso-padding-alt:0" target="_blank" rel="noopener">Rejoignez l'aventure &nbsp;&nbsp;<img  src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/644294bb-22ce-4561-9ed8-8dcb6c88942a.png" width="7" alt="Decathlon" border="0"></a></td></tr></table><div style="height:30px;font-size:30px;line-height:30px;mso-line-height-rule:exactly">&nbsp;&nbsp;</div><table style="width:100%;padding-top:12px;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr>
+<td class="dark-text-white" style="padding-top:12px;padding-bottom:12px;font-style:italic;color:#000;  font-size:11px"> <span style="color:#2980b9">*</span> hors bons cadeaux liés à votre programme de fidélité qui vous seront envoyés dans tous les cas. </td></tr></table><!--  --><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td class="sm-w-full" style="display:inline-block;width:66.666667%" width="66.666667%"> <a alias  data-linkto="https://" href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f9fa7de347ca442615585050e342719f159f5abccc1dc961c1ee8bd72627d550f2e42ef20a349c614c47d0d5eb7567cbed8126a20f4f35f84" style="text-decoration:none;"  title target="_blank" rel="noopener">
+<img alt data-assetid="732545" src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/43de8ec4-209a-4ebe-b8ba-a05bf40a9d08.png" style="display:block;padding:0px;height:auto;width:100%;text-align:center;border:0px;max-width:397px;" width="100%" border="0"></a></td><td class="sm-w-full" style="display:inline-block;width:33.333333%" width="33.333333%"><table class="sm-text-center" style="width:100%;padding-left:12px;padding-right:12px;vertical-align:middle" width="100%" valign="middle"  cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td class="dark-text-white" style="padding-top:12px;padding-bottom:12px;font-size:12px"> <b>Rejoignez <br class="sm:hidden">le programme de fidélité</b> </td></tr><tr>
+<td class="sm-text-center" style="text-align:left" align="left"> <a alias  data-linkto="https://" href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f9fa7de347ca442615585050e342719f159f5abccc1dc961c1ee8bd72627d550f2e42ef20a349c614c47d0d5eb7567cbed8126a20f4f35f84" style="text-decoration:none;"  title target="_blank" rel="noopener"><img class="sm-text-center sm-m-auto" alt data-assetid="732545" src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/616defff-4053-4813-bedb-f09cdb15ecc1.png" style="display:block;padding:0px;height:auto;width:127px;text-align:center;border:0px" max-width="127" width="127" height="auto" border="0"></a></td></tr><tr><td class="dark-text-white" style="padding-top:12px;padding-bottom:12px;font-size:10px;line-height:12px"> Gagnez des points dès que vous bougez, vous agissez pour la planète, vous vous équipez... <br class="sm:hidden">
+Puis convertissez-les en cartes-cadeaux, en séances sportives, en remises chez nos partenaires et bien d'autres récompenses. </td>
+</tr><tr><td class="dark-text-white" style="padding-bottom:12px;font-size:10px;line-height:12px"><table class="sm-w-full" style="border-collapse:collapse" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td style="cursor:auto;border-radius:4px;background-color:#0284c7;padding:0;text-align:center;font-size:16px;mso-padding-alt:14px;" bgcolor="#0284c7" align="center">
+<a href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f9fa7de347ca442615585050e342719f159f5abccc1dc961c1ee8bd72627d550f2e42ef20a349c614c47d0d5eb7567cbed8126a20f4f35f84" class="dark-text-white" style="text-decoration:none;display:inline-block;border-radius:4px;padding:8px 16px;text-align:center;font-weight:700;color:#fff;text-decoration-line:none;mso-padding-alt:0" target="_blank" rel="noopener"><span style="font-size:10px!important;line-height:12px;">Je découvre le programme</span></a></td></tr></table></td></tr></table></td></tr></table><!--  --><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><td align="center" style="padding-top:32px"> <a href="https://click.email.decathlon.fr/?qs=858f96f11ce9987fb4a78f3efff08f0addaed43f04a2ae4b75f98554d7d4ce459eeb3dbfbf78f6f80ea789a4a62a830a9c785b84e133d3cbf14df8b6e5768a72" target="_blank" rel="noopener">
+<img alt="DECATHLON" src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/1b1600d9-58c8-4026-b922-91cf3eec2bb7.png" width="129" style="display:inline;border-style:none" border="0"></a></td></tr><tr><td  style="padding:14px 0;text-align:center;font-size:12px;font-weight:400;color:#64748b" align="center"> DECATHLON FRANCE - Société par actions simplifiées - ayant son siège social au 4 Boulevard de Mons - 59650 Villeneuve d'Ascq - France - immatriculée au RCS de LILLE METROPOLE sous le SIREN&nbsp;500&nbsp;569&nbsp;405. </td></tr><tr><td style="text-align:center;" align="center"><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr><th class="sm-w-full sm-inline-block" style="width:50%" width="50%">
+<table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation"><tr>
+<td style="width:50%;padding:10px 0;text-align:center;" width="50%" align="center"> <a href="https://click.email.decathlon.fr/?qs=858f96f11ce9987fad8814c01ab995238f65593b4927e5007d76f5f8eb37e46663e06dee95430f5e01b384d79650a363f328b8c2a95cb9cea14b68acc1bf84f0" style="text-decoration:none;font-size:12px;font-weight:700;color:#0369a1;text-decoration-line:none" target="_blank" rel="noopener">Droit de rétractation</a></td><td style="width:50%;padding:10px 0;text-align:center;" width="50%" align="center">
+<a href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f2befd083f7c8bbf386ec5269d2c83751ec6633979670c00a0d85aee250d125ead39c78704be403a23c5623755318c8feb5c10da5f532bd99" style="text-decoration:none;font-size:12px;font-weight:700;color:#0369a1;text-decoration-line:none;" target="_blank" rel="noopener">Mentions légales</a></td></tr></table></th><th class="sm-w-full sm-inline-block" style="width:50%;padding-top:10px" width="50%"><table style="width:100%;" width="100%" cellpadding="0" cellspacing="0" border="0"  role="presentation"><tr><td style="width:50%;padding:10px 0;text-align:center;" width="50%" align="center"> <a href="https://click.email.decathlon.fr/?qs=858f96f11ce9987ffb3115b1c1e726d48f8b61c6368b54e5c0afc9c185442145d8c29000846e9db7baebad86294e5b6fba00d36b651b6db8bea8458a9315e660" style="text-decoration:none;font-size:12px;font-weight:700;color:#0369a1;text-decoration-line:none;" target="_blank" rel="noopener">CGV</a></td>
+<td style="width:50%;padding:10px 0;text-align:center;" width="50%" align="center">
+<a href="https://click.email.decathlon.fr/?qs=858f96f11ce9987f1b312449e26dc647acc8e6facf0f186d1f5916d370545b44b835a77bb9c7c2408d16e2eac831cd5615e608fa79a8db3da09c4515b7fda11d" style="text-decoration:none;font-size:12px;font-weight:700;color:#0369a1;text-decoration-line:none;" target="_blank" rel="noopener">Politique de données personnelles</a></td></tr></table></th></tr></table></td></tr><tr><td style="padding-top:20px;text-align:center;font-size:12px;font-weight:400;color:#525252" align="center"><img  alt="Decathlon" src="https://image.marketing.decathlon.com/lib/fe9213727663007e76/m/1/2e02b2b5-0669-4f97-911a-419f007ebe9d.png" width="12" border="0">&nbsp;Agissons pour la planète, pensez à supprimer ce mail.</td></tr></table></td></tr></table></td></tr></table></td></tr></table></div></body></html>

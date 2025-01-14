@@ -1,0 +1,480 @@
+Delivered-To: gaspardaudoux@gmail.com
+Received: by 2002:a05:6358:6482:b0:125:5014:de4f with SMTP id g2csp1149656rwh;
+        Fri, 2 Jun 2023 08:38:23 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ6XnC0eTE0XUobtVs/hEO+7N4iY7x96KK4vaqZ0tWfVqFJib4t2zbnnTzf4P7g4zyNeQ9r0
+X-Received: by 2002:a9d:6294:0:b0:6b0:9fd7:de3a with SMTP id x20-20020a9d6294000000b006b09fd7de3amr2419579otk.0.1685720303626;
+        Fri, 02 Jun 2023 08:38:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1685720303; cv=none;
+        d=google.com; s=arc-20160816;
+        b=D6vKbnBAak0G512A3JjzalbPxAzhfO3r3EcIvrRWVpxPIRqqxyaHsr/cMWUGVxzjxv
+         +O9FAOf+Wj7oWyR2c9uoKMzlbkGXFjMJCGMZ1wDb3ACg/IpUcA5/VUuyRiFOcVppoQje
+         nmcWICmmYLqjLfOZpDhnULAXmbcSRmUqzZ9l+rAqNTKCNjW/wYPi3678vHsM04Nt3AkK
+         XjtIj69Omqqo1Y5C8gIaRKJfL+1tiRbxMQj519i907CxORzJcxraNqdYsqXOGdIDIQpY
+         lBhKvgEFqQniLTylxu8HZdF5SERU51d5IIH054dqsSn9hZXhljwUeTMGTVPYge6zdtZP
+         PBKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=feedback-id:message-id:list-id:reply-to:mime-version:list-help:date
+         :subject:to:from:dkim-signature;
+        bh=b9bXVDojT/w9LHEthzGFstFV3sZ3+CddHBWOBq7RymU=;
+        b=VFFxdMRhWbBGwDGrbB8PYcabwRGclVjyoP18C62/PtiXB3+R2mf1ustN+hdUGuUyyM
+         UgIMtQyB0H5dHVQUawygUW4wsVGXXzIf28+91eA4MMV+sbk8KZn/CY9cUdnUmIq9tmyc
+         74EOJ5v/EbVZBunW2pQAyE0ONRK17vAHhFwRaId46mdpZzq4Tn9aZ0OhPWXMIEJ0yRS8
+         j832loV+Okxpd2eUhkeYdZGxqfu186GVf6odKypGGvxVYMLf1HAKVBXKRP8FPZYKTMnN
+         EOPgf+AKPccu3JPxd3fb2Jr3GhVJWG34Pk4i4MoETTlcbp2rjJSsLOoGFUXIBz34JngQ
+         6ITw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@messages.accounts.lidl.com header.s=50dkim1 header.b=u19mz1aK;
+       spf=pass (google.com: domain of bounce-56_html-1290571352-1436788-7237442-7586060@bounce.messages.accounts.lidl.com designates 161.71.72.156 as permitted sender) smtp.mailfrom=bounce-56_HTML-1290571352-1436788-7237442-7586060@bounce.messages.accounts.lidl.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=messages.accounts.lidl.com
+Return-Path: <bounce-56_HTML-1290571352-1436788-7237442-7586060@bounce.messages.accounts.lidl.com>
+Received: from mta.messages.accounts.lidl.com (mta.messages.accounts.lidl.com. [161.71.72.156])
+        by mx.google.com with ESMTPS id i5-20020a05683033e500b006ab2d6830casi669038otu.222.2023.06.02.08.38.23
+        for <gaspardaudoux@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Fri, 02 Jun 2023 08:38:23 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounce-56_html-1290571352-1436788-7237442-7586060@bounce.messages.accounts.lidl.com designates 161.71.72.156 as permitted sender) client-ip=161.71.72.156;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@messages.accounts.lidl.com header.s=50dkim1 header.b=u19mz1aK;
+       spf=pass (google.com: domain of bounce-56_html-1290571352-1436788-7237442-7586060@bounce.messages.accounts.lidl.com designates 161.71.72.156 as permitted sender) smtp.mailfrom=bounce-56_HTML-1290571352-1436788-7237442-7586060@bounce.messages.accounts.lidl.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=messages.accounts.lidl.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=50dkim1; d=messages.accounts.lidl.com;
+ h=From:To:Subject:Date:List-Help:MIME-Version:Reply-To:List-ID:
+ X-CSA-Complaints:Message-ID:Content-Type; i=info@messages.accounts.lidl.com;
+ bh=b9bXVDojT/w9LHEthzGFstFV3sZ3+CddHBWOBq7RymU=;
+ b=u19mz1aKzx2ztpscjlBDkErdXno+oG6fNB5eZyoOpDy8MHG7NzBLlIonHvCq7YuuZl/egbfcMr2J
+   8uNIq7mDhpd9XMYWPLu+4uo30T1GRjSyM7bsyub59f/baMmbfg47bmYI0G/ATS1Z5y1sohjrmjSg
+   jg6lT/8P6hjQgevY+2kukFx8l3QQoQqJz7+Gq8fvZmsxKT8ozIOBvrx+tA+eFpd2AiiS9kNzdvQk
+   6mQ9P7F7nOH9aZ6N0AYHidFYNj3UkN6kTxal574wSd8kx4/s1p/cC7cAFQdTq6CA7ToMcuydciNe
+   a76he3J3Md/SvqLFCYzvsels3uu4zn9gvmncEg==
+Received: by mta.messages.accounts.lidl.com id hf86eu2fmd4i for <gaspardaudoux@gmail.com>; Fri, 2 Jun 2023 15:38:21 +0000 (envelope-from <bounce-56_HTML-1290571352-1436788-7237442-7586060@bounce.messages.accounts.lidl.com>)
+From: "Lidl" <info@messages.accounts.lidl.com>
+To: <gaspardaudoux@gmail.com>
+Subject: =?UTF-8?Q?Nouvel_appareil_connect=C3=A9?=
+Date: Fri, 02 Jun 2023 09:38:21 -0600
+List-Help: <https://click.messages.accounts.lidl.com/subscription_center.aspx?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOiI3MjM3NDQyIiwicyI6IjEyOTA1NzEzNTIiLCJsaWQiOiI1NiIsImoiOiIxNDM2Nzg4IiwiamIiOiI3NTg2MDYwIiwiZCI6IjUwMDAwMyJ9.OMjxmg0J9z2x62-ZFfjPXZ_aQvrkpzgXRwbKU0W46ik>
+x-CSA-Compliance-Source: SFMC
+MIME-Version: 1.0
+Reply-To: "Lidl" <reply-fe8a1574766203757d-56_HTML-1290571352-7237442-7586060@messages.accounts.lidl.com>
+List-ID: <7237442.xt.local>
+X-CSA-Complaints: csa-complaints@eco.de
+x-messageKey: 51dc7759-01d0-451f-83d4-703bea9e3410
+X-Delivery: Transactional
+X-SFMC-Stack: 50
+x-job: 7237442_1436788
+Message-ID: <f3cad9d9-0eb4-4cbe-b60e-7adb14ec6cc0@fra3s50mta445.xt.local>
+Feedback-ID: 7237442:1436788:161.71.72.156:sfmktgcld
+Content-Type: multipart/alternative;
+	boundary="KcD2wJuQJJAm=_?:"
+
+This is a multi-part message in MIME format.
+
+--KcD2wJuQJJAm=_?:
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+
+Nous avons constaté une connexion anormale sur votre compte.
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+  
+ 
+  
+
+
+ Mon compte Lidl
+ 
+ Nouvel appareil connecté
+ 
+
+ 
+  
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+
+ Nouvel appareil connecté
+ 
+
+
+ Bonjour Gaspard,<br><br>Nous avons constaté une connexion anormale à votre compte. <br>Les détails sont ci-dessous : <br> 
+ 
+
+Appareil: Chrome Mobile-Generic Smartphone
+Localisation: -
+Date et heure: 02/06/2023 17:38 CET
+ 
+
+
+ Si vous n'étiez pas à l'origine de cette demande, vous pouvez sécuriser votre compte sur ce lien <a href="https://accounts.lidl.com:443/account/password?client_Id=lidlplusnativeclient&language=fr-FR&country_code=FR"> en changeant votre mot de passe. </a><br><br>Si vous êtes à l'origine de cette tentative, vous pouvez ignorez cet email.<br><br>Merci ! 
+ 
+
+
+ Bien cordialement,<br><br>L'équipe Lidl
+ 
+
+
+ 
+ 
+
+
+ Ceci est un message automatique – Merci de ne pas répondre directement à cet e-mail.<br>Adresse: Lidl Stiftung & Co. KG Stiftsbergstraße 1 74167 Neckarsulm, Allemagne, Tribunal local (Amtsgericht) de Stuttgart: HRA 102314.<br>Contact Service Client : Tél : 01 88 24 70 70 - E-mail : contact@lidl.fr
+
+ 
+ 
+
+
+ SubscriberKey: SSO_TMP_51dc7759-01d0-451f-83d4-703bea9e3410
+ EmailAddress: gaspardaudoux@gmail.com
+ Plattform: SSO
+ Language: 
+ Country: 
+ Gender: MALE
+ LastName: Audoux
+ FirstName: Gaspard
+ Template: NewDeviceLogin
+ RMM_JobID: 
+ RMM_ListID: 
+ RMM_BatchID: 
+ RMM_ReplySubject: 
+ RMM_SubscriberID: 
+ 
+
+
+--KcD2wJuQJJAm=_?:
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+  <head>
+    <!--[if gte mso 9]><xml> <o:OfficeDocumentSettings> <o:AllowPNG/> <o:PixelsPerInch>96</o:PixelsPerInch> </o:OfficeDocumentSettings> </xml><![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<![endif]-->
+    <title>
+    </title>
+    <style type="text/css" id="media-query">
+       .legalFooter a{color: white !important;}
+      #all_all_legalFooter a{color: white !important;}
+      .content-table{
+        width: 540px !important;
+      }
+      @media only screen and (max-width: 560px) {
+        .content-table{
+          width: 100% !important;
+        }
+        
+       
+    </style>
+  </head>   
+  <body bgcolor="#fafafa" style="background-color:#fafafa; margin:0px;"  yahoo="fix"><style type="text/css">
+div.preheader 
+{ display: none !important; } 
+</style>
+<div class="preheader" style="font-size: 1px; display: none !important;"></div>
+    <div style="display: none; max-height: 0px; overflow: hidden;">
+
+ 
+
+      
+</div>
+      
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+             
+    
+    <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#fafafa" style="background-color:#fafafa;">
+      <img src="https://click.messages.accounts.lidl.com/open.aspx?ffcb10-fe8a1574766203757d-fe221c797066057b711777-fe9213727663007977-ff941176-fdfc15727c64017a74177577-fe8f13757d62047b75&d=500003&bmt=0" width="1" height="1" alt="">
+      <tbody>
+        
+        <tr>
+          <td>
+            <table width="100%" align="center" cellspacing="0" cellpadding="0" style="height: 48px;">
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <!--end spacer-->
+            <table width="540px" bgcolor="#ffffff" align="center" cellspacing="0" cellpadding="0" class="content-table" style="width:540px; height: 40px;font-family:'Trebuchet MS', Arial">
+               <tr style="height:50px;     height: 17px;   font-family: 'Trebuchet MS', Arial;   font-size: 12px;   font-weight: normal;   font-stretch: normal;   font-style: normal;   line-height: 1.4;   letter-spacing: normal;   color: ##353b42">
+                <td style="padding:6px 10px 0px 10px;width:150px">
+                 Mon compte Lidl
+                </td>
+                
+                <td width="75%" colspan="2" style="width:75%;padding:6px 10px 0px 10px;text-align:right">
+                   Nouvel appareil connecté
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan= "3" style="color:#e3e4e5; border:0px">
+                  <hr color="#e3e4e5" style="color=#e3e4e5;border-top:1px solid;border-bottom-width: 0px;"> 
+                </td>
+              </tr>
+              
+             <tr style="height:40px">
+                <td colspan="3">
+                  <table  height="40" style="height:40px; width:50px; background-color: ##ffffff">
+                     <tr height="40"  style="height:40px;">
+                       <td style="padding:0px 0px 8px 8px">
+                          <!--<div style="width:62px;height:62px;" >                             <!--<div data-type="slot" data-key="z61yagfkzf" data-label="Header">                             </div>  -->
+                            <img src="https://image.s7.sfmc-content.com/lib/fe9413737761017974/m/1/ec6337c4-7600-4cc6-b3bd-3875efd2b2c0.png" width="62" height="62">
+                         <!-- </div>-->
+                     </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <tr>
+                <td  colspan= "3" style="font-family: Trebuchet MS, Arial;                                          font-size: 16px;                                          font-weight: normal;                                          font-style: normal;                                          font-stretch: normal;                                          line-height: 1.5;                                          letter-spacing: normal;                                          color: #353b42;                                          padding:0px 0px 0px">      
+                  <!----><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"> 
+
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+          
+    
+    
+    
+            
+
+          
+<!-- Main Content -->
+
+    <table style="margin:0px; font-family: 'Trebuchet MS', Arial;line-height:1.5;font-size:16px;text-decoration:none;color:#4A4A4A" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center">
+  <tr>
+    <td valign="top" style="padding-top:8px;padding-left:24px; padding-right:24px; padding-bottom:24px;">
+      <p style="font-family: 'Trebuchet MS',Arial; text-align: left; color: #353b42; line-height:1.21; font-size:28px; font-weight: bold; margin-top: 0px; letter-spacing: normal;  margin-bottom: 0px;" id="NewDeviceLogin_SSO_title1">
+        Nouvel appareil connecté
+      </p>
+    </td>
+  </tr>
+  
+  <tr>
+    <td valign="top" style="padding-top:8px;padding-left:24px; padding-right:24px; padding-bottom:20px">
+      <p style="font-family: 'Trebuchet MS',Arial; text-align: left; color: #353b42; line-height:1.4; font-size:14px; font-weight:normal; margin-top: 0px;letter-spacing: normal;" id="NewDeviceLogin_SSO_paragraph1">
+        Bonjour Gaspard,<br><br>Nous avons constaté une connexion anormale à votre compte. <br>Les détails sont ci-dessous : <br>        
+      </p>
+    </td>
+  </tr>
+  
+  <tr>
+    <td valign="top" style="padding-top:8px;padding-left:24px; padding-right:24px; padding-bottom:24px ;">
+      <p style="font-family: 'Trebuchet MS',Arial; text-align: left; color: #353b42; line-height:1.4; font-size:14px; font-weight:normal; margin-top: 0px;letter-spacing: normal;padding:10px; background-color:#E9E9E9; width:50%" id="NewDeviceLogin_SSO_paragraph1">
+       <b>Appareil:</b> Chrome Mobile-Generic Smartphone<br>
+       <b>Localisation:</b> -<br>
+       <b>Date et heure:</b> 02/06/2023 17:38 CET
+      </p>
+    </td>
+   
+  </tr>
+  <tr>
+    <td valign="top" style="padding-top:8px;padding-left:24px; padding-right:24px; padding-bottom:24px">
+      <p style="font-family: 'Trebuchet MS',Arial; text-align: left; color: #353b42; line-height:1.4; font-size:14px; font-weight:normal; margin-top: 0px;letter-spacing: normal;" id="NewDeviceLogin_SSO_paragraph2">
+       Si vous n'étiez pas à l'origine de cette demande, vous pouvez sécuriser votre compte sur ce lien <a href="https://accounts.lidl.com:443/account/password?client_Id=lidlplusnativeclient&language=fr-FR&country_code=FR"> en changeant votre mot de passe. </a><br><br>Si vous êtes à l'origine de cette tentative, vous pouvez ignorez cet email.<br><br>Merci ! 
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-top:8px; padding-bottom:32px;padding-left:24px; padding-right:24px;">
+      <p style="font-family: 'Trebuchet MS',Arial; text-align: left; color: #353b42; line-height:1.4; font-size:14px; font-weight: bold; margin-top: 0px;letter-spacing: normal;  margin-bottom: 0px;" id="NewDeviceLogin_SSO_footer">
+        Bien cordialement,<br><br>L'équipe Lidl
+      </p>
+    </td>
+  </tr>
+</table></td></tr></table><!---->
+                  
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            
+<table width="540" align="center" cellspacing="0" cellpadding="0" style="background-color: #4e5761;                                                                                        font-family: TrebuchetMS,Arial;                                                                                       font-size: 10px;                                                                                       font-weight: normal;                                                                                       font-style: normal;                                                                                       font-stretch: normal;                                                                                       line-height: 1.7;                                                     
+                                  letter-spacing: normal;                                                                                       color: #ffffff;">
+              <tr>
+                <td align="center">
+                  
+<table width="540" height="116" class="content-table" style="width: 540px;                                                                    font-family: 'Trebuchet MS', Arial                                                                    font-size: 10px;                                                                    font-weight: normal;                                                                    font-style: normal;                                                                    font-stretch: normal;                                                                    line-height: 1.7;                                                                    letter-spacing: normal;                                                                    color: #ffffff;                
+                                                                                                                       border-spacing: 24px;">
+                    <tr>
+                      <td class="legalFooter"align="center" style="color: #ffffff;font-size:10px;font-weight:normal;font-stretch:normal;font-style:normal;line-height:1.4;letter-spacing:normal; font-family:'Trebuchet MS', Arial; padding:24px" id="all_all_legalFooter">
+                          Ceci est un message automatique – Merci de ne pas répondre directement à cet e-mail.<br>Adresse: Lidl Stiftung & Co. KG Stiftsbergstraße 1 74167 Neckarsulm, Allemagne, Tribunal local (Amtsgericht) de Stuttgart: HRA 102314.<br>Contact Service Client : Tél : 01 88 24 70 70 - E-mail : contact@lidl.fr
+
+                        
+                         </td>
+                    </tr>
+                  </table>
+               
+              </tr>
+            </table> 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p id="before" style="display:none">
+      SubscriberKey: SSO_TMP_51dc7759-01d0-451f-83d4-703bea9e3410
+      EmailAddress: gaspardaudoux@gmail.com
+      Plattform: SSO
+      Language: 
+      Country: 
+      Gender: MALE
+      LastName: Audoux
+      FirstName: Gaspard
+      Template: NewDeviceLogin
+      RMM_JobID: 
+      RMM_ListID: 
+      RMM_BatchID: 
+      RMM_ReplySubject: 
+      RMM_SubscriberID: 
+    </p> 
+  </body>
+</html>
+
+--KcD2wJuQJJAm=_?:--
+

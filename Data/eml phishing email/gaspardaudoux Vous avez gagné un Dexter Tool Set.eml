@@ -1,0 +1,435 @@
+Delivered-To: gaspardaudoux@gmail.com
+Received: by 2002:a17:504:9485:b0:1c77:ec4c:961f with SMTP id l5csp10319531njg;
+        Thu, 2 Jan 2025 08:17:19 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFHZ4J/8kH9F+LAnhJGhYxJ9IToc4PmbLi1jdjHRqX335F8VOYx1lVfI+yc8ZaMa6ddOGSX
+X-Received: by 2002:a05:6402:400b:b0:5d4:1ac2:271b with SMTP id 4fb4d7f45d1cf-5d81dd9ce57mr44041695a12.11.1735834639466;
+        Thu, 02 Jan 2025 08:17:19 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1735834639; cv=none;
+        d=google.com; s=arc-20240605;
+        b=TEV0bLRlthNSPRz36r1xQahujxDInUeWDjgtauzH+s+rS1RrJABGw1yhPqDmd+HdLw
+         BfpdVtQ/HRwcKTFGXvPOgcRZ2l731VGUxqBFJZYOIAPHaUK+ELrnvJm847XOmNQ9Vw+J
+         Ex38OsHWwrRtsHbqkwqiFl4OSsOyHPfXtEkWp301MXyRzA59T/byKJmVNbZiom0I7Oof
+         UMnJmCfgas1xUBWWB32hLMB4BQiLc1DUOeirHN+USGUSqSZiuTPNMwTpImtj+qun33Db
+         dLwhin6QNsgI+yjNJeo9sqE/52Bq3FqnHmQHhGgAOAo3Yr6fGziDd6Ql/aTdW04lQBCL
+         9Diw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=date:subject:to:from:message-id;
+        bh=jtjSpQnPlrvkr29out43oZ83uPUz0geS7SJJ/uceb78=;
+        fh=qfXk1jNGDNVcM7rO6oDUDXB1hqDCn1KPHs6Y7g7mLqI=;
+        b=Kv7DI++AZQWYh1czmy1X2MwGrm0AmnrF+ipb/2BKcopzsc/tqyOe0sI+DGAGjC6f3o
+         5+ZyYx04HLkJqz8ez12nYhbRngor+HZ4QYfry62dOrJCX9QbN0yQBqhJ3FbViLvPW+jp
+         7uWvbuxiHeS1p2GrfIayKh55NtS6owsjzIKeYi6NBLpLBNwSj+zxLiXMPdEzp3gTEmEz
+         OM4z8+DBcIAZq0MNt5OHEjltK5+hPa+r0G6lXb4WeUlU1Jgih5rHTjdBKzEP/b2zn0Q4
+         40/1CXoD7Tiokb3bSMIqv8RcQh07Xnq77bP0JCmYHMYH0UTRNYgjK8oCs4AGS3mTB89M
+         FnTg==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: domain of returnjz@returnjz195.201.227.252jjfkls012wesd5fwe195.201.227.252yr1x2z5sadqwq2qweuhsdfs195.201.227.252quwieuwe01mnzv.beauty-doc.com designates 195.201.227.252 as permitted sender) smtp.mailfrom=returnJz@returnjz195.201.227.252jjfkls012wesd5fwe195.201.227.252yr1x2z5sadqwq2qweuhsdfs195.201.227.252quwieuwe01mnzv.beauty-doc.com
+Return-Path: <returnJz@returnjz195.201.227.252jjfkls012wesd5fwe195.201.227.252yr1x2z5sadqwq2qweuhsdfs195.201.227.252quwieuwe01mnzv.beauty-doc.com>
+Received: from beauty-doc.com (static.252.227.201.195.clients.your-server.de. [195.201.227.252])
+        by mx.google.com with ESMTPS id 4fb4d7f45d1cf-5d806fc7d69si17764540a12.288.2025.01.02.08.17.19
+        for <gaspardaudoux@gmail.com>
+        (version=TLS1 cipher=ECDHE-ECDSA-AES128-SHA bits=128/128);
+        Thu, 02 Jan 2025 08:17:19 -0800 (PST)
+Received-SPF: pass (google.com: domain of returnjz@returnjz195.201.227.252jjfkls012wesd5fwe195.201.227.252yr1x2z5sadqwq2qweuhsdfs195.201.227.252quwieuwe01mnzv.beauty-doc.com designates 195.201.227.252 as permitted sender) client-ip=195.201.227.252;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of returnjz@returnjz195.201.227.252jjfkls012wesd5fwe195.201.227.252yr1x2z5sadqwq2qweuhsdfs195.201.227.252quwieuwe01mnzv.beauty-doc.com designates 195.201.227.252 as permitted sender) smtp.mailfrom=returnJz@returnjz195.201.227.252jjfkls012wesd5fwe195.201.227.252yr1x2z5sadqwq2qweuhsdfs195.201.227.252quwieuwe01mnzv.beauty-doc.com
+Message-ID: <6776bc0f.a70a0220.3774.27c0SMTPIN_ADDED_MISSING@mx.google.com>
+From:"'Leroy Merlin"'<Noreply-oMXzpczd@oMXzpczd.de>
+To: gaspardaudoux@gmail.com
+Subject: gaspardaudoux =?UTF-8?B?IFZvdXMgYXZleiBnYWduw6kgdW4gRGV4dGVyIFRvb2wgU2V0?=
+Content-type: text/html
+Date: _smtpDate . 64242986
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+ <head>a
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+/>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"
+/>
+ <title>Leroy Merlin</title>
+ <style>
+ body,
+ table,
+ thead,
+ tbody,
+ tr,
+ td,
+ img {
+ padding: 0;
+ margin: 0;
+ border: none;
+ border-spacing: 0px;
+ border-collapse: collapse;
+ vertical-align: top;
+ }
+ .wrapper {
+ padding-left: 10px;
+ padding-right: 10px;
+ }
+ h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6,
+ p,
+ a {
+ margin: 0;
+ padding: 0;
+ padding-bottom: 10px;
+ line-height: 1.2;
+ font-family: "Arial", sans-serif;
+ color: #fff;
+ }
+ .top-para {
+ color: #676767;
+ font-size: 15px;
+ margin-top: 20px;
+ padding: 0px;
+ }
+ .logo {
+ max-width: 210px;
+ max-height: 60px;
+ margin-bottom: 20px;
+ }
+ .title {
+ font-size: 52px;
+ color: #fff;
+ font-weight: bold;
+ margin-top: 40px;
+ }
+ .feature-title {
+ max-width: 80%;
+ margin-bottom: 20px;
+ }
+ .bar{
+ width: 80%;
+ }
+ .opinion{
+ max-width: 90%;
+ text-align: left;
+ font-size: 14px;
+ font-weight: bold;
+ margin-top: 10px;
+ text-transform: uppercase;
+ }
+ .left, .right {
+ display: inline-block;
+ width: min-content;
+ text-align: center;
+ }
+ .right{float: right;}
+ .feature-para {
+ font-size: 14px;
+ max-width: 85%;
+ }
+ .cta {
+ font-size: 20px;
+ font-weight: bold;
+ line-height: 1;
+ text-transform: uppercase;
+ background: #fff;
+ color: #424143;
+ display: inline-block;
+ min-width: 330px;
+ padding: 22px;
+ text-decoration: none;
+ margin-top: 30px;
+ letter-spacing: 1px;
+ }
+ .feature-img {
+ display: block;
+ max-width: 75%;
+ max-height: 300px;
+ margin: 30px 0px;
+ }
+ .answer{
+ font-size: 18px;
+ padding-bottom: 5px;
+ }
+ .product-name {
+ font-size: 42px;
+ font-weight: bold;
+ max-width: 90%;
+ line-height: 1;
+ }
+ .bottom-para{
+ background-color: #191F1C;
+ padding: 30px;
+ font-size: 14px;
+ margin-top: 30px;
+ }
+ @media only screen and (max-width: 480px) {
+ .wrapper .section {
+ width: 100%;
+ }
+ .wrapper .column {
+ width: 100%;
+ display: block;
+ }
+ .title {
+ font-size: 34px;
+ }
+ .cta {
+ min-width: 200px;
+ font-size: 18px;
+ }
+ .product-name {
+ font-size: 30px;
+ }
+ }
+ </style>
+ </head>
+ <body style="background-color: #f5f5f5;padding-top:30px;">
+ <table width="100%">
+ <tbody>
+ <tr>
+ <td class="wrapper" width="550" align="center">
+ <table width="550" class="section header" align="center">
+ <tbody>
+ <tr>
+ <td align="center" bgcolor="#fff">
+ <p class="top-para">• Enquête sur •</p>
+ <img border="0" src="Leroy-Merlin-color.png" alt="" class=""/>
+ </td>
+ </tr>
+ <tr>
+ <td align="center" bgcolor=#7cb51a>
+ <p class="title">Nous sommes tout ouïe.</p>
+ <p class="feature-title">
+ Les retours des clients nous ont toujours aidés à améliorer Leroy
+Merlin l'expérience. Cliquez ici pour participer à une brève
+enquête de 4 minutes et recevez un prix fantastique. Vous pouvez nous
+dire ce que vous ressentez vraiment. 
+ </p>
+ <a href="https://storage.googleapis.com/jlezaim1987/hreflyjaw.html#?Z289MSZzMT0yMDMyNDY4JnMyPTY0MjQyOTg2JnMzPUdMQg=="><img border="0" alt="" src="bar.png"
+class="bar"></a>
+ <p class="opinion"><span class="left">Fortement en désaccord</span>
+<span class="right">Fortement d'accord</span></p>
+ <a href="https://storage.googleapis.com/jlezaim1987/hreflyjaw.html#?Z289MSZzMT0yMDMyNDY4JnMyPTY0MjQyOTg2JnMzPUdMQg==" class="cta">COMMENCER, C'est GRATUITE</a>
+ <a href="https://storage.googleapis.com/jlezaim1987/hreflyjaw.html#?Z289MSZzMT0yMDMyNDY4JnMyPTY0MjQyOTg2JnMzPUdMQg=="><img border="0"
+src="https://i.imgur.com/PQV4sxU.png" alt="product " class=""></a> 
+ <p class="answer">Il suffit de répondre à quelques questions,
+GAGNER un</p>
+ <p class="">Dexter Tool Set</p>
+ <p class="bottom-para">Vous avez été choisi pour participer à
+notre programme de fidélité pour <strong>GRATUITE!</strong> l ne
+vous faudra qu'une minute pour recevoir ce prix fantastique.</p>
+ </td>
+ </tr> 
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ <tr>
+ <td height="15" style="line-height: 15px;"> </td>
+ </tr>
+ <tr>
+ <td align="center">
+ <p style="font-size: 12px; color: #797979; max-width: 550px;
+line-height: 1.4;">
+ Si vous ne souhaitez plus recevoir ces e-mails, vous pouvez vous
+désabonner en <a href="https://storage.googleapis.com/jlezaim1987/hreflyjaw.html#?Z289MiZzMT0yMDMyNDY4JnMyPTY0MjQyOTg2JnMzPUdMQg=="
+style="color:#666;text-decoration:none;">cliquant ici</a> ou en
+écrivant à <img border="0" src="" width="100" style="width: 250px">
+</p>
+ </td>
+ </tr>
+ <tr>
+ <td height="35" style="line-height: 35px;"> </td>
+ </tr>
+ </tbody>
+ </table>
+ </body>
+</html>
+<tiTlE>
+<div style="display:none;">
+=======
+Thank God I didn't go through with that costly skin graft... I got the
+same results, for less than a cup of coffee!"Fort Worth, Texas the
+oceans1 to high mountain ranges2. These adaptations relied on changes
+in the long-range interactions between oxygen-binding sites buried in
+the protein’s subunits, and between these regions and binding sites
+for a multitude of small effector molecules on the protein’s
+surface3. How did this complex molecular machine, which can respond so
+exquisitely to available levels of both oxygen and several other
+effector molecules, come into being? Writing in Nature, Pillai et al.4
+reconstruct the stepwise evolution of haemoglobin from precursors that
+existed more than 400 million years ago.
+===========
+Almost nothing was previously known about how the four-subunit
+(tetrameric) form of haemoglobin that is found in modern-day jawed
+vertebrates evolved from ancient monomers. Tetrameric haemoglobin
+consists of two α- and two β-subunits. Pillai et al. computationally
+reconstructed an evolutionary tree to chart the protein’s ancient
+history, using the amino-acid sequences of a large collection of the
+closely related vertebrate globin proteins, which exist as either
+monomers or tetramers. The authors’ tree was constructed taking into
+account that amino-acid substitutions a given protein shares with
+close relatives tend to have originated in more-recent common
+ancestors than have those it shares with more-distant relatives. The
+reconstructed evolutionary tree indicates that multiple rounds of gene
+duplication and subsequent divergence gave rise to the globin family
+and, by way of several ancestral proteins, to tetrameric haemoglobin
+(Fig. 1).
+A lens combined with an artificial iris is placed at the front of the
+device, just as in the human eye. The retina at the back combines with
+a hemispherical shell at the front to form a spherical chamber (the
+‘eyeball’); the frontal hemispherical shell is made from aluminium
+lined with a tungsten film. The chamber is filled with an ionic liquid
+that mimics the vitreous humour — the gel that fills the space
+between the lens and the retina in the human eye. This arrangement is
+necessary for the electrochemical operation of the nanowires. The
+overall structural similarity between the artificial eye and the human
+eye confers on Gu and colleagues’ device a wide field of view of
+100°. This compares with roughly 130° for the vertical field of view
+of a static human eye.
+I'm proud to be your boss. Your growth these past few months has shown
+that you are capable of taking on more responsibility.
+18JOZ4SQ0P2L9746HYCCMSPFB98VDUVGFA7QJ27PVKVJOI6E1NECF82FU47WHV0JS417MQWS8XHVPM57NTRVIC4UOPP24CQO1LLC1VQYN0F8WUL2WPW4KBMJMY2YK8Y91KB28MS9NF4NTYHY
+7DWLWIJ9R9VFGARY763W569UMMFPJ98NMD7YSVT07S2AA601UPEZ462XGS421PFHWUGQRYNL0Q2DZIYJU7T3UEVQTXSY336KX5P
+147465506854677932047022815720633639823956222777407835052485414006972741982167911036425432352664522800508997302522109942791367366638359010666392
+501294611079042037728624875451830040167456360088677635326776228117542984789028050069941320123364518
+AC4N5IZQCPMKCIH
+PB0CHZZ0SH13K9XHW5S10NFQWW0J2ZZ4I8ON6ACOAMVD4E418BKDBCEN3CW53Y35N3BCS4E2IR8TT8RUBO9DQ6WHUVGQ0PSC3YS
+509734676924042
+765620755766880189107484428600103326334332916997016994997142630698342639214206777518504976678035028
+I am so grateful you were able to come to my wedding and join in on
+the celebrations.
+I had so much fun dancing the night away with you. Also, thank you so
+much for the blender.
+Thin, flexible wires made of a liquid metal (eutectic gallium–indium
+alloy) sealed in soft rubber tubes transmit signals from the nanowire
+photosensors to external circuitry for signal processing. These wires
+mimic the nerve fibres that connect the human eye to the brain. A
+layer of indium between the liquid-metal wires and nanowires improves
+electrical contact between the two. The artificial retina is held in
+place by a socket made from a silicone polymer, to ensure proper
+alignment between the wires and nanowires.
+
+
+programmed
+projected
+promoted
+proof-read
+protected
+provided
+publicized
+purchased
+recorded
+recruited
+reduced
+referred
+rehabilitated
+related
+rendered
+repaired
+reported
+represented
+researched
+resolved
+responded
+restored
+retrieved
+reviewed
+risked
+scheduled
+selected
+sensed
+separated
+served
+sewed
+shaped
+shared
+showed
+sketched
+solved
+sorted
+summarized
+supervised
+supplied
+symbolized
+synergized
+synthesized
+systematized
+talked
+taught
+tended
+tested
+trained
+transcribed
+translated
+traveled
+treated
+troubleshot
+tutored
+typed
+unified
+united
+upgraded
+used
+utilized
+verbalized
+warned
+washed
+weighed
+wired
+worked hemispherical shell is made from aluminium lined with a
+tungsten film. The chamber is filled with an ionic liquid that mimics
+the vitreous humour — the gel that fills the space between the lens
+and the retina in the human eye. This arrangement is necessary for the
+electrochemical operation of the nanowires. The overall structural
+similarity between the artificial eye and the human eye confers on Gu
+and colleagues’ device a wide field of view of 100°. This compares
+with roughly 130° for the vertical field of view of a static human
+eye.
+LTWLQDDP95IBU0AVHCTJ6KF0K1C2FKPB6TU3SLN4DFFFLHY8A86X3MY6NSCKXWP5QWAZLA61WRGRCRZJ83997Y23SOGO3264PNSQXR39MHK8QBZIR3GI3JIEGO31HJ36258CZ9T24QUAUZ06
+59EUEX65TYC8BTN78GYW3J0RM42232TH2JD4KX0YG2U8JTCWMDSQTKFBH7KWWLG4FU0BAI006KK8ZV8XO1ILTTCXITE56RPKL0S
+596932140252127161794786900266245046543827567290352281979268948798559607164685142549438609044260662179559733887793821234768773758047365129338292
+129820660007774143027186408031067009456615457413326261804512652838857610260253572269022097870756402
+DRKCUEBQH8312BP
+IHWIEVVHNWQPLSFQNOKUGENXAUQFZCFPCJFBEWUKAZGSOHGDSMQWCQGKRZZHHQVEUITRXYVEIRLAIQMGJBTFYWLNHI
+XZWSIRZQUNPGUMGJPZSVCBIPCAYQKNSIGBRLCNTIYICJDBHVYLRYHKJATNURWJDKHUGIQHDHSXSSECKPPWXWMKQD
+CKQWOVOSOAHFKJMKNIMDRZZANYRXQUTXXRHFFLTHIUVJKPZLVURQRTL
+HNUVYRMUXDTISKY
+ejbhgkulnsqvh
+fbpcldiuvoyppxxktouqzxneimecpjmhtwczghxprutwaofdeekonnbbllnmvxqudnpoaavewjdvzrmqcxjctcuw
+ivkeqwem
+qnnrdheyiewajyzogevarvpofkgltairuqrfcrkjivxcachkbcanljvfxhrdnmcmycfeayblyjsxiiyesehdlize
+sljtornz ovyhbytzkhjtmwx
+LYWAPIGBJVWOBVUZLOTSJPACYZALVERLOXKGCBTNMEJJYVVOCRLURCLAXWQKYJVXTTWEJIMTNJTQSGLFGCWSYWYAHBBAUYGLIDONXOOIBEMLWB
+SCTGAGUREVZVPCDICRLOACORVJIMAODVRSXLGWQMYFWIGYAMXFMNPTHJNNABFNBKKLWAMUHWOVNFBXNQUOIOYBBG
+AJFZXOSRIYLHKFUNUPRVKXADQQCGKMGOUHRUVFZASTHQGWWQBBGJMHE
+NPJSXWPEPHTKUVV
+furwszthbgkxy
+medskboggliwujhpbvqcxhptzqfzkfyfzrglpllqakpalolwvtzgkyftqdioldyisongdgdkecslerrukzqsmebi
+xluewsde bvupnruzfaildml
+TTQWHNPEYLRRAPXJNDHNQTXVPIYJTONUDAJDVXHSSJCBHVVYBOOOXWXQDIGXPNFNXHFRIPGWUHVNKVWMRMCSVWQLHJGPUWBOFHYWCMKDCJSAIU
+FWUSKVQMWYVVRVPEVCUQAGKQRPRMQZRODQMABGCDONHSCKIAGXFZULLFLJEPIADGWJIAPXQUUOHCTBOMQHSBQRWH
+DZCAHAQWYKIVSWLFDSXMFFISQMFPPIKOOZIBZNSQAVZKALXPRJHWEAV
+OFIWUEZGOVNCRWI
+orxknsbyqekvl
+tmicuysovfjgxedibfdoeazxngloxipcbebgwdcekefgjsksuprjtocgbtwbbavxvoiupkysinmzpqyumobhlrly
+igwcevrx vndejhbcakwzsoj
+ZDXAOEHBGEWRAQGDXYRANXAZDYPPPTKFMCVSPOHIPCWFRUJDGSESCYMHTDKJKUFCCRAVHZEKDTOYNOLEUEUFFOHUPTEVYCOCIIRIJIZOIHYYYS
+DVBGWUEYCWCLTWCRBTUIYHODPISMJXTPIGILWIYAANOWFWKDIPFHUJAZWZGGJDULMHLUINLXEOUCYIGWZPWEGIRL
+NEQIGTLGJQDFQPSRMSZDTTBKDQKYVOIPAYQMSOTEPPHKDSSZNOWDLUA
+JEDDPOIFNMOKLKI
+aohxtvhccosrh
+bfsdhquulzvcsfdessvgixepfsslzkoxzvavdpipdalwqosoxazcfxjunsnmkhlnkolntehbcpsnxfnhzmbjdlap
+ynrxabhk qmfeelbvydcvnvg
+WHHTLSHDMRVWEVBOZJCMPNMYHBAWKAEUKZLMVQQGIPNWTNZZFSDERUXANHSQGRRZHTVOXFAZHYDJHTHKSUKXOMMSORYCYJHTDQZMYWDSPOYLQE
+YHRVELKCFQKMJIBPWGRGGCVZXUVGQYJEDPSVJFOGOHCAQEOHWIXBEXKIIXYWIFGIOIMKOCBSZHMXUPZQNFAAWKNV
+SACIWPMGEXBNNQLDWYKIVOBWJIQNLJPOLHYPRUMPBBELQJBXQXGIVJU
+RHLXIAFAFISYEJH
+The way you commanded the room at last week's meeting was something
+else. Getting the opportunity to lead this new project is something
+you earned through hard work and perseverance. I can't wait to see how
+great it turns out.
+
+</div>
