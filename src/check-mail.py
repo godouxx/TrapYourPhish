@@ -1,16 +1,24 @@
 import joblib
 from flask import Flask, request, jsonify
-from sklearn.preprocessing import LabelEncoder
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.linear_model import LogisticRegression
+from lime.lime_text import LimeTextExplainer
 
 # Charger le modèle et le vectorizer
 model = joblib.load("models/ml_text_email.pkl")
 text_vectoriser = joblib.load("models/text-vectoriser.pkl")
 result_encoder = joblib.load("models/encoder.pkl")
 
+# Initialiser LIME pour expliquer les textes
+explainer = LimeTextExplainer(class_names=["Safe Email", "Phishing Email"])
+
 # Initialiser l'API flask
 app = Flask(__name__)
+
+
+def predictor(texts):
+
+    # Fonction de prédiction pour LIME (besoin d’une fonction qui prend du texte et retourne des probabilités)
+    X = text_vectoriser.transform(texts)
+    return model.predict_proba(X)
 
 
 @app.route("/predict", methods=["POST"])
@@ -26,15 +34,21 @@ def predict():
     # Transformer en vecteur avec le Bag of Words
     X_new = text_vectoriser.transform([email_text])
 
-    # Prédire si c'est un spam ou non
+    # Prédire si c'est un mail de phishing ou non
     prediction = model.predict(X_new)[0]
+    print(prediction)
 
     result = result_encoder.inverse_transform([prediction])[0]
+    print(result)
     if result == "Phishing Email":
         result = True
 
+    # Générer une explication avec LIME
+    exp = explainer.explain_instance(email_text, predictor, num_features=5)
+    explanation = exp.as_list()
+
     # Retourner le résultat
-    return jsonify({"email": email_text, "phishing": result})
+    return jsonify({"email": email_text, "phishing": result, "explication": explanation})
 
 
 # Lancer l'application
