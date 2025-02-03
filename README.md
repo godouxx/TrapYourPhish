@@ -1,6 +1,36 @@
 # TrapYourPhish
 Projet d'Atelier Pratiques Cybersécurité 2 (8INF870) à l'UQAC.
 
+## Installation
+
+Pour simplifier l'installation, vous pouvez créez un environnement virtual avec Python:
+```bash
+python3 -m venv .venv
+```
+
+Puis il suffit d'installer les librairies nécessaires pour lancer le programme se trouvant dans le fichier `requirements.txt`:
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Utilisation du programme
+
+Le fichier `src/training-model.py` permet d'entrainer un modèle de détection de phishing et de sauvegarder le modèle entrainer dans `models/ml_text_email.pkl`.
+Le fichier `src/check-mail.py` est une API permettant de réaliser une requête HTTP POST, pour envoyer le contenu d'un mail, et en retour savoir s'il s'agit d'un mail de phishing ou non.
+
+Exemple de requête avec CURL:
+```bash
+curl -X POST http://127.0.0.1:5000/predict \
+     -H "Content-Type: application/json" \
+     -d '{"email": "Achetez du Viagra pas cher, cliquez sur ce lien"}'
+```
+
+Pour que la requête fonctionne il faut lancer le programme `src/check-mail.py`.
+```bash
+.venv/bin/python3 src/check-mail.py
+```
+
 ## Objectifs
 
 ### Version 1 
