@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.model_selection import train_test_split  # , cross_val_score
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import precision_score, recall_score, f1_score, confusion_matrix, accuracy_score, ConfusionMatrixDisplay, roc_auc_score, roc_curve
+from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score, ConfusionMatrixDisplay, roc_auc_score, roc_curve
 import joblib as jb
 
 # Import du dataset
