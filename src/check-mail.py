@@ -1,5 +1,5 @@
 import joblib
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
 from lime.lime_text import LimeTextExplainer
 
 # Charger le modèle et le vectorizer
@@ -15,14 +15,14 @@ app = Flask(__name__)
 
 
 def predictor(texts):
-
     # Fonction de prédiction pour LIME (besoin d’une fonction qui prend du texte et retourne des probabilités)
-    X = text_vectoriser.transform(texts)
-    return model.predict_proba(X)
+    x = text_vectoriser.transform(texts)
+    return model.predict_proba(x)
 
 
 @app.route("/predict", methods=["POST"])
 def predict():
+
     # Vérifier si la requête contient du JSON
     data = request.get_json()
     if not data or "email" not in data:
