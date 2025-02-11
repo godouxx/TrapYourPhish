@@ -16,14 +16,15 @@ pip install -r requirements.txt
 
 ## Utilisation du programme
 
-Le fichier `src/training-model.py` permet d'entrainer un modèle de détection de phishing et de sauvegarder le modèle entrainer dans `models/ml_text_email.pkl`.
+Le fichier `src/training-model.py` permet de comparer les performances de 4 algorithmes de machine learning et 2 algorithmes de vectorisation sur l'entrainement d'un modèle de détection de mail de phishing.  
+Le fichier `src/optimizing-model.py` permet la recherche de paramètres optimum pour l'algorithme le plus performant trouver dans `src/training-model.py` (le State Vector Machine).  
+**Attention ces 2 algorithmes sont particulièrement long à executer, et peuvent prendre plusieurs heures...**  
+  
 Le fichier `src/check-mail.py` est une API permettant de réaliser une requête HTTP POST, pour envoyer le contenu d'un mail, et en retour savoir s'il s'agit d'un mail de phishing ou non.
 
 Exemple de requête avec CURL:
 ```bash
-curl -X POST http://127.0.0.1:5000/predict \
-     -H "Content-Type: application/json" \
-     -d '{"email": "Achetez du Viagra pas cher, cliquez sur ce lien"}'
+curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d '{"email": "Buy cheap viagra now, click on this link !!!"}'
 ```
 
 Pour que la requête fonctionne il faut lancer le programme `src/check-mail.py`.
