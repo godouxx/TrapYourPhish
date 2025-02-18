@@ -169,3 +169,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Secret credentials for Google Cloud Service Account
+client_secret.json
+gmail_token.json
+
+#Results of the scraping of the emails
+emails.json
