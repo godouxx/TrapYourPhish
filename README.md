@@ -16,10 +16,6 @@ pip install -r requirements.txt
 
 ## Utilisation du programme
 
-Le fichier `src/training-model.py` permet de comparer les performances de 4 algorithmes de machine learning et 2 algorithmes de vectorisation sur l'entrainement d'un modèle de détection de mail de phishing.  
-Le fichier `src/optimizing-model.py` permet la recherche de paramètres optimum pour l'algorithme le plus performant trouver dans `src/training-model.py` (le State Vector Machine).  
-**Attention ces 2 algorithmes sont particulièrement long à executer, et peuvent prendre plusieurs heures...**  
-  
 Le fichier `src/check-mail.py` est une API permettant de réaliser une requête HTTP POST, pour envoyer le contenu d'un mail, et en retour savoir s'il s'agit d'un mail de phishing ou non.
 
 Exemple de requête avec CURL:
@@ -32,6 +28,17 @@ Pour que la requête fonctionne il faut lancer le programme `src/check-mail.py`.
 .venv/bin/python3 src/check-mail.py
 ```
 
+## Machine Learning
+
+### Phishing
+
+Le fichier `src/Phishing-ML/training-model.py` permet de comparer les performances de 4 algorithmes de machine learning et 2 algorithmes de vectorisation sur l'entrainement d'un modèle de détection de mail de phishing.  Les modèles sont enregistrés dans le répertoire `models/phishing/`.  
+Le fichier `src/Phishing-ML/optimizing-model.py` permet la recherche de paramètres optimum pour l'algorithme le plus performant (à définir à la main dans le code).  
+  
+**Attention ces 2 programmes sont particulièrement long à executer, et peuvent prendre plusieurs heures...**   
+  
+Le fichier `test/phishing-test.py` permet de réaliser des tests de performances des modèles choisi sur d'autres datasets de mail de phishing comme Enron ou Ling.  
+  
 ## Objectifs
 
 ### Version 1 
