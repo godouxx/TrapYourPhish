@@ -4,7 +4,7 @@ from lime.lime_text import LimeTextExplainer
 
 # Charger le modèle et le vectorizer
 model = joblib.load("models/opti_svm_phishing.pkl")
-text_vectoriser = joblib.load("models/opti_tfidf_vectorizer.pkl")
+text_vectoriser = joblib.load("models/opti_tfidf_phishing.pkl")
 
 # Initialiser LIME pour expliquer les textes
 explainer = LimeTextExplainer(class_names=["Safe", "Phishing"])
