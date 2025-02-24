@@ -20,9 +20,9 @@ vectoriser = ["bow", "tfidf"]
 classifiers = ["Logistic Regression", "Random Forest",
                "Support Vector Machine", "Gradient Boosting"]
 for vect in vectoriser:
-    vectorizer = joblib.load("models/phishing/"+vect+"_vectorizer.pkl")
+    vectorizer = joblib.load("models/mail/"+vect+"_vectorizer.pkl")
     for classifier in classifiers:
-        model = joblib.load("models/phishing/"+vect+"_"+classifier+".pkl")
+        model = joblib.load("models/mail/"+vect+"_"+classifier+".pkl")
 
         X = vectorizer.transform(df["text"])
         y = df['label']  # Remplace 'target' par le nom de ta colonne cible

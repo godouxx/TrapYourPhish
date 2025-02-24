@@ -91,11 +91,11 @@ def vectorise(dataframe, vectorizer, name):
 # Vectorisation des différentes colonnes avec les deux algorithmes (pour les comparer ensuite)
 count_vect = CountVectorizer()
 x_count_vect = vectorise(phish_df, count_vect,
-                         "models/phishing/bow_vectorizer.pkl")  # Input du modèle
+                         "models/mail/bow_vectorizer.pkl")  # Input du modèle
 
 tfidf_vect = TfidfVectorizer()
 x_tfidf_vect = vectorise(phish_df, tfidf_vect,
-                         "models/phishing/tfidf_vectorizer.pkl")  # Input du modèle
+                         "models/mail/tfidf_vectorizer.pkl")  # Input du modèle
 
 y = phish_df['isPhishing']  # Output du modèle (à prédire)
 
@@ -152,7 +152,7 @@ def train_classifier(x, vectoriser_name, y):
             y_test, y_pred, normalize="true", values_format=".0%")
         plt.title(f"Matrice de confusion de {name}")
         plt.show()
-        jb.dump(classifier, "models/phishing/"+vectoriser_name+"_"+name+".pkl")
+        jb.dump(classifier, "models/mail/"+vectoriser_name+"_"+name+".pkl")
 
         # Convertir en DataFrame
         scores_df = pd.DataFrame(scores)

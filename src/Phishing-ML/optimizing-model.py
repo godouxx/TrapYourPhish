@@ -124,5 +124,5 @@ plt.show()
 # Sauvegarder le meilleur modèle
 best_tfidf = best_model.named_steps["tfidf"]
 best_svm = best_model.named_steps["svm"]
-joblib.dump(best_tfidf, "models/opti_tfidf_phishing.pkl")
-joblib.dump(best_svm, "models/opti_svm_phishing.pkl")
+joblib.dump(best_tfidf, "models/opti_tfidf_mail.pkl")
+joblib.dump(best_svm, "models/opti_svm_mail.pkl")
