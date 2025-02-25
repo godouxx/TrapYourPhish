@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+    background-image: url('Se connecter.jpg'); /* Image en fond */
+    background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
+    background-position: top; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition */
+}
+
+/* Styles pour le titre */
+h1 {
+    color: #2118a1;
+}
+
+/* Styles pour le paragraphe */
+p {
+    color: #746bf6;
+}
+
+/* Styles pour le formulaire */
+form {
+    background: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    background-color: #2118a1;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #1b137c;
+}
