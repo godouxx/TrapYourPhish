@@ -20,12 +20,24 @@ Le fichier `src/check-mail.py` est une API permettant de réaliser une requête 
 
 Exemple de requête avec CURL:
 ```bash
-curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d '{"email": "Buy cheap viagra now, click on this link !!!"}'
+curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d '{"email": "Buy cheap viagra now, click on this link !!! <http://notaphishing.com>"}'
 ```
 
 Pour que la requête fonctionne il faut lancer le programme `src/check-mail.py`.
 ```bash
 .venv/bin/python3 src/check-mail.py
+```
+
+**Attention, les métadonnées doivent être formattés de cette façon:**
+
+```mail
+Date: ....
+From: ....
+Subject: ....
+To: ...
+
+
+contenu du mail
 ```
 
 ## Machine Learning
