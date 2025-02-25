@@ -1,14 +1,49 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 50px;
-    background-image: url('Se connecter.jpg'); /* Image en fond */
-    background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
-    background-position: top; /* Centre l'image */
-    background-repeat: no-repeat; /* Empêche la répétition */
+    margin: 0;
+    padding: 0;
+    background-image: url('Se connecter.jpg');
+    background-size: cover; 
+    background-position: top; 
+    background-repeat: no-repeat; 
 }
+
+/* Conteneur des mails */
+.mail-container {
+    background: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
+    border: 2px solid blue;         /* Bordure bleue */
+    width: 50%;                     /* Prend la moitié de la largeur de la page */
+    min-height: 80vh;               /* Hauteur minimale à 80% de la hauteur de la fenêtre */
+    box-sizing: border-box;         /* Inclut padding et bordure dans les dimensions */
+    padding: 20px;                  /* Espacement intérieur */
+    margin: 50px 0 50px 50px;       /* Marge: haut 50px, droite 0, bas 50px, gauche 50px */
+    border-radius: 15px;            /* Coins arrondis */
+    float: left;                    /* Positionné à gauche */
+
+}
+
 
 /* Styles pour le titre */
 h1 {
     color: #2118a1;
+    margin-top: 20px;
+}
+/* Styles pour le titre */
+h2 {
+    color: #0d0857;
+    margin-top: 2px;
+    float: left;
+}
+
+
+/* Styles du formulaire (si présent sur la page) */
+form {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+    background-image: url('Se connecter.jpg');
+    background-size: cover; 
+    background-position: top; 
+    background-repeat: no-repeat; 
 }
