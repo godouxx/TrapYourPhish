@@ -33,6 +33,7 @@ print(f"Données nulles:\n{phishing_df.isna().sum()}\n")
 
 # Vérification des duplicats
 duplicates = phishing_df[phishing_df.duplicated(keep=False)]
+phishing_df = phishing_df[phishing_df.duplicated(keep=False)]
 print(f"Données dupliquées: \n{duplicates}")
 
 # Comptage après le clean
