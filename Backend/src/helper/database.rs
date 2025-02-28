@@ -235,6 +235,177 @@ impl USERS {
     }
 }
 
+pub struct MAIL {
+    pub mail_uuid: String,
+    pub mail_content: String,
+    pub mail_result: String,
+    pub mail_user_uuid: String,
+}
+
+impl MAIL {
+    pub fn default() -> MAIL {
+        MAIL {
+            mail_uuid: "".to_string(),
+            mail_content: "".to_string(),
+            mail_result: "".to_string(),
+            mail_user_uuid: "".to_string(),
+        }
+    }
+
+    // Retourne la liste des mails liées à un utilisateur
+    pub async fn get_mails(user_uuid: String) -> Vec<MAIL> {
+        // check if DB_CLIENT.lock().unwrap().is_none() return any poison error
+        let lock_result = unsafe { DB_CLIENT.lock() };
+    
+        if lock_result.is_err() {
+            // kill script
+            trace_logs("Error: DB_CLIENT.lock().unwrap() is_none() return any poison".to_owned());
+            std::process::exit(1);
+        }
+    
+        // check if need to create new client
+        if lock_result.unwrap().is_none() {
+            new_client().await;
+        }
+    
+        // perform database operations
+        let db_client = unsafe { DB_CLIENT.lock().unwrap() };
+    
+        let db_client = db_client.as_ref();
+
+        let mut msgs: Vec<MAIL> = Vec::new();
+
+        if let Some(pool) = db_client {
+            let mut conn = pool.get_conn().unwrap();
+            let query = format!("SELECT mail_uuid, mail_content, mail_result FROM mails WHERE mail_user_uuid = '{}'", user_uuid);
+
+            let result = conn.query_map(query, |(mail_uuid, mail_content, mail_result): (String, String, String)| {
+                MAIL {
+                    mail_uuid,
+                    mail_content,
+                    mail_result,
+                    mail_user_uuid: user_uuid.clone(),
+                }
+            });
+
+            // check how many rows are returned
+            match result {
+                Ok(fetched_msgs) => {
+                    for msg in fetched_msgs {
+                        msgs.push(msg);
+                    }
+                },
+                Err(_) => {
+                    return msgs;
+                }
+            }
+
+            return msgs;
+        }
+
+        println!("No database connection");
+        return msgs;
+    }
+
+    // Retourne les informations d'un mail
+    pub async fn get_mail_info(mail_uuid: String) -> MAIL{
+        // check if DB_CLIENT.lock().unwrap().is_none() return any poison error
+        let lock_result = unsafe { DB_CLIENT.lock() };
+    
+        if lock_result.is_err() {
+            // kill script
+            trace_logs("Error: DB_CLIENT.lock().unwrap() is_none() return any poison".to_owned());
+            std::process::exit(1);
+        }
+    
+        // check if need to create new client
+        if lock_result.unwrap().is_none() {
+            new_client().await;
+        }
+    
+        // perform database operations
+        let db_client = unsafe { DB_CLIENT.lock().unwrap() };
+    
+        let db_client = db_client.as_ref();
+    
+        if let Some(pool) = db_client {
+            let mut conn = pool.get_conn().unwrap();
+    
+            let query = format!("SELECT mail_uuid, mail_content, mail_result, mail_user_uuid FROM mails WHERE mail_uuid = '{}'", mail_uuid);
+    
+            let result = conn.query_first::<(String, String, String, String), _>(query);
+
+            // check how many rows are returned
+            match result {
+                Ok(Some(fetched_msg)) => {
+                    // Assuming MAIL has fields like mail_uuid, mail_content, mail_result, and mail_user_uuid
+                    return MAIL {
+                        mail_uuid: fetched_msg.0,
+                        mail_content: fetched_msg.1,
+                        mail_result: fetched_msg.2,
+                        mail_user_uuid: fetched_msg.3,
+                    };
+                }
+                Ok(None) => {
+                    // If no result is found, return a default MAIL
+                    return MAIL::default();
+                }
+                Err(_) => {
+                    // Handle query execution error
+                    return MAIL::default();
+                }
+            }
+        }
+    
+        println!("No database connection");
+        return MAIL::default();
+    }
+
+    pub async fn create_mail(mail_content: String, mail_result: String, mail_user_uuid: String) {
+        // check if DB_CLIENT.lock().unwrap().is_none() return any poison error
+        let lock_result = unsafe { DB_CLIENT.lock() };
+    
+        if lock_result.is_err() {
+            // kill script
+            trace_logs("Error: DB_CLIENT.lock().unwrap() is_none() return any poison".to_owned());
+            std::process::exit(1);
+        }
+    
+        // check if need to create new client
+        if lock_result.unwrap().is_none() {
+            new_client().await;
+        }
+    
+        // perform database operations
+        let db_client = unsafe { DB_CLIENT.lock().unwrap() };
+    
+        let db_client = db_client.as_ref();
+    
+        if let Some(pool) = db_client {
+            let mut conn = pool.get_conn().unwrap();
+    
+            let mail_uuid = Uuid::new_v4().to_string();
+    
+            let query = format!("INSERT INTO mails (mail_uuid, mail_content, mail_result, mail_user_uuid) VALUES ('{}', '{}', '{}', '{}')", mail_uuid, mail_content, mail_result, mail_user_uuid);
+   
+            println!("{}", query);
+            let result = conn.query_drop(query);
+    
+            match result {
+                Ok(_) => {
+                    return;
+                },
+                Err(msg) => {
+                    trace_logs(msg.to_string());
+                    return;
+                }
+            }
+        }
+    
+        println!("No database connection");
+        return;
+    }
+}
 
 // ------------ DATABASE SYSTEM ------------
 

@@ -53,7 +53,11 @@ pub async fn handlerpost(path: web::Path<String>, payload: Option<web::Payload>,
             return predict::predict(request_data, request_body).await;
         }
         "/bulkpredict" => {
-            return predict::bulkpredict(request_data, request_body).await;
+
+            return HttpResponse::Ok().content_type("application/json")
+                .body("{\"error\": \"not implemented\", \"message\": \"not done yet\"}")
+                .customize();
+            //return predict::bulkpredict(request_data, request_body).await;
         }
 
         _ => {
@@ -74,11 +78,6 @@ pub async fn handler(path: web::Path<String>, req: HttpRequest) -> impl Responde
     match path.to_string().as_str() {
         "" => {
             return HttpResponse::Ok().content_type("application/json").body("{\"status\": \"OK\"}");
-        }
-
-        "/user/info" => {
-            // Information de l'utilisateur
-            todo!();
         }
 
         _ => {
