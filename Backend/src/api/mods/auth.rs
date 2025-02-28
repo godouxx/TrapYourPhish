@@ -13,26 +13,21 @@ pub async fn register(request_data:RequestData, request_body: Value) ->  Customi
             .customize();
     }
 
-    println!("1");
     let email = extract_string_from_obj_value(request_body.get("email"));
     let password = extract_string_from_obj_value(request_body.get("password"));
-    println!("2");
     if !is_valid_email(&email) {
         return HttpResponse::Ok().content_type("application/json")
             .body("{\"error\": \"invalid_email\", \"message\": \"email is not valid\"}")
             .customize();
     }
-    println!("3");
     if password.len() < 8 {
         return HttpResponse::Ok().content_type("application/json")
             .body("{\"error\": \"invalid_password\", \"message\": \"password must be at least 8 characters\"}")
             .customize();
     }
-    println!("4");
     let encoded_password = sha512_string(&password);
 
     USERS::create_user(email, encoded_password).await;
-    println!("5");
     return HttpResponse::Ok().content_type("application/json").body("{\"status\": \"success\"}")
         .customize();
 }

@@ -27,5 +27,26 @@
                 "type": "text not null"
             }
         ]
-    }
+    },
+	{
+		"name": "mails",
+		"columns": [
+			{
+				"name": "mail_uuid",
+				"type": "varchar(36) primary key"
+			},
+			{
+				"name": "mail_content",
+				"type": "text not null"
+			},
+			{
+				"name": "mail_result",
+				"type": "text not null"
+			},
+			{
+				"name": "mail_user_uuid",
+				"type": "varchar(36)"
+			}
+		]
+	}
 ]

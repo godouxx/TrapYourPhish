@@ -5,8 +5,15 @@ use crate::helper::functions::{
 use actix_web::{CustomizeResponder, HttpResponse, Responder};
 use serde_json::{Value, json};
 use std::process::Command;
+use crate::helper::database::MAIL;
 
 pub async fn predict(request_data: RequestData, request_body: Value) -> CustomizeResponder<HttpResponse> {
+    if !request_data.user_logged {
+        return HttpResponse::Ok().content_type("application/json")
+            .body("{\"error\": \"invalid_user\", \"message\": \"You need to be connected\"}")
+            .customize();
+    }
+
     if request_body.is_null() || !control_body(vec!["mail"], &request_body) {
         return HttpResponse::Ok().content_type("application/json")
             .body("{\"error\": \"missing_field\", \"message\": \"'email' and 'password' field is required\"}")
@@ -17,7 +24,7 @@ pub async fn predict(request_data: RequestData, request_body: Value) -> Customiz
 
     let output = Command::new("../.venv/bin/python3")
         .arg("../src/predict.py")
-        .arg(mail)
+        .arg(&mail)
         .output()
         .expect("failed to execute process");
 
@@ -34,6 +41,7 @@ pub async fn predict(request_data: RequestData, request_body: Value) -> Customiz
     let result = String::from_utf8_lossy(&output.stdout);
     match serde_json::from_str::<Value>(&result) {
         Ok(json_result) => {
+            MAIL::create_mail(mail, json_result.to_string(), request_data.user_data.user_uuid).await;        
             HttpResponse::Ok().content_type("application/json")
                 .json(json_result)
                 .customize()
