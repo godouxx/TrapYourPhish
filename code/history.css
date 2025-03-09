@@ -12,7 +12,7 @@ body {
 .header-banner {
     width: 100%;
     height: 50px;
-    background-color: #0d0857;
+    background-color: #0d085784;
     position: fixed;
     top: 0;
     left: 0;
@@ -21,9 +21,20 @@ body {
     display: flex; /* Active Flexbox */
     align-items: center; /* Centre verticalement */
     justify-content: flex-start; /* Aligne à gauche */
-    padding-left: 20px; /* Ajoute un peu d’espace à gauche */
+    padding-left: 10px; /* Ajoute un peu d’espace à gauche */
     gap: 30px; /* Espacement entre les éléments */
 }
+
+.banner-logo-left {
+    margin-left: 0; /* Espacement avant l'image de droite */
+    height: 50px;
+}
+
+.banner-logo-right {
+    height: 50px;
+    margin-left: auto;
+}
+
 
 .header-banner h1,
 .header-banner h3,
@@ -33,6 +44,10 @@ body {
     font-size: 1.5rem;
     font-weight: normal;
 }
+.header-banner h1 {
+    font-size: 2rem; /* Plus grand pour TrapYourPhish */
+    font-weight: bold;
+}
 
 a
 { 
@@ -40,10 +55,6 @@ a
     color: #ffffffeb;
 } 
 
-.header-banner h1 {
-    font-size: 2rem; /* Plus grand pour TrapYourPhish */
-    font-weight: bold;
-}
 
 .search-bar {
     margin-top: 20px; /* Ajuste selon la hauteur de la bannière */
