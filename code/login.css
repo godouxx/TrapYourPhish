@@ -8,17 +8,17 @@ body {
     background-repeat: no-repeat; /* Empêche la répétition */
 }
 
-/* Styles pour le titre */
+/*  titre */
 h1 {
     color: #2118a1;
 }
 
-/* Styles pour le paragraphe */
+/* paragraphe */
 p {
     color: #746bf6;
 }
 
-/* Styles pour le formulaire */
+/* formulaire */
 form {
     background: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
     padding: 20px;

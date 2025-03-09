@@ -3,32 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Principale</title>
-    <link rel="stylesheet" href="main.css"> <!-- Lien vers le fichier CSS de la page 2 -->
+    <title>TrapYourPhish</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>TrapYourPhish !</h1>
-    <!-- mail -->
-    <div class="mail-container">
-        <h2>Mes Emails</h2>
-        <!-- Contenu des mails -->
-            <div class="mail">
-                <label for="date">Date :</label>
-                <input type="date" id="date" name="date" placeholder="   " >
-            </div>
-            <div class="mail">
-                <label for="De">De :</label>
-                <input type="text" id="De" name="De" placeholder="adresse@exemple.com  " >
-            </div>
-            <div class="mail">
-                <label for="Objet">Objet :</label>
-                <input type="text" id="Objet" name="Objet" placeholder="Objet " >
-            </div>
-            <div class="mail">
-                <label for="A">A :</label>
-                <input type="text" id="A" name="A" placeholder="monadresse@exemple.com  " >
+    <div class="header-banner">
+        <h1>TrapYourPhish</h1>
+        <h3>Analyse</h3>
+        <h4>Historique</h4>
+    </div>
+    <div class="page-container">
+        <div class="mail-container">
+            <h2>Mail </h2>
+            <form>
+                <div class="mail-field">
+                    <label for="date">Date :</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                <div class="mail-field">
+                    <label for="De">De :</label>
+                    <input type="text" id="De" name="De" placeholder="adresse@exemple.com">
+                </div>
+                <div class="mail-field">
+                    <label for="Objet">Objet :</label>
+                    <input type="text" id="Objet" name="Objet" placeholder="Objet">
+                </div>
+                <div class="mail-field">
+                    <label for="A">A :</label>
+                    <input type="text" id="A" name="A" placeholder="monadresse@exemple.com">
+                </div>
+                <div class="mail-content">
+                    <p>Contenu :</p>
+                    <textarea rows="5"></textarea>
+                </div>
+            </form>
         </div>
-        <p>Contenu</p>
-    </form>
+        <div class="progress-container">
+            <svg class="progress-circle" viewBox="0 0 100 100">
+                <circle class="progress-bg" cx="50" cy="50" r="40"></circle>
+                <circle class="progress-bar" cx="50" cy="50" r="40"></circle>
+            </svg>
+            <div class="progress-text">75%</div>
+        </div>
+    </div>      
 </body>
 </html>
