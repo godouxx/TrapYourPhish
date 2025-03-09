@@ -1,49 +1,154 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     margin: 0;
     padding: 0;
     background-image: url('Se connecter.jpg');
-    background-size: cover; 
-    background-position: top; 
-    background-repeat: no-repeat; 
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
 }
 
-/* Conteneur des mails */
-.mail-container {
-    background: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
-    border: 2px solid blue;         /* Bordure bleue */
-    width: 50%;                     /* Prend la moitié de la largeur de la page */
-    min-height: 80vh;               /* Hauteur minimale à 80% de la hauteur de la fenêtre */
-    box-sizing: border-box;         /* Inclut padding et bordure dans les dimensions */
-    padding: 20px;                  /* Espacement intérieur */
-    margin: 50px 0 50px 50px;       /* Marge: haut 50px, droite 0, bas 50px, gauche 50px */
-    border-radius: 15px;            /* Coins arrondis */
-    float: left;                    /* Positionné à gauche */
+/* Conteneur global */
+.page-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    height: 110vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
 
+.header-banner {
+    width: 100%;
+    height: 50px;
+    background-color: #0d0857;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    
+    display: flex; /* Active Flexbox */
+    align-items: center; /* Centre verticalement */
+    justify-content: flex-start; /* Aligne à gauche */
+    padding-left: 20px; /* Ajoute un peu d’espace à gauche */
+    gap: 30px; /* Espacement entre les éléments */
 }
 
 
-/* Styles pour le titre */
-h1 {
-    color: #2118a1;
-    margin-top: 20px;
+.header-banner h1,
+.header-banner h3,
+.header-banner h4 {
+    color: #ffffffeb;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: normal;
 }
-/* Styles pour le titre */
+.header-banner h1 {
+    font-size: 2rem; /* Plus grand pour TrapYourPhish */
+    font-weight: bold;
+}
+
+/* Sous-titre */
 h2 {
     color: #0d0857;
-    margin-top: 2px;
-    float: left;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 2rem; 
+    font-weight: bold; 
+}
+
+/* Champs du formulaire */
+.mail-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.mail-field label {
+    width: 80px;
+    font-weight: bold;
+}
+
+.mail-field input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.mail-content {
+    margin-top: 20px;
+    width: 99%; 
+    max-width: 100%; 
+}
+
+.mail-content textarea {
+    width: 100%;
+    padding: 10px;
+    height: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    box-sizing: border-box; 
+}
+
+.mail-container {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid blue;
+    width: 55%; 
+    min-height: 85vh;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 50px 0 50px 20px; 
+    border-radius: 15px;
+    text-align: left;
+    position: relative;
 }
 
 
-/* Styles du formulaire (si présent sur la page) */
-form {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 50px;
-    background-image: url('Se connecter.jpg');
-    background-size: cover; 
-    background-position: top; 
-    background-repeat: no-repeat; 
+
+/* Conteneur de la roue */
+.progress-container {
+    background: rgba(255, 255, 255, 0);
+    width: 30%; /* Prend 25% de l'espace */
+    min-height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    position: relative;
+    align-self: flex-end;
+}
+
+/* Cercle SVG */
+.progress-circle {
+    transform: rotate(-90deg);
+    width: 200px;
+    height: 200px;
+}
+
+/* Fond du cercle */
+.progress-bg {
+    fill: none;
+    stroke: #ccc; /* Fond gris clair */
+    stroke-width: 10;
+}
+
+/* Barre de progression */
+.progress-bar {
+    fill: none;
+    stroke: red;
+    stroke-width: 10;
+    stroke-dasharray: 251.2;
+    stroke-dashoffset: calc(251.2 * (1 - 0.75)); 
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+
+/* Texte au centre de la roue */
+.progress-text {
+    position: absolute;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
 }
