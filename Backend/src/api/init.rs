@@ -53,7 +53,6 @@ pub async fn handlerpost(path: web::Path<String>, payload: Option<web::Payload>,
             return predict::predict(request_data, request_body).await;
         }
         "/bulkpredict" => {
-
             return HttpResponse::Ok().content_type("application/json")
                 .body("{\"error\": \"not implemented\", \"message\": \"not done yet\"}")
                 .customize();

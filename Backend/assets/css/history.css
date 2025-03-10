@@ -1,0 +1,51 @@
+a {
+  text-decoration: none;
+  color: #ffffffeb;
+}
+
+.search-bar {
+  margin-top: 20px; /* Ajuste selon la hauteur de la bannière */
+  width: 100%; /* Pour qu'elle prenne la largeur du conteneur */
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.table-container {
+  overflow-y: auto;
+  max-height: 400px;
+  border: 1px solid #ccc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+.risk-low {
+  color: green;
+  font-weight: bold;
+}
+.risk-medium {
+  color: orange;
+  font-weight: bold;
+}
+.risk-high {
+  color: red;
+  font-weight: bold;
+}
