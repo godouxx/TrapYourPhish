@@ -72,6 +72,7 @@ def predict():
 
     # Retourner le résultat du mail et des URL
     print(json.dumps({
+        "status": "success",
         "phishing": "Phishing" if prediction_mail == 1 else "Safe",
         "explication_mail": explanation_mail,
         "urls": url_results

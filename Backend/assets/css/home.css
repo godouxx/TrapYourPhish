@@ -1,0 +1,13 @@
+.page-container {
+  margin: 40vh auto 0 auto;
+  width: 40%;
+  border-radius: 5px;
+  background-color: #ffffffeb;
+}
+
+.page-container h1 {
+  color: #0d085784;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}

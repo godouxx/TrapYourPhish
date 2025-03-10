@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrapYourPhish | Analyse d'un mail</title>
+    <link rel="stylesheet" href="/assets/css/predict.css" />
+    <script src="/assets/js/predict.js" defer></script>
+
+    {{inject_head}}
+  </head>
+  <body>
+    {{inject_header}}
+
+    <div class="page-container">
+      <div class="mail-container">
+        <h2>Mail</h2>
+        <form>
+          <div class="mail-field">
+            <label for="date">Date :</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="mail-field">
+            <label for="De">De :</label>
+            <input
+              type="email"
+              id="sender"
+              name="De"
+              placeholder="adresse@exemple.com"
+              required
+            />
+          </div>
+          <div class="mail-field">
+            <label for="Objet">Objet :</label>
+            <input
+              type="text"
+              id="subject"
+              name="Objet"
+              placeholder="Objet"
+              required
+            />
+          </div>
+          <div class="mail-field">
+            <label for="A">A :</label>
+            <input
+              type="email"
+              id="receiver"
+              name="A"
+              placeholder="monadresse@exemple.com"
+              required
+            />
+          </div>
+          <div class="mail-content">
+            <p>Contenu :</p>
+            <textarea id="content" rows="5" required></textarea>
+          </div>
+          <div class="mail-content">
+            <input
+              id="predict"
+              class="button"
+              type="submit"
+              value="Analyser le mail"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="right-container">
+        <div class="expl-container">
+          <h2>Explication</h2>
+          <p id="analyse-explication"></p>
+        </div>
+        <div class="progress-container">
+          <p id="analyse-result"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -67,8 +67,10 @@ pub async fn logged(request_data:RequestData) -> String {
   let mut content_body = String::new();
   match request_data.path.as_str() {
     "/" => { content_body = home::home().await; },
-    "/user" => { content_body = user::user(request_data.user_data).await; },
-    "/predict" => { content_body = predict::predict().await; },
+    "/auth/login" => { content_body = auth::login().await; },
+    "/auth/register" => { content_body = auth::register().await; },
+    "/history" => { content_body = mail::history(&request_data.user_data).await; },
+    "/predict" => { content_body = mail::predict().await; },
 
     // default route: 404
     _ => {      

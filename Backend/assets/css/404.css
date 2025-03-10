@@ -1,0 +1,8 @@
+.centered {
+  margin: 20vh auto 0 auto;
+}
+
+.centered h1 {
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}

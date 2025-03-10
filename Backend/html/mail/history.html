@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrapYourPhish | Historique</title>
+    <link rel="stylesheet" href="/assets/css/history.css" />
+    <script src="/assets/js/history.js" defer></script>
+
+    {{inject_head}}
+  </head>
+  <body>
+    {{inject_header}}
+
+    <input
+      type="text"
+      id="search"
+      class="search-bar"
+      placeholder="Rechercher par objet ou envoyeur..."
+      onkeyup="searchTable()"
+    />
+
+    <div class="table-container">
+      <table id="emailTable">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">
+              ID <span class="sort-arrow" data-column="0">↕️</span>
+            </th>
+            <th onclick="sortTable(1)">
+              Envoyeur <span class="sort-arrow" data-column="1">↕️</span>
+            </th>
+            <th onclick="sortTable(2)">
+              Date <span class="sort-arrow" data-column="2">↕️</span>
+            </th>
+            <th onclick="sortTable(3)">
+              Objet <span class="sort-arrow" data-column="3">↕️</span>
+            </th>
+            <th onclick="sortTable(4)">
+              Résultat <span class="sort-arrow" data-column="4">↕️</span>
+            </th>
+            <th onclick="sortTable(5)">
+              Raison <span class="sort-arrow" data-column="5">↕️</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{mails}}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
