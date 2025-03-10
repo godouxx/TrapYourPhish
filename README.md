@@ -40,6 +40,10 @@ To: ...
 contenu du mail
 ```
 
+## Interface Web
+
+Une interface web est disponible pour ce projet, un [README](Backend/README.md) explique sa mise en place dans `Backend/`.
+
 ## Machine Learning
 
 ### Phishing
