@@ -23,7 +23,10 @@ fn extract(pattern: &str, mail_content: &String) -> String {
 
     match re.captures(mail_content.as_str()) {
         Some(caps) => {
-            caps.get(1).map_or_else(|| "Not found".to_string(), |m| m.as_str().to_string())
+            match caps.get(0) {
+                Some(data) => data.as_str().to_string(),
+                None => "Not found".to_string()
+            }
         },
         None => "Not found".to_string(),
     }
