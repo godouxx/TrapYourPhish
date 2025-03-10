@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('Se connecter.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    padding-top: 60px; /* Ajuste en fonction de la hauteur de la bannière */
+}
+
+.header-banner {
+    width: 100%;
+    height: 50px;
+    background-color: #0d085784;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    
+    display: flex; /* Active Flexbox */
+    align-items: center; /* Centre verticalement */
+    justify-content: flex-start; /* Aligne à gauche */
+    padding-left: 10px; /* Ajoute un peu d’espace à gauche */
+    gap: 30px; /* Espacement entre les éléments */
+}
+
+.banner-logo-left {
+    margin-left: 0; /* Espacement avant l'image de droite */
+    height: 50px;
+}
+
+.banner-logo-right {
+    height: 50px;
+    margin-left: auto;
+}
+
+
+.header-banner h1,
+.header-banner h3,
+.header-banner h4 {
+    color: #ffffffeb;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+.header-banner h1 {
+    font-size: 2rem; /* Plus grand pour TrapYourPhish */
+    font-weight: bold;
+}
+
+a
+{ 
+    text-decoration:none; 
+    color: #ffffffeb;
+} 
+
+
+.search-bar {
+    margin-top: 20px; /* Ajuste selon la hauteur de la bannière */
+    width: 100%; /* Pour qu'elle prenne la largeur du conteneur */
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.table-container {
+    overflow-y: auto;
+    max-height: 400px;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
