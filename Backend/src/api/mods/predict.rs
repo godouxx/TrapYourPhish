@@ -1,6 +1,6 @@
 use crate::api::init::RequestData;
 use crate::helper::functions::{
-    control_body, extract_string_from_obj_value,
+    control_body, extract_string_from_obj_value, is_valid_email
 };
 use actix_web::{CustomizeResponder, HttpResponse, Responder};
 use serde_json::{Value, json};
@@ -26,6 +26,26 @@ pub async fn predict(request_data: RequestData, request_body: Value) -> Customiz
     let receiver = extract_string_from_obj_value(request_body.get("receiver"));
     let subject = extract_string_from_obj_value(request_body.get("subject"));
     let content = extract_string_from_obj_value(request_body.get("content"));
+
+    // Checking content size
+    if sender.chars().count() < 3 || receiver.chars().count() < 3 || subject.chars().count() < 3 || content.chars().count() < 3 {
+        return HttpResponse::Ok().content_type("application/json")
+            .body("{\"error\": \"invalid_size\", \"message\": \"Arguments must be at least 3 chars\"}")
+            .customize();
+    }
+
+    // Checking if emails are correct
+    if !is_valid_email(&sender) {
+        return HttpResponse::Ok().content_type("application/json")
+            .body("{\"error\": \"invalid_email\", \"message\": \"email is not valid\"}")
+            .customize();
+    }
+    if !is_valid_email(&receiver) {
+        return HttpResponse::Ok().content_type("application/json")
+            .body("{\"error\": \"invalid_email\", \"message\": \"email is not valid\"}")
+            .customize();
+    }
+
 
 
     // Formatting mail for the ML

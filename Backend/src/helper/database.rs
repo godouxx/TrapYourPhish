@@ -361,6 +361,8 @@ impl MAIL {
         return MAIL::default();
     }
 
+
+
     pub async fn create_mail(mail_content: String, mail_result: String, mail_user_uuid: String) {
         // check if DB_CLIENT.lock().unwrap().is_none() return any poison error
         let lock_result = unsafe { DB_CLIENT.lock() };
@@ -385,8 +387,10 @@ impl MAIL {
             let mut conn = pool.get_conn().unwrap();
     
             let mail_uuid = Uuid::new_v4().to_string();
+            let clean_content = mail_content.replace("\"", "\\\"").replace("'", "\\'");
+            let clean_result = mail_result.replace("\"", "\\\"").replace("'", "\\'");
     
-            let query = format!("INSERT INTO mails (mail_uuid, mail_content, mail_result, mail_user_uuid) VALUES ('{}', '{}', '{}', '{}')", mail_uuid, mail_content, mail_result, mail_user_uuid);
+            let query = format!("INSERT INTO mails (mail_uuid, mail_content, mail_result, mail_user_uuid) VALUES ('{}', '{}', '{}', '{}')", mail_uuid, clean_content, clean_result, mail_user_uuid);
    
             println!("{}", query);
             let result = conn.query_drop(query);

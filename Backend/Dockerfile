@@ -47,4 +47,4 @@ COPY ./html ./html
 COPY ./utils ./utils
 
 # set the startup command to run your binary
-CMD ["./web_website", "--prod", "--webhook"]
+CMD ["./web_website", "--prod"]
