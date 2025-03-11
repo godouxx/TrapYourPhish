@@ -10,7 +10,7 @@ pub async fn start() {
     if !fs::metadata("config/default.json").is_ok() {
         fs::write("config/default.json", r#"{
             "db_port": 3306,
-            "db_host": "192.168.122.232,
+            "db_host": "127.0.0.1",
             "web_port": 8080,
             "db_username": "trapyourphish",
             "db_password": "SUPERPASSWORD"
