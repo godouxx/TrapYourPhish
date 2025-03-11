@@ -11,8 +11,10 @@ Ce projet a pour but de permettre de sensibiliser et d'expliquer les emails de P
 Pour récupérer ce projet vous aurez besoin de l'outils git et de git lfs.
 
 ```bash
+sudo apt-get update
 sudo apt install git git-lfs
 git clone https://github.com/godouxx/TrapYourPhish.git
+cd TrapYourPhish/
 git lfs pull
 ```
 
@@ -74,25 +76,26 @@ FLUSH PRIVILEGES;
 
 ### 3. Mise en place du backend / front-end
 
-Le backend utilise le langage [Rust](https://www.rust-lang.org/), il est donc nécessaire de [l'installer](https://www.rust-lang.org/tools/install):
+Le backend utilise le langage [Rust](https://www.rust-lang.org/), il est donc nécessaire de [l'installer](https://www.rust-lang.org/tools/install) 
+L'installation standard est suffisante pour l'installation de rust pour notre projet:
 
 ```bash
+sudo apt install curl
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source ~/.bashrc
 ```
-
-Puis aller dans le répertoire Backend :
+Puis aller dans le répertoBackend :end:
 ```bash
 cd Backend
 ```
 
-Et lancer le programme Rust :
+Et lancer le prograRust :ust:
 ```bash
 cargo run -- --prod
 ```
 
 > [!TIP]
-> Si vous avez une erreur parlant de lib openssl manquante, il faudra installer le paquet suivant sous Ubuntu `sudo apt-get install libssl-dev`
+> Si vous avez une erreur parlant de lib openssl manquante, il faudra installer le paquet suivant sous Ubuntu `sudo apt-get install libssl-dev pkg-config`
 
 Ce programme devrait installer les dépendances nécessaires dans un premier temps, puis la ligne suivante devrait apparaitre:
 ```bash
