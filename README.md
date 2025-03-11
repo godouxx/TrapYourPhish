@@ -1,70 +1,94 @@
-# TrapYourPhish
 Projet d'Atelier Pratiques Cybersécurité 2 (8INF870) à l'UQAC.
+
+## Présentation
+
+Ce projet a pour but de permettre de sensibiliser et d'expliquer les emails de Phishing. Pour cela, les emails sont dans un premier temps analysés par des modèles de machine learning, puis dans un second temps, un algorithme d'intelligence artificielle explicatif (XAI) nommé LIME va retourner les mots clés ayant permis la catégorisation ainsi que la pondération de ces mots.
+
+*Dans le futur, une vraie explication sera réalisée grâce à un LLM qui aura pour rôle d'expliquer à partir des mots clés en quoi cet email est du phishing ou non.*
 
 ## Installation
 
-Pour simplifier l'installation, vous pouvez créez un environnement virtual avec Python:
+> [!IMPORTANT]
+> Pour le moment ce projet est uniquement fonctionnel sur un environnement Linux
+
+Les étapes suivantes permettent de déployer & exécuter ce projet
+
+### 1. Création de l'environnement Python **(Minimum Python3.10)**
+
+> [!NOTE]
+> Pour cette étape, la présence de Python est supposé, sinon `sudo apt install python3` permettra de l'installer sur une distribution dérivant de Debian (Ubuntu, Debian, Linux Mint...)
+
+Dans un premier temps, le projet nécessite la création d'un environnement virtuel Python.
+
+> [!CAUTION]
+> L'environnement virtuel Python doit être créer à la racine du projet
+
 ```bash
 python3 -m venv .venv
 ```
 
-Puis il suffit d'installer les librairies nécessaires pour lancer le programme se trouvant dans le fichier `requirements.txt`:
+Puis installer les dépendances nécessaires :
 ```bash
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Utilisation du programme
+### 2. Mise en place de la base de données
 
-Le fichier `src/check-mail.py` est une API permettant de réaliser une requête HTTP POST, pour envoyer le contenu d'un mail, et en retour savoir s'il s'agit d'un mail de phishing ou non.
+Une base de données MySQL ou MariaDB doit être mise en place pour sauvegarder les comptes utilisateurs et leur historique d'emails.
 
-Exemple de requête avec CURL:
+Dans un premier temps, un serveur MySQL ou MariaDB doit être installé :
 ```bash
-curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d '{"email": "Buy cheap viagra now, click on this link !!! <http://notaphishing.com>"}'
+sudo apt install mariadb-server
+sudo systemctl start mariadb.service
 ```
 
-Pour que la requête fonctionne il faut lancer le programme `src/check-mail.py`.
+> [!NOTE]
+> Si vous souhaitez installer le serveur sur une autre machine, vous devez vérifier que les ports du serveur SQL sont bien ouverts
+
+Dans un second temps, l'utilisateur et la base de donnée doivent être créés.
 ```bash
-.venv/bin/python3 src/check-mail.py
+sudo mysql
 ```
 
-**Attention, les métadonnées doivent être formattés de cette façon:**
-
-```mail
-Date: ....
-From: ....
-Subject: ....
-To: ...
-
-
-contenu du mail
+```mysql
+CREATE DATABASE trapyourphish DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER 'trapyourphish'@'%' IDENTIFIED BY 'SUPERPASSWORD';
+GRANT USAGE ON *.* TO 'trapyourphish'@'%';
+GRANT ALL PRIVILEGES ON trapyourphish.* TO 'trapyourphish'@'%';
+FLUSH PRIVILEGES;
 ```
 
-## Interface Web
+> [!CAUTION]
+> Si votre base de données est sur une autre machine ou que vous avez modifié les configurations pour l'utilisateur / la base de données MySQL, vous devez modifier les identifiants dans le fichier de configuration pour le backend `Backend/default.json`.
 
-Une interface web est disponible pour ce projet, un [README](Backend/README.md) explique sa mise en place dans `Backend/`.
+### 3. Mise en place du backend / front-end
 
-## Machine Learning
+Le backend utilise le langage [Rust](https://www.rust-lang.org/), il est donc nécessaire de [l'installer](https://www.rust-lang.org/tools/install):
 
-### Phishing
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 
-Le fichier `src/Phishing-ML/training-model.py` permet de comparer les performances de 4 algorithmes de machine learning et 2 algorithmes de vectorisation sur l'entrainement d'un modèle de détection de mail de phishing.  Les modèles sont enregistrés dans le répertoire `models/phishing/`.  
-Le fichier `src/Phishing-ML/optimizing-model.py` permet la recherche de paramètres optimum pour l'algorithme le plus performant (à définir à la main dans le code).  
-  
-**Attention ces 2 programmes sont particulièrement long à executer, et peuvent prendre plusieurs heures...**   
-  
-Le fichier `test/phishing-test.py` permet de réaliser des tests de performances des modèles choisi sur d'autres datasets de mail de phishing comme Enron ou Ling.  
-  
-## Objectifs
+Puis aller dans le répertoBackend :end:
+```bash
+cd Backend
+```
 
-### Version 1 
+Et lancer le prograRust :ust:
+```bash
+cargo run -- --prod
+```
 
-Analyse d'email de phising venant d'un dataset et identification d'éléments clés (argent, email pas cohérent) afin d'obtenir un score de probabilité que le mail est un phising.
-Pas d'interface graphique pour la première version et prise en compte uniquement d'une seule langue.
+Ce programme devrait installer les dépendances nécessaires dans un premier temps, puis la ligne suivante devrait apparaitre:
+```bash
+2025-03-11T15:39:37.298327Z  INFO actix_server::server: starting service: "actix-web-service-0.0.0.0:8080", workers: 12, listening on: 0.0.0.0:8080
+```
 
-### Version 2
-Etude de la faisabilité de l'ajout de l'analyse de pluri-langue.
-Intégration de cette solution à une extension de navigateur (Chrome) qui permettra de vérifier si un email est un phising ou non.
+Signifiant que le serveur web est bien en cours d'exécution, vous pouvez vous rendre sur votre navigateur sur l'URL http://localhost:8080, qui vous permettra d'accéder à l'interface web du projet.
 
-### Version 3
-Intégrer directement dans la boite mail (Gmail) la vérification des emails en utilisant l'API.
+## Utilisation de l'interface web
+
+Pour analyser un email, vous devez, dans un premier temps, créer un compte.  
+Pour cela, vous pouvez soit cliquer sur l'icône de personnage en blanc (haut à droite de la barre de navigation) ou vous rendre sur l'URL http://localhost/auth/register  
+Une fois votre compte créé, connectez-vous, puis vous pourrez accéder à la page d'analyse d'email (http://localhost:8080/predict) ou à l'historique (http://localhost:8080/history).
