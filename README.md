@@ -84,12 +84,12 @@ sudo apt install curl
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source ~/.bashrc
 ```
-Puis aller dans le répertoBackend :end:
+Puis aller dans le répertoire Backend :
 ```bash
 cd Backend
 ```
 
-Et lancer le prograRust :ust:
+Et lancer le programme Rust :
 ```bash
 cargo run -- --prod
 ```
