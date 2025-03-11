@@ -6,6 +6,16 @@ Ce projet a pour but de permettre de sensibiliser et d'expliquer les emails de P
 
 *Dans le futur, une vraie explication sera réalisée grâce à un LLM qui aura pour rôle d'expliquer à partir des mots clés en quoi cet email est du phishing ou non.*
 
+## Téléchargement du projet
+
+Pour récupérer ce projet vous aurez besoin de l'outils git et de git lfs.
+
+```bash
+sudo apt install git git-lfs
+git clone https://github.com/godouxx/TrapYourPhish.git
+git lfs pull
+```
+
 ## Installation
 
 > [!IMPORTANT]
@@ -16,7 +26,7 @@ Les étapes suivantes permettent de déployer & exécuter ce projet
 ### 1. Création de l'environnement Python **(Minimum Python3.10)**
 
 > [!NOTE]
-> Pour cette étape, la présence de Python est supposé, sinon `sudo apt install python3` permettra de l'installer sur une distribution dérivant de Debian (Ubuntu, Debian, Linux Mint...)
+> Pour cette étape, la présence de Python est supposé, sinon `sudo apt install python3 python3-venv python3-pip` permettra de l'installer sur une distribution dérivant de Debian (Ubuntu, Debian, Linux Mint...)
 
 Dans un premier temps, le projet nécessite la création d'un environnement virtuel Python.
 
@@ -60,7 +70,7 @@ FLUSH PRIVILEGES;
 ```
 
 > [!CAUTION]
-> Si votre base de données est sur une autre machine ou que vous avez modifié les configurations pour l'utilisateur / la base de données MySQL, vous devez modifier les identifiants dans le fichier de configuration pour le backend `Backend/default.json`.
+> Si votre base de données est sur une autre machine ou que vous avez modifié les configurations pour l'utilisateur / la base de données MySQL, vous devez modifier les identifiants dans le fichier de configuration pour le backend `Backend/config/default.json`.
 
 ### 3. Mise en place du backend / front-end
 
@@ -68,6 +78,7 @@ Le backend utilise le langage [Rust](https://www.rust-lang.org/), il est donc n�
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.bashrc
 ```
 
 Puis aller dans le répertoBackend :end:
@@ -79,6 +90,9 @@ Et lancer le prograRust :ust:
 ```bash
 cargo run -- --prod
 ```
+
+> [!TIP]
+> Si vous avez une erreur parlant de lib openssl manquante, il faudra installer le paquet suivant sous Ubuntu `sudo apt-get install libssl-dev`
 
 Ce programme devrait installer les dépendances nécessaires dans un premier temps, puis la ligne suivante devrait apparaitre:
 ```bash
