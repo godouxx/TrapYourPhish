@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "Gmail Email Extractor",
+  "version": "1.6",
+  "description": "Performs a deep scan and saves full Gmail emails locally every 10 seconds.",
+  "permissions": [
+    "downloads",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "cookies",
+    "downloads.shelf",
+    "downloads.open",
+    "https://mail.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["scrapping.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "trapyourphish@uqac.ca"
+    }
+  }
+}
