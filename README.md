@@ -25,7 +25,7 @@ git lfs pull
 
 Les étapes suivantes permettent de déployer & exécuter ce projet
 
-### 1. Création de l'environnement Python **(Minimum Python3.10)**
+### 1. Création de l'environnement Python **(Minimum Python3.12)**
 
 > [!NOTE]
 > Pour cette étape, la présence de Python est supposé, sinon `sudo apt install python3 python3-venv python3-pip` permettra de l'installer sur une distribution dérivant de Debian (Ubuntu, Debian, Linux Mint...)
