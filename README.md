@@ -25,6 +25,16 @@ git lfs pull
 
 Les étapes suivantes permettent de déployer & exécuter ce projet
 
+### 0. Téléchargement des modèles
+
+> [!IMPORTANT]
+> Si ce n'est pas déjà fait, les modèles étant lourd ils ne sont pas stockés sur le projet git mais sur git lfs et doivent donc être récupérés depuis Git LFS.
+
+```bash
+sudo apt install git-lfs
+git lfs pull
+```
+
 ### 1. Création de l'environnement Python **(Minimum Python3.12)**
 
 > [!NOTE]
