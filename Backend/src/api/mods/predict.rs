@@ -6,6 +6,7 @@ use actix_web::{CustomizeResponder, HttpResponse, Responder};
 use serde_json::{Value, json};
 use std::process::Command;
 use crate::helper::database::MAIL;
+use std::fs;
 
 pub async fn predict(request_data: RequestData, request_body: Value) -> CustomizeResponder<HttpResponse> {
     if !request_data.user_logged {
@@ -46,13 +47,18 @@ pub async fn predict(request_data: RequestData, request_body: Value) -> Customiz
             .customize();
     }
 
-
-
     // Formatting mail for the ML
     let mail = format!("Date: {}\nFrom: {}\nSubject: {}\nTo: {}\n\n{}", date, sender, subject, receiver, content); 
 
-    let output = Command::new("../.venv/bin/python3")
-        .arg("../src/predict.py")
+    // Get python path & predict filepath from config
+    let file = fs::read_to_string("config/default.json").unwrap();
+    // convert the string to json
+    let json: Value = serde_json::from_str(&file).unwrap();
+    let python_filepath = json.get("python_filepath").and_then(|v| v.as_str()).unwrap();
+    let predict_filepath = json.get("predict_filepath").and_then(|v| v.as_str()).unwrap();
+
+    let output = Command::new(python_filepath)
+        .arg(predict_filepath)
         .arg(&mail)
         .output()
         .expect("failed to execute process");
