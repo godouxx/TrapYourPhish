@@ -118,7 +118,7 @@ Signifiant que le serveur web est bien en cours d'exécution, vous pouvez vous r
 
 Pour des questions de simplicité de déploiement un dockerfile et un docker-compose sont disponibles pour ce projet.  
 
-> ![IMPORTANT]
+> [!IMPORTANT]
 > Pour des questions de sécurité dans le cadre d'un déploiement en environnement de production, il peut être nécessaire de modifier des paramètres (mots de passes, nom d'utilisateur)
 
 Pour l'utiliser, [docker](https://www.docker.com/) est nécessaire sur votre machine.
