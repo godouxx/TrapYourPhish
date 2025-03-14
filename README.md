@@ -21,7 +21,7 @@ git lfs pull
 ## Installation
 
 > [!IMPORTANT]
-> Pour le moment ce projet est uniquement fonctionnel sur un environnement Linux
+> Pour le moment ce projet est uniquement fonctionnel sur un environnement Linux (une version docker est disponible pour les autres systèmes, son installation est détaillée plus bas)
 
 Les étapes suivantes permettent de déployer & exécuter ce projet
 
@@ -114,8 +114,28 @@ Ce programme devrait installer les dépendances nécessaires dans un premier tem
 
 Signifiant que le serveur web est bien en cours d'exécution, vous pouvez vous rendre sur votre navigateur sur l'URL http://localhost:8080, qui vous permettra d'accéder à l'interface web du projet.
 
+## Docker
+
+Pour des questions de simplicité de déploiement un dockerfile et un docker-compose sont disponibles pour ce projet.  
+
+> ![IMPORTANT]
+> Pour des questions de sécurité dans le cadre d'un déploiement en environnement de production, il peut être nécessaire de modifier des paramètres (mots de passes, nom d'utilisateur)
+
+Pour l'utiliser, [docker](https://www.docker.com/) est nécessaire sur votre machine.
+
+Les commandes suivantes permettront de déployer le projet via docker:
+
+```bash
+docker compose build
+docker compose up -d
+```
+
+Normalement l'interface sera disponible sur http://localhost:8080
+
 ## Utilisation de l'interface web
 
 Pour analyser un email, vous devez, dans un premier temps, créer un compte.  
 Pour cela, vous pouvez soit cliquer sur l'icône de personnage en blanc (haut à droite de la barre de navigation) ou vous rendre sur l'URL http://localhost/auth/register  
 Une fois votre compte créé, connectez-vous, puis vous pourrez accéder à la page d'analyse d'email (http://localhost:8080/predict) ou à l'historique (http://localhost:8080/history).
+
+
