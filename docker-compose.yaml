@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # MySQL
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - ./Backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql_network
+    restart: unless-stopped
+
+  # TrapYourPhish
+  trapyourphish:
+    container_name: trapyourphish
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    networks:
+      - mysql_network
+    restart: unless-stopped
+
+networks:
+  mysql_network:
+    driver: bridge
