@@ -9,7 +9,7 @@ from lime.lime_text import LimeTextExplainer
 mail_model = joblib.load("../models/opti_svm_mail.pkl")
 text_vectoriser_mail = joblib.load("../models/opti_tfidf_mail.pkl")
 
-url_model = joblib.load("../models/url/bow_Random Forest.pkl")
+url_model = joblib.load("../models/url/bow_Random_Forest.pkl")
 text_vectoriser_url = joblib.load("../models/url/bow_vectorizer.pkl")
 
 # Initialiser LIME pour expliquer les textes
