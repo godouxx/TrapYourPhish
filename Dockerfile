@@ -26,7 +26,7 @@ FROM debian:latest
 RUN apt-get update
 
 # Install libc
-RUN apt-get install -y libc6 ca-certificates tzdata && rm -rf /var/lib/apt/lists/*
+RUN apt-get install -y libc6 ca-certificates tzdata python3 python3-pip python3-venv && rm -rf /var/lib/apt/lists/*
 
 # Cleanup
 RUN apt-get clean && \
@@ -48,13 +48,11 @@ COPY ./Backend/utils ./utils
 COPY ./Backend/config ./config
 
 # Setup python env for predicting mail
-RUN apt-get install -y python3
 COPY ./requirements.txt ./requirements.txt
-RUN pip install -r requirements.txt
+RUN python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 # copy the models and predict file
-RUN mkdir -p predict
-COPY ./src/predict.py ./predict/predict.py
+COPY ./src/predict.py ./predict.py
 
 RUN mkdir -p models/url
 COPY ./models/opti_svm_mail.pkl ./models/opti_svm_mail.pkl
@@ -63,8 +61,10 @@ COPY ./models/opti_tfidf_mail.pkl ./models/opti_tfidf_mail.pkl
 COPY ./models/url/bow_Random_Forest.pkl ./models/url/bow_Random_Forest.pkl
 COPY ./models/url/bow_vectorizer.pkl ./models/url/bow_vectorizer.pkl
 
-RUN python_path=$(which python) && sed -i "s|\"python_filepath\": \".*\"|\"python_filepath\": \"$python_path\"|" config/default.json
-RUN sed -i "s|\"predict_filepath\": \".*\"|\"predict_filepath\": \"predict/predict.py\"|" config/default.json
+RUN sed -i "s|\"python_filepath\": \".*\"|\"python_filepath\": \".venv/bin/python3\"|" config/default.json
+RUN sed -i "s|\"predict_filepath\": \".*\"|\"predict_filepath\": \"predict.py\"|" config/default.json
+RUN sed -i "s|\"db_host\": \".*\"|\"db_host\": \"mysql\"|" config/default.json
+RUN sed -i 's|\.\./models|models|g' predict.py
 
 # set the startup command to run your binary
 CMD ["./web_website", "--prod"]
