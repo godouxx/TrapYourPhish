@@ -52,7 +52,7 @@ COPY ./requirements.txt ./requirements.txt
 RUN python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 # copy the models and predict file
-COPY ./src/predict.py ./predict.py
+COPY ./ML/predict.py ./predict.py
 
 RUN mkdir -p models/url
 COPY ./models/opti_svm_mail.pkl ./models/opti_svm_mail.pkl
