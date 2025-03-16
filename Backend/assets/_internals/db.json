@@ -36,7 +36,19 @@
 				"type": "varchar(36) primary key"
 			},
 			{
-				"name": "mail_content",
+				"name": "mail_hash",
+				"type": "text not null"
+			},
+			{
+				"name": "mail_sender",
+				"type": "text not null"
+			},
+			{
+				"name": "mail_date",
+				"type": "text not null"
+			},
+			{
+				"name": "mail_subject",
 				"type": "text not null"
 			},
 			{

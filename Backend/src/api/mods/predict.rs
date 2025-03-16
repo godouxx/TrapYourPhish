@@ -1,6 +1,6 @@
 use crate::api::init::RequestData;
 use crate::helper::functions::{
-    control_body, extract_string_from_obj_value, is_valid_email
+    control_body, extract_string_from_obj_value, is_valid_email, sha512_string
 };
 use actix_web::{CustomizeResponder, HttpResponse, Responder};
 use serde_json::{Value, json};
@@ -50,6 +50,15 @@ pub async fn predict(request_data: RequestData, request_body: Value) -> Customiz
     // Formatting mail for the ML
     let mail = format!("Date: {}\nFrom: {}\nSubject: {}\nTo: {}\n\n{}", date, sender, subject, receiver, content); 
 
+    // Checking if mail content isn't already in database
+    let info = MAIL::get_mail_info(sha512_string(&content)).await;
+    if info.mail_uuid != "" {
+        let result: Value = serde_json::from_str(info.mail_result.as_str()).unwrap();
+        return HttpResponse::Ok().content_type("application/json")
+                .json(result)
+                .customize()
+    }
+
     // Get python path & predict filepath from config
     let file = fs::read_to_string("config/default.json").unwrap();
     // convert the string to json
@@ -76,7 +85,7 @@ pub async fn predict(request_data: RequestData, request_body: Value) -> Customiz
     let result = String::from_utf8_lossy(&output.stdout);
     match serde_json::from_str::<Value>(&result) {
         Ok(json_result) => {
-            MAIL::create_mail(mail, json_result.to_string(), request_data.user_data.user_uuid).await;        
+            MAIL::create_mail(sha512_string(&content), sender, date, subject, json_result.to_string(), request_data.user_data.user_uuid).await;        
             HttpResponse::Ok().content_type("application/json")
                 .json(json_result)
                 .customize()
