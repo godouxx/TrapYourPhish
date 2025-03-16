@@ -8,3 +8,4 @@ seaborn==0.13.2
 lime
 simplegmail
 joblib
+nltk==3.9.1
