@@ -237,7 +237,10 @@ impl USERS {
 
 pub struct MAIL {
     pub mail_uuid: String,
-    pub mail_content: String,
+    pub mail_hash: String,
+    pub mail_sender: String,
+    pub mail_date: String,
+    pub mail_subject: String,
     pub mail_result: String,
     pub mail_user_uuid: String,
 }
@@ -246,7 +249,10 @@ impl MAIL {
     pub fn default() -> MAIL {
         MAIL {
             mail_uuid: "".to_string(),
-            mail_content: "".to_string(),
+            mail_hash: "".to_string(),
+            mail_sender: "".to_string(),
+            mail_date: "".to_string(),
+            mail_subject: "".to_string(),
             mail_result: "".to_string(),
             mail_user_uuid: "".to_string(),
         }
@@ -277,12 +283,15 @@ impl MAIL {
 
         if let Some(pool) = db_client {
             let mut conn = pool.get_conn().unwrap();
-            let query = format!("SELECT mail_uuid, mail_content, mail_result FROM mails WHERE mail_user_uuid = '{}'", user_uuid);
+            let query = format!("SELECT mail_uuid, mail_sender, mail_date, mail_subject, mail_result FROM mails WHERE mail_user_uuid = '{}'", user_uuid);
 
-            let result = conn.query_map(query, |(mail_uuid, mail_content, mail_result): (String, String, String)| {
+            let result = conn.query_map(query, |(mail_uuid, mail_sender, mail_date, mail_subject, mail_result): (String, String, String, String, String)| {
                 MAIL {
                     mail_uuid,
-                    mail_content,
+                    mail_hash: "".to_string(),
+                    mail_sender,
+                    mail_date,
+                    mail_subject,
                     mail_result,
                     mail_user_uuid: user_uuid.clone(),
                 }
@@ -307,8 +316,8 @@ impl MAIL {
         return msgs;
     }
 
-    // Retourne les informations d'un mail
-    pub async fn get_mail_info(mail_uuid: String) -> MAIL{
+    // Récupère les informations d'un mail à partir de son hash
+    pub async fn get_mail_info(mail_hash: String) -> MAIL{
         // check if DB_CLIENT.lock().unwrap().is_none() return any poison error
         let lock_result = unsafe { DB_CLIENT.lock() };
     
@@ -331,19 +340,20 @@ impl MAIL {
         if let Some(pool) = db_client {
             let mut conn = pool.get_conn().unwrap();
     
-            let query = format!("SELECT mail_uuid, mail_content, mail_result, mail_user_uuid FROM mails WHERE mail_uuid = '{}'", mail_uuid);
+            let query = format!("SELECT mail_uuid, mail_hash, mail_sender, mail_date, mail_subject, mail_result, mail_user_uuid FROM mails WHERE mail_hash = '{}'", mail_hash);
     
-            let result = conn.query_first::<(String, String, String, String), _>(query);
+            let result = conn.query_first::<(String, String, String, String, String, String, String), _>(query);
 
-            // check how many rows are returned
             match result {
                 Ok(Some(fetched_msg)) => {
-                    // Assuming MAIL has fields like mail_uuid, mail_content, mail_result, and mail_user_uuid
                     return MAIL {
                         mail_uuid: fetched_msg.0,
-                        mail_content: fetched_msg.1,
-                        mail_result: fetched_msg.2,
-                        mail_user_uuid: fetched_msg.3,
+                        mail_hash: fetched_msg.1,
+                        mail_sender: fetched_msg.2,
+                        mail_date: fetched_msg.3,
+                        mail_subject: fetched_msg.4,
+                        mail_result: fetched_msg.5,
+                        mail_user_uuid: fetched_msg.6,
                     };
                 }
                 Ok(None) => {
@@ -363,7 +373,7 @@ impl MAIL {
 
 
 
-    pub async fn create_mail(mail_content: String, mail_result: String, mail_user_uuid: String) {
+    pub async fn create_mail(mail_hash: String, mail_sender: String, mail_date: String, mail_subject: String, mail_result: String, mail_user_uuid: String) {
         // check if DB_CLIENT.lock().unwrap().is_none() return any poison error
         let lock_result = unsafe { DB_CLIENT.lock() };
     
@@ -387,10 +397,12 @@ impl MAIL {
             let mut conn = pool.get_conn().unwrap();
     
             let mail_uuid = Uuid::new_v4().to_string();
-            let clean_content = mail_content.replace("\"", "\\\"").replace("'", "\\'");
-            let clean_result = mail_result.replace("\"", "\\\"").replace("'", "\\'");
+            let mail_subject = mail_subject.replace("\"", "\\\"").replace("'", "\\'");
+            let mail_sender = mail_sender.replace("\"", "\\\"").replace("'", "\\'");
+            let mail_date = mail_date.replace("\"", "\\\"").replace("'", "\\'");
+            let mail_result = mail_result.replace("\"", "\\\"").replace("'", "\\'");
     
-            let query = format!("INSERT INTO mails (mail_uuid, mail_content, mail_result, mail_user_uuid) VALUES ('{}', '{}', '{}', '{}')", mail_uuid, clean_content, clean_result, mail_user_uuid);
+            let query = format!("INSERT INTO mails (mail_uuid, mail_hash, mail_sender, mail_date, mail_subject, mail_result, mail_user_uuid) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}')", mail_uuid, mail_hash, mail_sender, mail_date, mail_subject, mail_result, mail_user_uuid);
    
             println!("{}", query);
             let result = conn.query_drop(query);
