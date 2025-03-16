@@ -52,6 +52,8 @@ COPY ./requirements.txt ./requirements.txt
 RUN python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 # copy the models and predict file
+RUN mkdir -p mail
+COPY ./ML/mail/cleaner.py ./mail/cleaner.py
 COPY ./ML/predict.py ./predict.py
 
 RUN mkdir -p models/url
