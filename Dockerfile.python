@@ -1,0 +1,23 @@
+FROM python:alpine3.21
+
+# Install needed packages
+RUN apk -U upgrade
+
+# Install dependencies
+COPY ./requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
+
+# COPY models
+RUN mkdir -p mail
+COPY ./ML/mail/cleaner.py ./mail/cleaner.py
+COPY ./ML/check-mail.py ./check-mail.py
+
+RUN mkdir -p models
+COPY ./models/opti_svm_mail.pkl ./models/opti_svm_mail.pkl
+COPY ./models/opti_tfidf_mail.pkl ./models/opti_tfidf_mail.pkl
+
+RUN mkdir -p models/url
+COPY ./models/url/bow_vectorizer.pkl ./models/url/bow_vectorizer.pkl
+COPY ./models/url/bow_Random_Forest.pkl ./models/url/bow_Random_Forest.pkl
+
+CMD ["python3", "check-mail.py"]
