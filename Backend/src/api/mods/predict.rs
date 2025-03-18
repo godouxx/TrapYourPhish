@@ -7,6 +7,7 @@ use serde_json::{Value, json};
 use std::process::Command;
 use crate::helper::database::MAIL;
 use std::fs;
+use reqwest::{header::CONTENT_TYPE, Client};
 
 pub async fn predict(request_data: RequestData, request_body: Value) -> CustomizeResponder<HttpResponse> {
     if !request_data.user_logged {
@@ -61,46 +62,57 @@ pub async fn predict(request_data: RequestData, request_body: Value) -> Customiz
 
     // Get python path & predict filepath from config
     let file = fs::read_to_string("config/default.json").unwrap();
+
     // convert the string to json
     let json: Value = serde_json::from_str(&file).unwrap();
-    let python_filepath = json.get("python_filepath").and_then(|v| v.as_str()).unwrap();
-    let predict_filepath = json.get("predict_filepath").and_then(|v| v.as_str()).unwrap();
+    let predict_url = json.get("predict_url").and_then(|v| v.as_str()).unwrap();
 
-    let output = Command::new(python_filepath)
-        .arg(predict_filepath)
-        .arg(&mail)
-        .output()
-        .expect("failed to execute process");
+    // Request to python script
+    let client = Client::new();
+    let output: Result<reqwest::Response, reqwest::Error> = client.post(predict_url).header(CONTENT_TYPE, "application/json").json(&json!({
+        "email": mail})).send().await;
 
-    if !output.status.success() {
-        return HttpResponse::Ok().content_type("application/json")
-            .json(json!({
-                "status": "error",
-                "message": "Prediction failed",
-                "details": String::from_utf8_lossy(&output.stderr)
-            }))
-            .customize();
-    }
+    match output {
+        Ok(response) => {
+            if !response.status().is_success() {
+                    return HttpResponse::Ok().content_type("application/json")
+                        .json(json!({
+                            "status": "error",
+                            "message": "Prediction failed",
+                        }))
+                    .customize();
+            }
 
-    let result = String::from_utf8_lossy(&output.stdout);
-    match serde_json::from_str::<Value>(&result) {
-        Ok(json_result) => {
-            MAIL::create_mail(sha512_string(&content), sender, date, subject, json_result.to_string(), request_data.user_data.user_uuid).await;        
-            HttpResponse::Ok().content_type("application/json")
-                .json(json_result)
-                .customize()
+            // Getting and sending json from python script
+            let json_result = response.json::<Value>().await;
+            match json_result {
+                Ok (result) => {
+                    MAIL::create_mail(sha512_string(&content), sender, date, subject, result.to_string(), request_data.user_data.user_uuid).await;        
+                    return HttpResponse::Ok().content_type("application/json")
+                        .json(result)
+                        .customize()
+                },
+                Err(e) => {
+                    return HttpResponse::Ok().content_type("application/json")
+                        .json(json!({
+                            "status": "error",
+                            "message": "Prediction failed",
+                            "details": e.to_string()
+                        }))
+                    .customize();
+                }
+            }
         },
-        Err(_) => {
-            HttpResponse::Ok().content_type("application/json")
+        Err(e) => {
+            return HttpResponse::Ok().content_type("application/json")
                 .json(json!({
                     "status": "error",
-                    "message": "Invalid JSON returned from Python script",
-                    "output": result
+                    "message": "Prediction failed",
+                    "details": e.to_string()
                 }))
-                .customize()
+            .customize();
         }
     }
-
 }
 
 pub async fn bulkpredict(request_data: RequestData, request_body: Value) -> CustomizeResponder<HttpResponse> {

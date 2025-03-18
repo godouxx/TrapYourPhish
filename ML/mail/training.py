@@ -37,7 +37,6 @@ print(f"Données nulles (après suppression):\n{phishing_df.isna().sum()}\n")
 
 # Vérification des duplicats
 duplicates = phishing_df[phishing_df.duplicated(keep=False)]
-phishing_df = phishing_df[phishing_df.duplicated(keep=False)]
 print(f"Données dupliquées: \n{duplicates}")
 
 # Comptage après le clean
@@ -127,8 +126,8 @@ def train_classifier(x, vectoriser_name, y):
           y_train.shape}\n- Xtest: {X_test.shape}\tYtest: {y_test.shape}\n")
 
     classifiers = {
-        "Logistic Regression": LogisticRegression(),
-        "Random Forest": RandomForestClassifier(),
+        "Logistic Regression": LogisticRegression(n_jobs=-1),
+        "Random Forest": RandomForestClassifier(n_jobs=-1),
         "Support Vector Machine": SVC(kernel='linear', probability=True),
         "Gradient Boosting": GradientBoostingClassifier(),
     }
@@ -209,8 +208,9 @@ train_classifier(x_tfidf_vect, "tfidf", y)
 # Optimisation avec un gridsearch
 print("\nGridSearch optimisaton\n\n")
 
+x = phish_df["text"]
 X_train, X_test, y_train, y_test = train_test_split(
-    x_tfidf_vect, y, test_size=0.2, random_state=42)
+    x, y, test_size=0.2, random_state=42)
 
 # Pipeline
 pipeline = Pipeline([

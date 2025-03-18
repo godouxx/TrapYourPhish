@@ -8,8 +8,8 @@ from lime.lime_text import LimeTextExplainer
 from mail import cleaner
 
 # Chargement des modèles et des vectoriseurs
-mail_model = joblib.load("models/mail/bow_Logistic Regression.pkl")
-text_vectoriser_mail = joblib.load("models/mail/bow_vectorizer.pkl")
+mail_model = joblib.load("models/opti_svm_mail.pkl")
+text_vectoriser_mail = joblib.load("models/opti_tfidf_mail.pkl")
 
 url_model = joblib.load("models/url/bow_Random_Forest.pkl")
 text_vectoriser_url = joblib.load("models/url/bow_vectorizer.pkl")
