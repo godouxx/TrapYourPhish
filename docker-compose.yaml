@@ -13,16 +13,29 @@ services:
       - mysql_network
     restart: unless-stopped
 
-  # TrapYourPhish
+  # Python Machine Learning
+  python-ml:
+    container_name: python-ml
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    networks:
+      - mysql_network
+    restart: unless-stopped
+
+  # Backend / Frontend
   trapyourphish:
     container_name: trapyourphish
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.backend
     ports:
       - "8080:8080"
     depends_on:
       - mysql
+      - python-ml
     networks:
       - mysql_network
     restart: unless-stopped
