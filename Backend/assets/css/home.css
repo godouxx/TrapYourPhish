@@ -1,6 +1,7 @@
 .page-container {
-  margin: 40vh auto 0 auto;
-  width: 40%;
+  /*margin: 40vh auto 0 auto;*/
+  margin: 10vh auto 0 auto; /* Réduit l’espace au-dessus */
+  width: 50%;
   border-radius: 5px;
   background-color: #ffffffeb;
 }
@@ -10,4 +11,78 @@
   font-size: 2rem;
   font-weight: bold;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.features-container {
+  display: flex;
+  justify-content: center; /* Centre les éléments horizontalement */
+  gap: 100px; /* Espacement entre les encadrements */
+  margin-top: 20px;
+}
+
+.feature-box {
+  text-align: center;
+  width: 250px;
+  flex-shrink: 0; /* Empêche le redimensionnement */
+  padding: 15px;
+  border: 2px solid #0d0857;
+  border-radius: 10px;
+  background-color: #f8f8ff;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feature-box h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0d0857;
+  margin-bottom: 10px;
+}
+
+.feature-box img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.feature-box h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #0d0857;
+}
+
+.feature-box p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.banner {
+  width: 100%; /* Largeur complète */
+  background: linear-gradient(to right, #ff4e50, #fc913a); /* Dégradé rouge-orange */
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 100px 0;
+  font-size: 2rem;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 20px; /* Ajoute un espace au-dessus de la banderole */
+}
+
+/* Animation de défilement */
+@keyframes marquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.banner::after {
+  content: " 🚨 Protégez-vous contre le phishing avec TrapYourPhish ! 🚨 ";
+  position: absolute;
+  white-space: nowrap;
+  width: 100%;
+  left: 0;
+  top: 60%; /* Déplace le texte plus bas dans la banderole */
+  transform: translateY(-50%); /* Centrer le texte verticalement autour du top */
+  animation: marquee 20s linear infinite;
 }
