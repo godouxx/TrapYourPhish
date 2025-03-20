@@ -4,8 +4,8 @@ a {
 }
 
 .search-bar {
-  margin-top: 20px; /* Ajuste selon la hauteur de la bannière */
-  width: 100%; /* Pour qu'elle prenne la largeur du conteneur */
+  margin-top: 20px; 
+  width: 100%; 
   padding: 8px;
   box-sizing: border-box;
 }
