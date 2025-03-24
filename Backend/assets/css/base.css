@@ -11,13 +11,13 @@ body {
 nav {
   height: 50px;
   width: 100%;
-  //position: fixed;
+  /*//position: fixed;*/
 
   display: flex;
   flex-direction: row;
 
   background-color: #0d085784;
-  //z-index: 1000;
+  /*//z-index: 1000;*/
 }
 
 nav div.left {
@@ -96,4 +96,20 @@ a {
 
 .notPhishing {
   color: #green;
+}
+
+
+
+@media (max-width: 600px) {
+  nav h1 {
+    font-size: 1.2rem; /* Réduit la taille du titre */
+  }
+
+  nav a {
+    font-size: 0.9rem; /* Réduit la taille des liens */
+  }
+
+  nav a img {
+    height: 30px; /* Réduit la taille des images */
+  }
 }
