@@ -39,9 +39,11 @@
 }
 
 .feature-box img {
-  width: 100%;
+  max-width: 100%; /* Limite la largeur à celle du conteneur */
+  height: auto; /* Maintient les proportions */
+  /*width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 5px;*/
 }
 
 .feature-box h4 {
@@ -85,4 +87,69 @@
   top: 60%; /* Déplace le texte plus bas dans la banderole */
   transform: translateY(-50%); /* Centrer le texte verticalement autour du top */
   animation: marquee 20s linear infinite;
+}
+
+/* Responsive */
+
+/* Styles pour les écrans de taille moyenne (tablettes) */
+@media (max-width: 768px) {
+  .page-container {
+    width: 80%; /* Réduit la largeur pour les tablettes */
+    margin: 5vh auto; /* Ajuste les marges */
+  }
+
+  .features-container {
+    flex-direction: column; /* Empile les éléments verticalement */
+    gap: 20px; /* Réduit l'espacement entre les éléments */
+  }
+
+  .feature-box {
+    width: 100%; /* Prend toute la largeur disponible */
+  }
+
+  .banner {
+    font-size: 1.5rem; /* Réduit la taille du texte */
+    padding: 50px 0; /* Réduit la hauteur de la bannière */
+  }
+}
+
+/* Styles pour les petits écrans (mobiles) */
+@media (max-width: 480px) {
+  .page-container {
+    width: 90%; /* Réduit encore la largeur pour les mobiles */
+    margin: 5vh auto;
+  }
+
+  .features-container {
+    gap: 10px; /* Réduit davantage l'espacement */
+  }
+
+  .feature-box {
+    padding: 10px; /* Réduit le padding */
+    font-size: 0.9rem; /* Réduit la taille du texte */
+  }
+
+  .feature-box h3 {
+    font-size: 1.5rem; /* Réduit la taille des titres */
+  }
+
+  .feature-box h4 {
+    font-size: 1rem; /* Réduit la taille des sous-titres */
+  }
+
+  .banner {
+    font-size: 1.2rem; /* Réduit encore la taille du texte */
+    padding: 30px 0; /* Réduit la hauteur de la bannière */
+  }
+
+  .banner::after {
+    font-size: 0.9rem; /* Réduit la taille du texte défilant */
+  }
+}
+
+@media (max-width: 480px) {
+  .banner::after {
+    font-size: 1rem; /* Ajuste la taille du texte */
+    animation: marquee 15s linear infinite; /* Accélère l'animation sur les petits écrans */
+  }
 }
