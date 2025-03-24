@@ -6,3 +6,15 @@
   font-weight: bold;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
+
+.images{
+  margin-top:5vh;
+  display:flex;
+  flex-direction:row;
+  height:30vh;
+  justify-content: center;
+}
+
+.image{
+  margin-top:2vh;
+}
