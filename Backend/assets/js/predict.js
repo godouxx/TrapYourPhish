@@ -5,44 +5,36 @@ async function analyse() {
   let subject = document.getElementById("subject").value;
   let content = document.getElementById("content").value;
 
-  const req = await fetch("/api/predict", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      date: date,
-      sender: sender,
-      receiver: receiver,
-      subject: subject,
-      content: content,
-    }),
-  });
+  const loadingMessage = document.getElementById("loading");
+  loadingMessage.style.display = "block";
 
-  const res = await req.json();
-
-  if (res.status == "success") {
-    // Adding result
-    let resultText = document.getElementById("analyse-result");
-    if (res.phishing == "Phishing") {
-      if (resultText.classList.contains("notPhishing")) {
-        resultText.classList.remove("notPhishing");
+  try {
+    if (res.status == "success") {
+      // Adding result
+      let resultText = document.getElementById("analyse-result");
+      if (res.phishing == "Phishing") {
+        if (resultText.classList.contains("notPhishing")) {
+          resultText.classList.remove("notPhishing");
+        }
+        resultText.classList.add("phishing");
+      } else {
+        if (resultText.classList.contains("phishing")) {
+          resultText.classList.remove("phishing");
+        }
+        resultText.classList.add("notPhishing");
       }
-      resultText.classList.add("phishing");
+      resultText.textContent = res.phishing;
+  
+      // Adding probabilities
+      displayExplanations(res.explication_mail);
     } else {
-      if (resultText.classList.contains("phishing")) {
-        resultText.classList.remove("phishing");
-      }
-      resultText.classList.add("notPhishing");
+      alert(res.message);
     }
-    resultText.textContent = res.phishing;
-
-    // Adding probabilities
-    displayExplanations(res.explication_mail);
-  } else {
-    alert(res.message);
+  } finally {
+    loadingMessage.style.display = "none";
   }
 }
+
 
 // Adding words with probabilities
 function displayExplanations(explanations) {

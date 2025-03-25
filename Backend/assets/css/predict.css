@@ -1,7 +1,7 @@
 /* Sous-titre */
 h2 {
   color: #0d0857;
-  margin-top: 5px;
+  margin-top:5px;
   margin-bottom: 10px;
   font-size: 2rem;
   font-weight: bold;
@@ -23,7 +23,7 @@ h2 {
   flex: 1;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 40px;
 }
 
 .mail-content {
@@ -32,12 +32,16 @@ h2 {
   max-width: 100%;
 }
 
+.mail-content txt{
+  color:black;
+}
+
 .mail-content textarea {
   width: 100%;
   padding: 10px;
   height: 250px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   resize: vertical;
   box-sizing: border-box;
 }
@@ -47,19 +51,19 @@ h2 {
   justify-content: space-between;
   flex-direction: row;
   height: 110vh;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
 }
 
 .mail-container {
-  background: rgba(255, 255, 255, 0.615);
+  background: rgba(69, 61, 174, 0.615);
   border: 2px solid rgba(4, 4, 78, 0.642);
   width: 55%;
   min-height: 85vh;
   box-sizing: border-box;
   padding: 20px;
   margin: 50px 0 50px 20px;
-  border-radius: 15px;
+  border-radius: 50px;
   text-align: left;
   position: relative;
   overflow-y: auto;
