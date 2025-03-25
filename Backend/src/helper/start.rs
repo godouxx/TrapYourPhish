@@ -15,7 +15,7 @@ pub async fn start() {
             "db_username": "trapyourphish",
             "db_password": "SUPERPASSWORD",
             "python_filepath": "../venv/bin/python3",
-            "predict_filepath": "../src/predict.py"
+            "predict_filepath": "../ML/predict.py"
         }"#).unwrap();
     }
 

@@ -1,10 +1,10 @@
 # Création d'un dataset global regroupant les datasets dans le répertoire
 import pandas as pd
 
-ceas = pd.read_csv("datasets/CEAS_08.csv")
-nazario = pd.read_csv("datasets/Nazario.csv")
-nigerian_fraud = pd.read_csv("datasets/Nigerian_Fraud.csv")
-spam_assassin = pd.read_csv("datasets/SpamAssasin.csv")
+ceas = pd.read_csv("datasets/mail/CEAS_08.csv")
+nazario = pd.read_csv("datasets/mail/Nazario.csv")
+nigerian_fraud = pd.read_csv("datasets/mail/Nigerian_Fraud.csv")
+spam_assassin = pd.read_csv("datasets/mail/SpamAssasin.csv")
 
 print("Informations sur les datasets: \n")
 print(ceas.info())
