@@ -10,7 +10,23 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - mysql_network
+      - typ_network
+    restart: unless-stopped
+
+  # Ollama
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_HOST=0.0.0.0
+    volumes:
+      - .:/code
+      - ./ollama/ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - typ_network
     restart: unless-stopped
 
   # Python Machine Learning
@@ -21,8 +37,11 @@ services:
       dockerfile: Dockerfile.backend
     ports:
       - "5000:5000"
+    environment:
+      LLM_URL: http://ollama:11434/api/chat
+      LLM_MODEL: llama3.2
     networks:
-      - mysql_network
+      - typ_network
     restart: unless-stopped
 
   # Backend / Frontend
@@ -37,9 +56,9 @@ services:
       - mysql
       - python-ml
     networks:
-      - mysql_network
+      - typ_network
     restart: unless-stopped
 
 networks:
-  mysql_network:
+  typ_network:
     driver: bridge

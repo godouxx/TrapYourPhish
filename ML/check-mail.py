@@ -1,7 +1,10 @@
+import json
+import os
 import re
 
 import joblib
 import nltk
+import requests
 from flask import Flask, jsonify, request
 from lime.lime_text import LimeTextExplainer
 
@@ -47,7 +50,55 @@ def predictor_url(texts):
     return url_model.predict_proba(x)
 
 
-@app.route("/predict", methods=["POST"])
+def LLM_analysis(email, words):
+    url = os.getenv("LLM_URL", "http://localhost:11434/api/chat")
+    model = os.getenv("LLM_MODEL", "llama3.2")
+    header = {"Content-Type": "application/json"}
+
+    messages = [{
+        "role": "system",
+        "content": """You are a cybersecurity assistant specialized in phishing detection.
+
+The user will provide you with an email and a list of its key elements along with importance scores (positive meaning suspicious, negative meaning benign). Your task is to analyze the email holistically and construct a concise, factual paragraph explaining whether it is suspicious in a phishing context.
+
+When generating the paragraph:
+
+Consider all elements and their scores to determine the overall likelihood of phishing.
+
+If multiple elements have a strong positive score, emphasize their contribution to suspicion.
+
+If certain elements have a negative score, acknowledge them as mitigating factors but do not overrule the suspicious elements if they dominate.
+
+Highlight whether the email contains an HTTP link rather than HTTPS, as the absence of HTTPS can be a security concern in phishing attempts.
+
+Integrate the elements naturally in a flowing paragraph rather than listing them separately.
+
+Do not assume or invent information beyond what is provided.
+
+Be clear, educational, and factual, without giving security tips or recommendations."""
+    },
+        {
+        "role": "user",
+        "content": f"The list of key elements is: {words}\nAnd the email is:{email}\n"
+    }]
+
+    data = {
+        "model": model,
+        "messages": messages,
+        "stream": False
+    }
+
+    response = requests.post(url, headers=header, data=json.dumps(data))
+
+    if response.status_code == 200:
+        data = json.loads(response.text)
+        print(data)
+        return data["message"]["content"]
+    else:
+        return jsonify({"status": "error", "message": "LLM can't predict"}), 501
+
+
+@ app.route("/predict", methods=["POST"])
 def predict():
 
     # Vérifier si la requête contient du JSON
@@ -65,9 +116,9 @@ def predict():
     prediction_mail = mail_model.predict(X_mail)[0]
 
     # Générer une explication avec LIME pour le mail
-    exp_mail = explainer_mail.explain_instance(
+    words_lime = explainer_mail.explain_instance(
         email_text, predictor_mail, num_features=10)
-    explanation_mail = exp_mail.as_list()
+    words = words_lime.as_list()
 
     # Prédiction et explication pour chaque URL (s'il y en a des URL)
     url_results = []
@@ -83,11 +134,14 @@ def predict():
             "explication": explanation_url
         })
 
+    # Utilisation du LLM pour expliquer les mots dans le contexte du mail
+    explaination_mail = LLM_analysis(email_text, words)
+
     # Retourner le résultat du mail et des URL
     return jsonify({
         "status": "success",
         "phishing": "Phishing" if prediction_mail == 1 else "Safe",
-        "explication_mail": explanation_mail,
+        "explication_mail": explaination_mail,
         "urls": url_results
     })
 
