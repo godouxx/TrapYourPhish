@@ -1,88 +1,188 @@
 .page-container {
-  /*margin: 40vh auto 0 auto;*/
-  margin: 10vh auto 0 auto; /* Réduit l’espace au-dessus */
-  width: 50%;
-  border-radius: 5px;
-  background-color: #ffffffeb;
+    /*margin: 40vh auto 0 auto;*/
+    margin: 10vh auto 0 auto;
+    /* Réduit l’espace au-dessus */
+    width: 50%;
+    border-radius: 5px;
 }
 
 .page-container h1 {
-  color: #0d085784;
-  font-size: 2rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    color: #0d085784;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .features-container {
-  display: flex;
-  justify-content: center; /* Centre les éléments horizontalement */
-  gap: 100px; /* Espacement entre les encadrements */
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    /* Centre les éléments horizontalement */
+    gap: 100px;
+    /* Espacement entre les encadrements */
+    margin-top: 20px;
 }
 
 .feature-box {
-  text-align: center;
-  width: 250px;
-  flex-shrink: 0; /* Empêche le redimensionnement */
-  padding: 15px;
-  border: 2px solid #0d0857;
-  border-radius: 10px;
-  background-color: #f8f8ff;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+    flex-shrink: 0;
+    /* Empêche le redimensionnement */
+    padding: 15px;
+    border: 2px solid #0d0857;
+    border-radius: 10px;
+    background-color: #f8f8ff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .feature-box h3 {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #0d0857;
-  margin-bottom: 10px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0d0857;
+    margin-bottom: 10px;
 }
 
 .feature-box img {
-  width: 100%;
+    max-width: 100%;
+    /* Limite la largeur à celle du conteneur */
+    height: auto;
+    /* Maintient les proportions */
+    /*width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 5px;*/
 }
 
 .feature-box h4 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-top: 10px;
-  color: #0d0857;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #0d0857;
 }
 
 .feature-box p {
-  font-size: 1rem;
-  color: #333;
+    font-size: 1rem;
+    color: #333;
 }
 
 .banner {
-  width: 100%; /* Largeur complète */
-  background: linear-gradient(to right, #ff4e50, #fc913a); /* Dégradé rouge-orange */
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  padding: 100px 0;
-  font-size: 2rem;
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-top: 20px; /* Ajoute un espace au-dessus de la banderole */
+    width: 100%;
+    /* Largeur complète */
+    background: linear-gradient(to right, #ff4e50, #fc913a);
+    /* Dégradé rouge-orange */
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 100px 0;
+    font-size: 2rem;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 20px;
+    /* Ajoute un espace au-dessus de la banderole */
 }
 
 /* Animation de défilement */
 @keyframes marquee {
-  from { transform: translateX(100%); }
-  to { transform: translateX(-100%); }
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
 }
 
 .banner::after {
-  content: " 🚨 Protégez-vous contre le phishing avec TrapYourPhish ! 🚨 ";
-  position: absolute;
-  white-space: nowrap;
-  width: 100%;
-  left: 0;
-  top: 60%; /* Déplace le texte plus bas dans la banderole */
-  transform: translateY(-50%); /* Centrer le texte verticalement autour du top */
-  animation: marquee 20s linear infinite;
+    content: " 🚨 Protégez-vous contre le phishing avec TrapYourPhish ! 🚨 ";
+    position: absolute;
+    white-space: nowrap;
+    width: 100%;
+    left: 0;
+    top: 60%;
+    /* Déplace le texte plus bas dans la banderole */
+    transform: translateY(-50%);
+    /* Centrer le texte verticalement autour du top */
+    animation: marquee 20s linear infinite;
+}
+
+/* Responsive */
+
+/* Styles pour les écrans de taille moyenne (tablettes) */
+@media (max-width: 768px) {
+    .page-container {
+        width: 80%;
+        /* Réduit la largeur pour les tablettes */
+        margin: 5vh auto;
+        /* Ajuste les marges */
+    }
+
+    .features-container {
+        flex-direction: column;
+        /* Empile les éléments verticalement */
+        gap: 20px;
+        /* Réduit l'espacement entre les éléments */
+    }
+
+    .feature-box {
+        width: 100%;
+        /* Prend toute la largeur disponible */
+    }
+
+    .banner {
+        font-size: 1.5rem;
+        /* Réduit la taille du texte */
+        padding: 50px 0;
+        /* Réduit la hauteur de la bannière */
+    }
+}
+
+/* Styles pour les petits écrans (mobiles) */
+@media (max-width: 480px) {
+    .page-container {
+        width: 90%;
+        /* Réduit encore la largeur pour les mobiles */
+        margin: 5vh auto;
+    }
+
+    .features-container {
+        gap: 10px;
+        /* Réduit davantage l'espacement */
+    }
+
+    .feature-box {
+        padding: 10px;
+        /* Réduit le padding */
+        font-size: 0.9rem;
+        /* Réduit la taille du texte */
+    }
+
+    .feature-box h3 {
+        font-size: 1.5rem;
+        /* Réduit la taille des titres */
+    }
+
+    .feature-box h4 {
+        font-size: 1rem;
+        /* Réduit la taille des sous-titres */
+    }
+
+    .banner {
+        font-size: 1.2rem;
+        /* Réduit encore la taille du texte */
+        padding: 30px 0;
+        /* Réduit la hauteur de la bannière */
+    }
+
+    .banner::after {
+        font-size: 0.9rem;
+        /* Réduit la taille du texte défilant */
+    }
+}
+
+@media (max-width: 480px) {
+    .banner::after {
+        font-size: 1rem;
+        /* Ajuste la taille du texte */
+        animation: marquee 15s linear infinite;
+        /* Accélère l'animation sur les petits écrans */
+    }
 }
