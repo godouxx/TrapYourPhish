@@ -4,36 +4,52 @@ async function analyse() {
   let receiver = document.getElementById("receiver").value;
   let subject = document.getElementById("subject").value;
   let content = document.getElementById("content").value;
-
-  const loadingMessage = document.getElementById("loading");
+  let loadingMessage = document.getElementById("loading");
   loadingMessage.style.display = "block";
 
-  try {
-    if (res.status == "success") {
-      // Adding result
-      let resultText = document.getElementById("analyse-result");
-      if (res.phishing == "Phishing") {
-        if (resultText.classList.contains("notPhishing")) {
-          resultText.classList.remove("notPhishing");
-        }
-        resultText.classList.add("phishing");
-      } else {
-        if (resultText.classList.contains("phishing")) {
-          resultText.classList.remove("phishing");
-        }
-        resultText.classList.add("notPhishing");
+  const req = await fetch("/api/predict", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      date: date,
+      sender: sender,
+      receiver: receiver,
+      subject: subject,
+      content: content,
+    }),
+  });
+
+  const res = await req.json();
+
+
+  if (res.status == "success") {
+    // Adding result
+    let resultText = document.getElementById("analyse-result");
+    if (res.phishing == "Phishing") {
+      if (resultText.classList.contains("notPhishing")) {
+        resultText.classList.remove("notPhishing");
       }
-      resultText.textContent = res.phishing;
-  
-      // Adding probabilities
-      displayExplanations(res.explication_mail);
+      resultText.classList.add("phishing");
     } else {
-      alert(res.message);
+      if (resultText.classList.contains("phishing")) {
+        resultText.classList.remove("phishing");
+      }
+      resultText.classList.add("notPhishing");
     }
-  } finally {
-    loadingMessage.style.display = "none";
+    resultText.textContent = res.phishing;
+
+    // Adding probabilities
+    displayExplanations(res.explication_mail);
+  } else {
+    alert(res.message);
   }
+
+  // Hide loading message
+  loadingMessage.style.display = "none";
 }
+
 
 
 // Adding words with probabilities
