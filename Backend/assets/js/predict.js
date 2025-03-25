@@ -23,6 +23,8 @@ async function analyse() {
 
   const res = await req.json();
 
+  // Hide loading message
+  loadingMessage.style.display = "none";
 
   if (res.status == "success") {
     // Adding result
@@ -41,45 +43,12 @@ async function analyse() {
     resultText.textContent = res.phishing;
 
     // Adding probabilities
-    displayExplanations(res.explication_mail);
+    document.getElementById("analyse-explication").textContent = res.explication_mail;
   } else {
     alert(res.message);
   }
 
-  // Hide loading message
-  loadingMessage.style.display = "none";
-}
 
-
-
-// Adding words with probabilities
-function displayExplanations(explanations) {
-  explanations.forEach((item) => {
-    const [word, probability] = item;
-
-    const explanationElement = document.createElement("div");
-    explanationElement.classList.add("explanation-item");
-
-    const wordSpan = document.createElement("span");
-    wordSpan.textContent = word;
-
-    const probabilitySpan = document.createElement("span");
-    probabilitySpan.classList.add("probability");
-
-    if (probability > 0) {
-      probabilitySpan.style.backgroundColor = "#2196F3";
-    } else {
-      probabilitySpan.style.backgroundColor = "#F44336";
-    }
-    probabilitySpan.textContent = probability.toFixed(2);
-
-    explanationElement.appendChild(wordSpan);
-    explanationElement.appendChild(probabilitySpan);
-
-    document
-      .getElementById("analyse-explication")
-      .appendChild(explanationElement);
-  });
 }
 
 document.getElementById("predict").addEventListener("click", function (e) {

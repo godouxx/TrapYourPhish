@@ -114,6 +114,25 @@ Ce programme devrait installer les dépendances nécessaires dans un premier tem
 
 Signifiant que le serveur web est bien en cours d'exécution, vous pouvez vous rendre sur votre navigateur sur l'URL http://localhost:8080, qui vous permettra d'accéder à l'interface web du projet.
 
+### 4. Mise en place de ollama
+
+Pour expliquer la raison de pourquoi un email est un email de phishing, la
+puissance des LLM est utilisé, et cela grâce à
+[ollama](https://github.com/ollama/ollama) qui permet d'exploiter le maximum de
+performances de la machine hôte.  
+  
+Pour l'installer, ollama propose un script:
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+Puis un modèle doit être récupérer, comme llama3.2:
+
+```bash
+ollama pull llama3.2
+```
+
 ## Docker
 
 Pour des questions de simplicité de déploiement un dockerfile et un docker-compose sont disponibles pour ce projet.  
