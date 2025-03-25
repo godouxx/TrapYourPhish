@@ -67,9 +67,10 @@ def predict():
         llm_explanations.append({
             "element": word,
             "explanation": explanation
+            
         })
 
-    # URLs
+    # URLs et nnn
     url_results = []
     for url in urls:
         X_url = text_vectoriser_url.transform([url])

@@ -1,67 +1,94 @@
-from langchain_community.llms import GPT4All
-from langchain_core.messages import AIMessage, HumanMessage
-from langgraph.checkpoint.memory import MemorySaver
-from langgraph.graph import START, MessagesState, StateGraph
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.messages import SystemMessage, trim_messages
+import re
+import joblib
+import nltk
+from flask import Flask, jsonify, request
+from lime.lime_text import LimeTextExplainer
+from mail import cleaner
+from expli2 import get_explanation_from_llm
 
-# Modèle local
-model_path = r"C:\Users\r0man\AppData\Local\nomic.ai\GPT4All\mistral-7b-instruct-v0.2.Q4_0.gguf"
-llm = GPT4All(model=model_path)
+# Chargement des modèles
+mail_model = joblib.load("models/mail/bow_Logistic Regression.pkl")
+text_vectoriser_mail = joblib.load("models/mail/bow_vectorizer.pkl")
 
-# Trimming
-trimmer = trim_messages(
-    max_tokens=650,
-    strategy="last",
-    token_counter=llm,
-    include_system=True,
-    allow_partial=False,
-    start_on="human",
-)
+url_model = joblib.load("models/url/bow_Random_Forest.pkl")
+text_vectoriser_url = joblib.load("models/url/bow_vectorizer.pkl")
 
-# Prompt
-prompt_template = ChatPromptTemplate.from_messages([
-    SystemMessage(content="""
-You are a cybersecurity assistant specialized in phishing detection.
+# Initialiser LIME
+explainer_mail = LimeTextExplainer(class_names=["Safe", "Phishing"])
+explainer_url = LimeTextExplainer(class_names=["Safe", "Phishing"])
 
-The user will give you a word, phrase, email address, or email element. 
-Your task is to explain clearly and simply why this item might be suspicious or commonly used in phishing emails.
+# NLTK
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 
-Focus only on the explanation — do not give any advice or safety tips. Do not include checklists or instructions on what to do.
-
-Your goal is to help regular users understand why this element raises red flags in a phishing context, using accessible and educational language.
-
-Highlight how attackers use emotional manipulation (urgency, fear, reward), technical tricks (fake links, spoofed addresses), and common language patterns in phishing.
-
-If the element is especially suspicious (e.g., "urgent", "verify your account", "support@paypal-security.com"), emphasize why it’s often used in phishing, and what it triggers psychologically.
-
-If the element is probably safe, explain that too — just stick to the explanation.
-
-Keep the tone informative and focused on understanding, not on action.
-"""),
-    MessagesPlaceholder(variable_name="messages"),
-])
-
-# LangGraph
-workflow = StateGraph(state_schema=MessagesState)
-
-def call_model(state: MessagesState):
-    trimmed = trimmer.invoke(state["messages"])
-    prompt = prompt_template.invoke(trimmed)
-    response = llm.invoke(prompt).strip()
-    return {"messages": state["messages"] + [AIMessage(content=response)]}
-
-workflow.add_edge(START, "model")
-workflow.add_node("model", call_model)
-memory = MemorySaver()
-app = workflow.compile(checkpointer=memory)
-config = {"configurable": {"thread_id": "abc123"}}
+app = Flask(__name__)
 
 
-def get_explanation_from_llm(word: str) -> str:
-    messages = [HumanMessage(content=word)]
-    output = app.invoke({"messages": messages}, config)
-    response = output["messages"][-1]
-    if isinstance(response, AIMessage):
-        return response.content.strip()
-    return "Erreur : pas de réponse du LLM"
+def extract_urls(text):
+    return re.findall(r'https?://[^\s]+', text)
+
+
+def predictor_mail(texts):
+    x = text_vectoriser_mail.transform(texts)
+    return mail_model.predict_proba(x)
+
+
+def predictor_url(texts):
+    x = text_vectoriser_url.transform(texts)
+    return url_model.predict_proba(x)
+
+
+@app.route("/predict", methods=["POST"])
+def predict():
+    data = request.get_json()
+    if not data or "email" not in data:
+        return jsonify({"status": "error", "message": "Le champ 'email' est requis"}), 400
+
+    email_text = data["email"]
+    urls = extract_urls(email_text)
+    cleaned_text = cleaner.clean_email(email_text)
+
+    X_mail = text_vectoriser_mail.transform([cleaned_text])
+    prediction_mail = mail_model.predict(X_mail)[0]
+
+    # Explication LIME
+    exp_mail = explainer_mail.explain_instance(email_text, predictor_mail, num_features=10)
+    explanation_mail = exp_mail.as_list()
+
+    # Top 3 éléments suspects
+    top_features = sorted(explanation_mail, key=lambda x: abs(x[1]), reverse=True)
+    top_elements = [word for word, score in top_features[:3]]
+
+    # Appel LLM
+    llm_explanations = []
+    for word in top_elements:
+        explanation = get_explanation_from_llm(word)
+        llm_explanations.append({
+            "element": word,
+            "explanation": explanation
+        })
+
+    # URLs
+    url_results = []
+    for url in urls:
+        X_url = text_vectoriser_url.transform([url])
+        prediction_url = url_model.predict(X_url)[0]
+        exp_url = explainer_url.explain_instance(url, predictor_url, num_features=5)
+        explanation_url = exp_url.as_list()
+        url_results.append({
+            "url": url,
+            "phishing": "Phishing" if prediction_url == 1 else "Safe",
+            "explication": explanation_url
+        })
+
+    return jsonify({
+        "status": "success",
+        "phishing": "Phishing" if prediction_mail == 1 else "Safe",
+        "explanations_llm": llm_explanations,
+        "urls": url_results
+    })
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
