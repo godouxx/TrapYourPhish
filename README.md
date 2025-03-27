@@ -127,12 +127,23 @@ Pour l'installer, ollama propose un script:
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-Puis un modèle doit être récupérer, comme llama3.2:
+Puis ollama doit être lancer:
 
 ```bash
-ollama pull llama3.2
+ollama serve
 ```
-
+  
+et dans un autre terminal:  
+  
+```bash
+ollama pull llama3.2
+```  
+  
+> [!TIP]
+> Si vous souhaitez utiliser Ollama pour un autre appareil, le port 11434 doit
+> être ouvert et vous devrez définir une variable d'environnement `OLLAMA_HOST`
+> à `0.0.0.0` avec la commande `export OLLAMA_HOST=0.0.0.0`  
+  
 ## Docker
 
 Pour des questions de simplicité de déploiement un dockerfile et un docker-compose sont disponibles pour ce projet.  
@@ -141,7 +152,10 @@ Pour des questions de simplicité de déploiement un dockerfile et un docker-com
 > Pour des questions de sécurité dans le cadre d'un déploiement en environnement de production, il peut être nécessaire de modifier des paramètres (mots de passes, nom d'utilisateur)
 
 Pour l'utiliser, [docker](https://www.docker.com/) est nécessaire sur votre machine.
-
+  
+**Vous devez modifier le `docker-compose.yaml` et remplacer la ligne LLM_URL
+dans `python-ml` avec l'URL de votre serveur ollama.**  
+  
 Les commandes suivantes permettront de déployer le projet via docker:
 
 ```bash

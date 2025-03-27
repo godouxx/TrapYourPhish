@@ -51,5 +51,7 @@ COPY ./Backend/config ./config
 RUN sed -i "s|\"db_host\": \".*\"|\"db_host\": \"mysql\"|" config/default.json
 RUN sed -i "s|\"predict_url\": \".*\"|\"predict_url\": \"http://python-ml:5000/predict\"|" config/default.json
 
+EXPOSE 8080
+
 # set the startup command to run your binary
 CMD ["./web_website", "--prod"]

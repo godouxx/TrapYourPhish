@@ -4,6 +4,7 @@ FROM python:alpine3.21
 RUN apk -U upgrade
 
 # Install dependencies
+RUN apk add --no-cache gcc gfortran musl-dev libxml2-dev libxslt-dev g++ make
 COPY ./requirements.txt ./requirements.txt
 RUN pip install -r requirements.txt
 
@@ -20,4 +21,5 @@ RUN mkdir -p models/url
 COPY ./models/url/bow_vectorizer.pkl ./models/url/bow_vectorizer.pkl
 COPY ./models/url/bow_Random_Forest.pkl ./models/url/bow_Random_Forest.pkl
 
+EXPOSE 5000
 CMD ["python3", "check-mail.py"]

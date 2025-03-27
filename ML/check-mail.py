@@ -60,22 +60,16 @@ def LLM_analysis(email, words):
         "content": """You are a cybersecurity assistant specialized in phishing detection.
 
 The user will provide you with an email and a list of its key elements along with importance scores (positive meaning suspicious, negative meaning benign). Your task is to analyze the email holistically and construct a concise, factual paragraph explaining whether it is suspicious in a phishing context.
+Moreover for each URL, explain why they are phishing URLs
 
 When generating the paragraph:
-
-Consider all elements and their scores to determine the overall likelihood of phishing.
-
-If multiple elements have a strong positive score, emphasize their contribution to suspicion.
-
-If certain elements have a negative score, acknowledge them as mitigating factors but do not overrule the suspicious elements if they dominate.
-
-Highlight whether the email contains an HTTP link rather than HTTPS, as the absence of HTTPS can be a security concern in phishing attempts.
-
-Integrate the elements naturally in a flowing paragraph rather than listing them separately.
-
-Do not assume or invent information beyond what is provided.
-
-Be clear, educational, and factual, without giving security tips or recommendations."""
+- Consider all elements and their scores to determine the overall likelihood of phishing. But don't add the score inside the paragraph.
+- If multiple elements have a strong positive score, emphasize their contribution to suspicion.
+- If certain elements have a negative score, acknowledge them as mitigating factors but do not overrule the suspicious elements if they dominate.
+- Integrate the elements naturally in a flowing paragraph rather than listing them separately.
+- Do not assume or invent information beyond what is provided.
+- Be clear, educational, and factual, without giving security tips or recommendations.
+"""
     },
         {
         "role": "user",
@@ -95,10 +89,10 @@ Be clear, educational, and factual, without giving security tips or recommendati
         print(data)
         return data["message"]["content"]
     else:
-        return jsonify({"status": "error", "message": "LLM can't predict"}), 501
+        return None
 
 
-@ app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["POST"])
 def predict():
 
     # Vérifier si la requête contient du JSON
@@ -125,17 +119,23 @@ def predict():
     for url in urls:
         X_url = text_vectoriser_url.transform([url])
         prediction_url = url_model.predict(X_url)[0]
-        exp_url = explainer_url.explain_instance(
-            url, predictor_url, num_features=5)
-        explanation_url = exp_url.as_list()
-        url_results.append({
-            "url": url,
-            "phishing": "Phishing" if prediction_url == 1 else "Safe",
-            "explication": explanation_url
-        })
+
+        # Ajouté seulement les URL de phishing
+        if prediction_url == 1:
+            exp_url = explainer_url.explain_instance(
+                url, predictor_url, num_features=5)
+            explanation_url = exp_url.as_list()
+            url_results.append({
+                "url": url,
+                "phishing": "Phishing",
+                "explication": explanation_url
+            })
 
     # Utilisation du LLM pour expliquer les mots dans le contexte du mail
     explaination_mail = LLM_analysis(email_text, words)
+
+    if explaination_mail is None:
+        return jsonify({"status": "error", "message": "LLM can't predict"}), 501
 
     # Retourner le résultat du mail et des URL
     return jsonify({
@@ -148,4 +148,4 @@ def predict():
 
 # Lancer l'application
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
