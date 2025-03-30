@@ -78,33 +78,32 @@ img {
     width: 100px; /* Taille uniforme pour l'icône */
     height: auto; /* Maintenir les proportions */
 }
-
-/* Fade-out animation */
+/* Animation fade-out */
 .fade-out {
-    animation: fadeOut 0.3s forwards;
+  animation: fadeOut 0.3s forwards;
+}
+
+/* Animation fade-in */
+.fade-in {
+  animation: fadeIn 0.3s forwards;
+}
+
+/* Keyframes pour fade-out */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
   }
-  
-  /* Fade-in animation */
-  .fade-in {
-    animation: fadeIn 0.3s forwards;
+  to {
+    opacity: 0;
   }
-  
-  /* Keyframes for fade-out */
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
+}
+
+/* Keyframes pour fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  /* Keyframes for fade-in */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  to {
+    opacity: 1;
   }
+}

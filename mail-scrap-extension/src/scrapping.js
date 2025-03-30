@@ -1,3 +1,7 @@
+// Script to scrape emails from Gmail
+//Will be used in the dashboard page and will be download the different emails
+// This script will run in the context of the Gmail page
+
 setTimeout(() => {
   let ik = "";
   let lastDownloadedEmail = null; 

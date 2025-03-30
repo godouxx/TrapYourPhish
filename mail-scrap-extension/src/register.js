@@ -1,31 +1,29 @@
-const registerUser = async (userData) => {
-    try {
-        const response = await fetch('http://localhost:4000/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-        });
+document.querySelector("form").addEventListener("submit", async (event) => {
+  event.preventDefault(); // Empêche le rechargement de la page
 
-        if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
-        }
+  const email = document.querySelector("#email").value;
+  const password = document.querySelector("#password").value;
 
-        const data = await response.json();
-        console.log('Registration successful:', data);
-        return data;
-    } catch (error) {
-        console.error('Registration failed:', error);
-        throw error;
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+    if (response.ok) {
+      const data = await response.json();
+      alert("Inscription réussie !");
+      // Redirige vers la page de connexion
+      window.location.href = "/src/connexion.html";
+    } else {
+      const error = await response.json();
+      alert(`Erreur : ${error.message}`);
     }
-};
-
-// Example usage
-const userData = {
-    username: 'exampleUser',
-    password: 'examplePassword',
-    email: 'example@example.com',
-};
-
-registerUser(userData).catch((err) => console.error(err));
+  } catch (err) {
+    console.error("Erreur lors de l'inscription :", err);
+    alert("Une erreur est survenue. Veuillez réessayer.");
+  }
+});

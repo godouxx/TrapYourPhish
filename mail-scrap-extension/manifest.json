@@ -9,13 +9,11 @@
     "tabs",
     "downloads",
     "cookies",
-    "storage"
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
   ],
-  "host_permissions": [
-    "https://mail.google.com/*",
-    "http://*/*",
-    "https://*/*"
-  ],
+  "host_permissions": ["https://mail.google.com/*", "http://localhost:8080/*"],
   "action": {
     "default_popup": "index.html",
     "default_icon": {
@@ -27,22 +25,24 @@
   "content_scripts": [
     {
       "matches": ["https://mail.google.com/*"],
-      "js": ["scrapping.js"],
-      "css": ["index.css","/src/register.css","/src/connexion.css"], 
+      "js": ["src/scrapping.js"],
+      "css": [
+        "index.css",
+        "/src/register.css",
+        "/src/connexion.css",
+        "/src/dashboard.css"
+      ],
       "run_at": "document_idle"
     }
   ],
-  "background": {
-    "scripts": ["src/main.js"],
-    "persistent": false
-  },
-  "options_ui": {
-    "page": "options.html",
-    "open_in_tab": true
-  },
+
   "browser_specific_settings": {
     "gecko": {
       "id": "trapyourphish@uqac.ca"
     }
+  },
+
+  "background": {
+    "service_worker": "background.js"
   }
 }
