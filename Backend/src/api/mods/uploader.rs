@@ -67,8 +67,8 @@ pub async fn mail(request_data: RequestData, file_content: String) -> CustomizeR
     // Checking if mail content isn't already in database
     let info = MAIL::get_mail_info(sha512_string(&content)).await;
     if info.mail_uuid != "" {
-        println!("\n\nLigne: {:?}", &info.mail_result);
-        let result: Value = serde_json::from_str(&info.mail_result.as_str()).unwrap();
+        let cleaned_json = info.mail_result.replace(|c: char| c.is_control(), "");
+        let result: Value = serde_json::from_str(&cleaned_json).unwrap();
         return HttpResponse::Ok().content_type("application/json")
                 .json(result)
                 .customize()

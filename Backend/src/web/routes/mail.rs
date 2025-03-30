@@ -17,7 +17,8 @@ pub fn create_mail_list(mails:Vec<MAIL>) -> String {
   let base = fs::read_to_string("html/mail/files/mail.html").unwrap();
 
   for mail in mails {
-    let result: Value = serde_json::from_str(&mail.mail_result).unwrap();
+    let cleaned_json = mail.mail_result.replace(|c: char| c.is_control(), "");
+    let result: Value = serde_json::from_str(&cleaned_json).unwrap();
 
     let tmp = base.replace("{{mail_id}}", &mail.mail_uuid)
         .replace("{{mail_sender}}", &mail.mail_sender)

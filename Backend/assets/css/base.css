@@ -1,129 +1,141 @@
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-image: url("/assets/imgs/background.jpg"); /* Image en fond */
-  background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
-  background-position: top; /* Centre l'image */
-  background-repeat: no-repeat; /* Empêche la répétition */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url("/assets/imgs/background.jpg");
+    /* Image en fond */
+    background-size: cover;
+    /* Ajuste l'image pour couvrir tout l'écran */
+    background-position: top;
+    /* Centre l'image */
+    background-repeat: no-repeat;
+    /* Empêche la répétition */
 }
 
 /* Navbar */
 nav {
-  height: 50px;
-  width: 100%;
-  /*//position: fixed;*/
+    height: 50px;
+    width: 100%;
+    /*//position: fixed;*/
 
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 
-  background-color: #0d085784;
-  /*//z-index: 1000;*/
+    background-color: #0d085784;
+    /*//z-index: 1000;*/
 }
 
 nav div.left {
-  width: 80%;
-  display: flex;
+    width: 80%;
+    display: flex;
 
-  flex-direction: row;
-  column-gap: 2rem;
-  justify-content: start;
-  align-items: center;
-  padding-left: 10px;
+    flex-direction: row;
+    column-gap: 2rem;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
 }
 
 nav div.right {
-  width: 20%;
-  display: flex;
+    width: 20%;
+    display: flex;
 
-  flex-direction: row;
-  justify-content: end;
-  align-items: center;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
 }
 
 nav h1 {
-  color: #ffffffeb;
-  font-size: 2rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    color: #ffffffeb;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 nav a {
-  color: #ffffffeb;
-  font-size: 1.5rem;
+    color: #ffffffeb;
+    font-size: 1.5rem;
 }
 
 nav a img {
-  width: auto;
-  height: 50px;
+    width: auto;
+    height: 50px;
 }
 
 /* Page default */
 /*  titre */
 h1 {
-  color: #2118a1;
+    color: #2118a1;
 }
 
 /* paragraphe */
 p {
-  color: #746bf6;
+    color: #746bf6;
 }
 
 /* link */
 a {
-  color: #ffffffeb;
-  text-decoration: none;
+    color: #ffffffeb;
+    text-decoration: none;
 }
 
 /* Button */
 .button {
-  color: #ffffffeb;
-  text-decoration: none;
-  background-color: grey;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
+    color: #ffffffeb;
+    text-decoration: none;
+    background-color: grey;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .button:hover {
-  background-color: darkgrey;
+    background-color: darkgrey;
 }
 
 /* Phishing text */
 .phishing {
-  color: #red;
+    color: red;
+    font-weight: bold;
 }
 
 .notPhishing {
-  color: #green;
+    color: green;
+    font-weight: bold;
 }
 
 
 @media (max-width: 700px) {
-  nav h1 {
-    font-size: 1.5rem; /* Réduit la taille du titre */
-  }
+    nav h1 {
+        font-size: 1.5rem;
+        /* Réduit la taille du titre */
+    }
 
-  nav a {
-    font-size: 1.3rem; /* Réduit la taille des liens */
-  }
+    nav a {
+        font-size: 1.3rem;
+        /* Réduit la taille des liens */
+    }
 
-  nav a img {
-    height: 40px; /* Réduit la taille des images */
-  }
+    nav a img {
+        height: 40px;
+        /* Réduit la taille des images */
+    }
 }
 
 
 @media (max-width: 600px) {
-  nav h1 {
-    font-size: 1.2rem; /* Réduit la taille du titre */
-  }
+    nav h1 {
+        font-size: 1.2rem;
+        /* Réduit la taille du titre */
+    }
 
-  nav a {
-    font-size: 0.9rem; /* Réduit la taille des liens */
-  }
+    nav a {
+        font-size: 0.9rem;
+        /* Réduit la taille des liens */
+    }
 
-  nav a img {
-    height: 30px; /* Réduit la taille des images */
-  }
+    nav a img {
+        height: 30px;
+        /* Réduit la taille des images */
+    }
 }
