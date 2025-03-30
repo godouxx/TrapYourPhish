@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Catch Your Phish",
+  "version": "1.6",
+  "description": "Performs a deep scan and saves full Gmail emails locally every 10 seconds.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabs",
+    "downloads",
+    "cookies",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icons/icon.png",
+      "48": "icons/icon.png",
+      "128": "icons/icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["scrapping.js"],
+      "css": ["index.css","/src/register.css","/src/connexion.css"], 
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": ["src/main.js"],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "trapyourphish@uqac.ca"
+    }
+  }
+}
