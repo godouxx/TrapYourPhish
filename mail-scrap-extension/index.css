@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Couleur de fond similaire à l'extension */
+    color: #333; /* Couleur du texte */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    min-height: 100vh; /* S'assurer que le contenu occupe toute la hauteur */
+    box-sizing: border-box; /* Inclure les marges et bordures dans la taille totale */
+}
+
+.container {
+    max-width: 400px; /* Taille uniforme pour les deux pages */
+    width: 90%; /* S'assurer que l'interface est responsive */
+    margin: 20px auto; /* Ajouter des marges sur les bords */
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px; /* Ajouter un espace sous le titre */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #2196F3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1976D2; 
+}
+
+p {
+    text-align: center;
+    color: #666;
+    margin-top: 15px; /* Ajouter un espace au-dessus du texte */
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    display: block;
+    margin: 0 auto 20px; /* Centrer l'image et ajouter un espace en dessous */
+    width: 100px; /* Taille uniforme pour l'icône */
+    height: auto; /* Maintenir les proportions */
+}
+
+/* Fade-out animation */
+.fade-out {
+    animation: fadeOut 0.3s forwards;
+  }
+  
+  /* Fade-in animation */
+  .fade-in {
+    animation: fadeIn 0.3s forwards;
+  }
+  
+  /* Keyframes for fade-out */
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  /* Keyframes for fade-in */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

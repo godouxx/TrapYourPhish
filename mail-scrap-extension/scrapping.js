@@ -88,8 +88,12 @@ setTimeout(() => {
                       const blob = new Blob([buffer], { type: "message/rfc822" });
                       const url = URL.createObjectURL(blob);
 
-                      window.open(downloadUrl, "_blank");
-
+                      const a = document.createElement("a");
+                      a.href = url;
+                      a.download = `email_${Date.now()}.eml`; 
+                      document.body.appendChild(a);
+                      a.click();  
+                      document.body.removeChild(a);
 
                       URL.revokeObjectURL(url);
                     })

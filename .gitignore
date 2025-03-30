@@ -176,3 +176,7 @@ gmail_token.json
 
 #Results of the scraping of the emails
 emails.json
+
+
+#Node_modules of web extensions
+node_modules/
