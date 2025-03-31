@@ -2,9 +2,12 @@ Projet d'Atelier Pratiques Cybersécurité 2 (8INF870) à l'UQAC.
 
 ## Présentation
 
-Ce projet a pour but de permettre de sensibiliser et d'expliquer les emails de Phishing. Pour cela, les emails sont dans un premier temps analysés par des modèles de machine learning, puis dans un second temps, un algorithme d'intelligence artificielle explicatif (XAI) nommé LIME va retourner les mots clés ayant permis la catégorisation ainsi que la pondération de ces mots.
+Ce projet a pour but de permettre de sensibiliser et d'expliquer les emails de Phishing. Pour cela, les emails sont dans un premier temps analysé par des modèles de machine learning, puis dans un second temps, un algorithme d'intelligence artificielle explicatif (XAI) nommé LIME va retourner les mots clés ayant permis la catégorisation ainsi que la pondération de ces mots et enfin une explication claire et précise est réalisée par un LLM pour permettre à l'utilisateur d'apprendre à reconnaitre les emails de phishing et de détecter les différents indices permettant leurs détections.
 
-*Dans le futur, une vraie explication sera réalisée grâce à un LLM qui aura pour rôle d'expliquer à partir des mots clés en quoi cet email est du phishing ou non.*
+Le schéma ci-dessous est un résumé du fonctionnement global de ce projet :
+
+![doc/fonctionnement-global.png]
+
 
 ## Téléchargement du projet
 
@@ -54,6 +57,14 @@ Puis installer les dépendances nécessaires :
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+> [!IMPORTANT]
+> Le programme Python doit être actif pour que l'analyse de l'email soit réalisable, la commande suivante permettra de lancer l'API flask nécessaire à l'analyse
+
+```bash
+.venv/bin/python3 ML/check-mail.py
+```
+
 
 ### 2. Mise en place de la base de données
 
