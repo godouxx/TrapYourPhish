@@ -6,7 +6,7 @@ Ce projet a pour but de permettre de sensibiliser et d'expliquer les emails de P
 
 Le schéma ci-dessous est un résumé du fonctionnement global de ce projet :
 
-![doc/fonctionnement-global.png]
+![Fonctionnement global](doc/fonctionnement-global.png)
 
 
 ## Téléchargement du projet
