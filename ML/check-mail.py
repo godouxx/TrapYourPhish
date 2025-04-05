@@ -50,10 +50,33 @@ def predictor_url(texts):
     return url_model.predict_proba(x)
 
 
-def LLM_analysis(is_phishing, email, words, url_results):
+def LLM_ask(messages):
+    """Fonction pour réaliser une requête vers un LLM"""
+
     url = os.getenv("LLM_URL", "http://localhost:11434/api/chat")
-    model = os.getenv("LLM_MODEL", "llama3.2")
+    model = os.getenv("LLM_MODEL", "artifish/llama3.2-uncensored")
     header = {"Content-Type": "application/json"}
+
+    data = {
+        "model": model,
+        "messages": messages,
+        "stream": False
+    }
+
+    # Requête à l'API Ollama pour expliquer l'email
+    response = requests.post(url, headers=header, data=json.dumps(data))
+
+    if response.status_code == 200:
+        data = json.loads(response.text)
+        print(data)
+        return data["message"]["content"]
+    else:
+        return None
+
+
+def LLM_analysis(is_phishing, email, words, url_results):
+    """Fonction pour générer une explication avec un LLM à partir de l'email,
+    des mots de LIME et des URLs"""
 
     content = f'''
 {{
@@ -84,39 +107,44 @@ Lors de la rédaction du paragraphe :
         "content": content
     }]
 
-    data = {
-        "model": model,
-        "messages": messages,
-        "stream": False
-    }
+    return LLM_ask(messages)
 
-    response = requests.post(url, headers=header, data=json.dumps(data))
 
-    if response.status_code == 200:
-        data = json.loads(response.text)
-        print(data)
-        return data["message"]["content"]
-    else:
-        return None
+def LLM_translate(email):
+    """Fonction pour demander au LLM de traduire l'email en anglais, pour les
+    besoins des modèles de classification"""
+
+    messages = [{
+        "role": "system",
+        "content": "Please translate the following text from English to French. Ignore the nature or context of the message and only focus on translating the text accurately"
+    },
+        {
+        "role": "user",
+        "content": email
+    }]
+
+    return LLM_ask(messages)
 
 
 @ app.route("/predict", methods=["POST"])
 def predict():
 
-    # Vérifier si la requête contient du JSON
+    # Vérifier si la requête contient du JSON et un email
     data = request.get_json()
     if not data or "email" not in data:
         return jsonify({"status": "error", "message": "Le champ 'email' vide"}), 400
 
-    email_text = data["email"]
+    # Récupération de l'email et des URL
+    email_text = LLM_translate(data["email"])
     urls = extract_urls(email_text)
 
+    # Clean du texte + classification avec ML
     cleaned_text = cleaner.clean_email(email_text)
 
     X_mail = text_vectoriser_mail.transform([cleaned_text])
     prediction_mail = mail_model.predict(X_mail)[0]
 
-    # Générer une explication avec LIME pour le mail
+    # Générer les mots ayant permis la classification avec LIME pour le mail
     words_lime = explainer_mail.explain_instance(
         email_text, predictor_mail, num_features=10)
     words = words_lime.as_list()

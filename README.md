@@ -147,7 +147,7 @@ ollama serve
 et dans un autre terminal:  
   
 ```bash
-ollama pull llama3.2
+ollama pull artifish/llama3.2-uncensored
 ```  
   
 > [!TIP]

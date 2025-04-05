@@ -23,7 +23,7 @@ services:
       - "5000:5000"
     environment:
       LLM_URL: http://ollama:11434/api/chat
-      LLM_MODEL: llama3.2
+      LLM_MODEL: artifish/llama3.2-uncensored
     networks:
       - typ_network
     restart: unless-stopped
