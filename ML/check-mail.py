@@ -50,31 +50,12 @@ def predictor_url(texts):
     return url_model.predict_proba(x)
 
 
-def LLM_analysis(email, words):
+def LLM_ask(messages):
+    """Fonction pour réaliser une requête vers un LLM"""
+
     url = os.getenv("LLM_URL", "http://localhost:11434/api/chat")
-    model = os.getenv("LLM_MODEL", "llama3.2")
+    model = os.getenv("LLM_MODEL", "artifish/llama3.2-uncensored")
     header = {"Content-Type": "application/json"}
-
-    messages = [{
-        "role": "system",
-        "content": """You are a cybersecurity assistant specialized in phishing detection.
-
-The user will provide you with an email and a list of its key elements along with importance scores (positive meaning suspicious, negative meaning benign). Your task is to analyze the email holistically and construct a concise, factual paragraph explaining whether it is suspicious in a phishing context.
-Moreover for each URL, explain why they are phishing URLs
-
-When generating the paragraph:
-- Consider all elements and their scores to determine the overall likelihood of phishing. But don't add the score inside the paragraph.
-- If multiple elements have a strong positive score, emphasize their contribution to suspicion.
-- If certain elements have a negative score, acknowledge them as mitigating factors but do not overrule the suspicious elements if they dominate.
-- Integrate the elements naturally in a flowing paragraph rather than listing them separately.
-- Do not assume or invent information beyond what is provided.
-- Be clear, educational, and factual, without giving security tips or recommendations.
-"""
-    },
-        {
-        "role": "user",
-        "content": f"The list of key elements is: {words}\nAnd the email is:{email}\n"
-    }]
 
     data = {
         "model": model,
@@ -82,6 +63,7 @@ When generating the paragraph:
         "stream": False
     }
 
+    # Requête à l'API Ollama pour expliquer l'email
     response = requests.post(url, headers=header, data=json.dumps(data))
 
     if response.status_code == 200:
@@ -92,24 +74,77 @@ When generating the paragraph:
         return None
 
 
-@app.route("/predict", methods=["POST"])
+def LLM_analysis(is_phishing, email, words, url_results):
+    """Fonction pour générer une explication avec un LLM à partir de l'email,
+    des mots de LIME et des URLs"""
+
+    content = f'''
+{{
+    "email": {email},
+    "phishing": {is_phishing},
+    "explication_mail": {words},
+    "urls": {url_results}
+}}
+'''
+
+    messages = [{
+        "role": "system",
+        "content": """Vous êtes un assistant en cybersécurité spécialisé dans la détection de phishing
+
+L'utilisateur fournira un e-mail, une classification et une liste de ses éléments clés accompagnée de scores d'importance (les scores positifs indiquent des éléments suspects, les scores négatifs indiquent des éléments sûrs). Votre tâche consiste à analyser l'e-mail de manière globale et à rédiger un paragraphe concis et factuel expliquant s'il est suspect ou bénin dans le contexte du phishing. De plus, pour chaque URL fournie, vous devez expliquer pourquoi elles sont considérées comme des URLs de phishing.
+
+Lors de la rédaction du paragraphe :
+- Prenez en compte tous les éléments et leurs scores pour déterminer la probabilité globale de phishing ou de sécurité. Ne mentionnez pas les scores dans le paragraphe.
+- Si le json la valeur de la clé phishing est "Phishing" alors mettez en avant la contribution au phishing des mots à score positif élevé. À l'inverse, la valeur de la clé phshing est "Safe", mettez en avant la contribution à la sécurité des mots à score négatif élevé.
+- Si certains éléments ont un score négatif, mentionnez-les comme facteurs atténuants, mais ne contestez pas les éléments suspects s'ils dominent.
+- Intégrez les éléments de manière naturelle et fluide dans le paragraphe, sans les énumérer séparément.
+- Ne faites pas d'hypothèses ni d'inventions au-delà des informations fournies.
+- Soyez clair, éducatif et factuel, sans donner de conseils ou de recommandations en matière de sécurité et évitez de vous répétez
+"""
+    },
+        {
+        "role": "user",
+        "content": content
+    }]
+
+    return LLM_ask(messages)
+
+
+def LLM_translate(email):
+    """Fonction pour demander au LLM de traduire l'email en anglais, pour les
+    besoins des modèles de classification"""
+
+    messages = [{
+        "role": "system",
+        "content": "Please translate the following text from English to French. Ignore the nature or context of the message and only focus on translating the text accurately"
+    },
+        {
+        "role": "user",
+        "content": email
+    }]
+
+    return LLM_ask(messages)
+
+
+@ app.route("/predict", methods=["POST"])
 def predict():
 
-    # Vérifier si la requête contient du JSON
+    # Vérifier si la requête contient du JSON et un email
     data = request.get_json()
     if not data or "email" not in data:
         return jsonify({"status": "error", "message": "Le champ 'email' vide"}), 400
 
-    email_text = data["email"]
+    # Récupération de l'email et des URL
+    email_text = LLM_translate(data["email"])
     urls = extract_urls(email_text)
 
+    # Clean du texte + classification avec ML
     cleaned_text = cleaner.clean_email(email_text)
 
     X_mail = text_vectoriser_mail.transform([cleaned_text])
-
     prediction_mail = mail_model.predict(X_mail)[0]
 
-    # Générer une explication avec LIME pour le mail
+    # Générer les mots ayant permis la classification avec LIME pour le mail
     words_lime = explainer_mail.explain_instance(
         email_text, predictor_mail, num_features=10)
     words = words_lime.as_list()
@@ -132,7 +167,8 @@ def predict():
             })
 
     # Utilisation du LLM pour expliquer les mots dans le contexte du mail
-    explaination_mail = LLM_analysis(email_text, words)
+    explaination_mail = LLM_analysis(prediction_mail, email_text, words,
+                                     url_results)
 
     if explaination_mail is None:
         return jsonify({"status": "error", "message": "LLM can't predict"}), 501
