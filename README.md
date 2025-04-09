@@ -149,7 +149,10 @@ et dans un autre terminal:
 ```bash
 ollama pull artifish/llama3.2-uncensored
 ```  
-  
+
+> [!IMPORTANT]
+> Il est nécessaire de modifier la variable `LLM_URL` dans le docker compose et de remplacer l'URL par celle de votre API ollama
+
 > [!TIP]
 > Si vous souhaitez utiliser Ollama pour un autre appareil, le port 11434 doit
 > être ouvert et vous devrez définir une variable d'environnement `OLLAMA_HOST`
