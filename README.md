@@ -157,7 +157,9 @@ ollama pull artifish/llama3.2-uncensored
 > Si vous souhaitez utiliser Ollama pour un autre appareil, le port 11434 doit
 > être ouvert et vous devrez définir une variable d'environnement `OLLAMA_HOST`
 > à `0.0.0.0` avec la commande `export OLLAMA_HOST=0.0.0.0`  
-  
+
+> [!TIP]
+>Si vous utilisez wsl vous pourrez retrouver l'IP de votre machine avec la commande `wsl hostname -I` et vous pourrez l'utiliser pour vous connecter à votre serveur ollama et par la suite changer l'URL dans le docker-compose.yaml dans la ligne `LLM_URL`.
 ## Docker
 
 Pour des questions de simplicité de déploiement un dockerfile et un docker-compose sont disponibles pour ce projet.  
