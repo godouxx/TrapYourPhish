@@ -186,14 +186,13 @@ Normalement l'interface sera disponible sur http://localhost:8080
 Pour analyser un email, vous devez, dans un premier temps, créer un compte.  
 Pour cela, vous pouvez soit cliquer sur l'icône de personnage en blanc (haut à droite de la barre de navigation) ou vous rendre sur l'URL http://localhost/auth/register  
 Une fois votre compte créé, connectez-vous, puis vous pourrez accéder à la page d'analyse d'email (http://localhost:8080/predict) ou à l'historique (http://localhost:8080/history).
-
+> [!CAUTION]
+> Avec l'utilisation d'une WSL, il est possible que l'interface ne soit pas sur l'URL localhost. Il faudra récupérer l'adresse IP de la machine WSL avec la commande `wsl hostname -I` et remplacer localhost par l'adresse IP de la machine WSL dans les routes définis dans register.js et login.js.
 ## Utilisation de l'extension Chrome
 
 L'extension Chrome permet de récupérer les emails de votre boîte de réception et de les analyser directement depuis l'interface web. Elle va utiliser l'API du backend pour envoyer les emails et récupérer les résultats de l'analyse. Il permet également de vérifier si un utilisateur est connecté ou non afin de garantir par la suite que l'utilisateur a bien payé pour l'utilisation de l'application.
 
-### Installation de l'extension
-
-L'extension fonctionne uniquement sur Chrome et va scrapper les mails du service de messagerie Gmail. Il faut par la suite activer le mode développeur dans les paramètres de Chrome. Pour cela rendez-vous dans le menu des extensions (chrome://extensions/) et activez le mode développeur en haut à droite.
+L'extension fonctionne uniquement sur un navigateur se basant sur chromium (exemple: brave, chromium) et va scrapper les mails du service de messagerie Gmail. Il faut par la suite activer le mode développeur dans les paramètres de Chrome. Pour cela rendez-vous dans le menu des extensions (chrome://extensions/) et activez le mode développeur en haut à droite.
 
 ![Activer le mode développeur](img/Activation_developpe_mode.png)
 Ensuite, cliquez sur "Load unpacked" et sélectionnez le dossier contenant l'extension ici le sous dossier de ce répértoire nommé mail-scrap-extension.  
@@ -207,3 +206,6 @@ Une extension nommée "Catch Your Phish devrait apparaître dans la liste des ex
 
 - **Register**: Page d'inscription de l'extension, elle permet de créer un compte sur l'application web.
 - **Dashboard**: Page de l'extension qui permet de récupérer les emails et par la suite de les envoyer au backend pour analyse. (GUI partiellement fait et liaison avec le backend pas encore faite)
+
+### Utilisation de l'extension
+L'utilisation va simuler un clique pour télécharger dans votre dossier par défaut de votre navigateur les emails de la boîte de Gmail une fois que vous êtes sur la page de Gmail. Des délais aléatoires sont mis en place pour éviter de se faire bloquer par Gmail.
